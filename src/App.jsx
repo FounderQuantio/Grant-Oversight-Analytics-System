@@ -1,0 +1,97 @@
+/**
+ * App.jsx — Top-level shell with React Router.
+ * Routes map to the six workspace views + onboarding wizard.
+ * The shell renders Sidebar + Header on all authenticated routes.
+ */
+import { useState } from "react";
+import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
+import { DS, ROLES } from "@/utils/tokens";
+import { Sidebar, Header, Notifications } from "@/components/layout";
+import { Spin } from "@/components/ui";
+import { useAppState } from "@/context/AppContext";
+import Wizard from "@/pages/Wizard";
+import Overview from "@/pages/Overview";
+import Transactions from "@/pages/Transactions";
+import Alerts from "@/pages/Alerts";
+import Cases from "@/pages/Cases";
+import Compliance from "@/pages/Compliance";
+import Settings from "@/pages/Settings";
+
+// Metadata for each route — used by Header
+const VIEW_META = {
+  "/":            { title:"Overview",           sub:"Portfolio risk · ROI calculator · DS1–DS6 real-time monitoring" },
+  "/alerts":      { title:"Alert Queue",        sub:"OMB 2 CFR 200 violations · Corrective actions · Case creation" },
+  "/transactions":{ title:"Transactions",       sub:"150 real transactions (DS1–DS6) · ML risk scoring · Batch payment holds" },
+  "/cases":       { title:"Case Management",    sub:"Investigation workflow · Evidence packages · OIG report export" },
+  "/compliance":  { title:"Compliance Reports", sub:"OMB control matrix (CC-001–CC-010) · GAO Green Book · Audit readiness" },
+  "/settings":    { title:"Settings",           sub:"Detection rules (R001–R010) · Graph analytics · Role-based access control" },
+};
+
+/** Loading screen — shown while AppContext initialises data */
+function LoadingScreen() {
+  return (
+    <div style={{height:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:DS.bg,flexDirection:"column",gap:13}}>
+      <div style={{width:44,height:44,borderRadius:DS.r3,background:DS.p2,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,fontWeight:900,color:"#fff"}}>G</div>
+      <Spin/>
+      <div style={{fontSize:12,color:DS.t3,fontWeight:600}}>Initializing FraudGuard Enterprise · Loading DS1–DS6…</div>
+    </div>
+  );
+}
+
+/** Shell — the persistent chrome (sidebar + header) wrapping page content */
+function Shell() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { s }    = useAppState();
+  const role     = ROLES[s.role] || ROLES.compliance;
+  const meta     = VIEW_META[location.pathname] || { title:"FraudGuard", sub:"" };
+
+  // Derive which nav id is active from the pathname
+  const pathToId = { "/":"overview", "/alerts":"alerts", "/transactions":"transactions", "/cases":"cases", "/compliance":"compliance", "/settings":"settings" };
+  const active   = pathToId[location.pathname] || "overview";
+  const setActive = (id) => {
+    const idToPath = { overview:"/", alerts:"/alerts", transactions:"/transactions", cases:"/cases", compliance:"/compliance", settings:"/settings" };
+    navigate(idToPath[id] || "/");
+  };
+
+  return (
+    <div style={{display:"flex",height:"100vh",background:DS.bg,overflow:"hidden"}}>
+      <Sidebar active={active} setActive={setActive}/>
+      <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+        <Header title={meta.title} sub={meta.sub}/>
+        <main style={{flex:1,overflowY:"auto",padding:20}}>
+          <Routes>
+            <Route path="/"             element={<Overview/>}/>
+            <Route path="/alerts"       element={<Alerts/>}/>
+            <Route path="/transactions" element={<Transactions/>}/>
+            <Route path="/cases"        element={<Cases/>}/>
+            <Route path="/compliance"   element={<Compliance/>}/>
+            <Route path="/settings"     element={role.views.includes("settings") ? <Settings/> : <Navigate to="/" replace/>}/>
+            <Route path="*"             element={<Navigate to="/" replace/>}/>
+          </Routes>
+        </main>
+      </div>
+      <Notifications/>
+    </div>
+  );
+}
+
+/** Root component — handles wizard / loading / shell states */
+export default function App() {
+  const { s } = useAppState();
+
+  if(!s.loaded) return <LoadingScreen/>;
+  if(s.wizard)  return <Wizard/>;
+  return (
+    <>
+      <Shell/>
+      <style>{`
+        @keyframes spin    { to { transform: rotate(360deg); } }
+        @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes barFill { from { width: 0; } to { width: 100%; } }
+        button:not([disabled]):hover { filter: brightness(.95); }
+        tr:hover td { background: rgba(235,243,255,0.7) !important; }
+      `}</style>
+    </>
+  );
+}
