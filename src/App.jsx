@@ -10,6 +10,7 @@ import { Sidebar, Header, Notifications } from "@/components/layout";
 import { Spin } from "@/components/ui";
 import { useAppState } from "@/context/AppContext";
 import Wizard from "@/pages/Wizard";
+import HomePage from "@/pages/HomePage";
 import Overview from "@/pages/Overview";
 import Transactions from "@/pages/Transactions";
 import Alerts from "@/pages/Alerts";
@@ -76,11 +77,13 @@ function Shell() {
   );
 }
 
-/** Root component — handles wizard / loading / shell states */
+/** Root component — handles wizard / loading / home / shell states */
 export default function App() {
   const { s } = useAppState();
+  const [showHome, setShowHome] = useState(true);
 
   if(!s.loaded) return <LoadingScreen/>;
+  if(showHome)  return <HomePage onEnterFraudGuard={() => setShowHome(false)}/>;
   if(s.wizard)  return <Wizard/>;
   return (
     <>
