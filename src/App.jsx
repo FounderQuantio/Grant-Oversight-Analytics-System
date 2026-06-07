@@ -83,6 +83,11 @@ function Shell() {
   );
 }
 
+function HomeRoute() {
+  const navigate = useNavigate();
+  return <HomePage onEnterFraudGuard={() => navigate("/fraud-guard")} />;
+}
+
 export default function App() {
   const { s } = useAppState();
 
@@ -91,9 +96,9 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/"            element={<HomePage onEnterFraudGuard={() => window.open("/fraud-guard", "_blank")} />} />
+        <Route path="/"              element={<HomeRoute />} />
         <Route path="/fraud-guard/*" element={<Shell />} />
-        <Route path="*"            element={<Navigate to="/" replace />} />
+        <Route path="*"              element={<Navigate to="/" replace />} />
       </Routes>
       <style>{`
         @keyframes spin    { to { transform: rotate(360deg); } }

@@ -1,16 +1,18 @@
 import { DS, ROLES } from "@/utils/tokens";
 import { Tip, Pick } from "@/components/ui";
 import { useAppState } from "@/context/AppContext";
+import { useNavigate } from "react-router-dom";
 import GSearch from "@/components/layout/GSearch";
 
 export default function Header({ title, sub }) {
   const { s, d } = useAppState();
+  const navigate  = useNavigate();
   const crit = s.alerts.filter(a=>a.severity==="CRITICAL"&&a.status==="OPEN").length;
   const role = ROLES[s.role] || ROLES.compliance;
   return (
     <div style={{height:55,background:DS.surface,borderBottom:`1px solid ${DS.bd}`,display:"flex",alignItems:"center",padding:"0 22px",gap:16,flexShrink:0,zIndex:100}}>
       <button
-        onClick={() => window.location.href = "/"}
+        onClick={() => navigate("/")}
         title="Back to Home"
         style={{background:"none",border:`1px solid ${DS.bd}`,borderRadius:DS.r2,padding:"4px 10px",cursor:"pointer",color:DS.t3,fontSize:12,fontWeight:600,display:"flex",alignItems:"center",gap:5,flexShrink:0}}
       >
