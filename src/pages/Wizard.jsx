@@ -46,7 +46,7 @@ export default function Wizard() {
           <div style={{width:34,height:34,borderRadius:DS.r2,background:DS.p2,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,color:"#fff",fontSize:17}}>G</div>
           <div style={{fontWeight:800,fontSize:15,color:"#F1F5F9"}}>FraudGuard Enterprise</div>
         </div>
-        <div style={{fontSize:10,fontWeight:700,color:"#475569",letterSpacing:1,marginBottom:18,textTransform:"uppercase"}}>Setup Guide</div>
+        <div style={{fontSize:10,fontWeight:700,color:"rgba(255,255,255,0.4)",letterSpacing:1,marginBottom:18,textTransform:"uppercase"}}>Setup Guide</div>
         {STEPS.map((st,i)=>(
           <div key={i} style={{display:"flex",alignItems:"center",gap:12,marginBottom:18,opacity:i>step?.4:1}}>
             <div style={{width:26,height:26,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:"#fff",background:i<step?DS.ok:i===step?"#2C4E72":"rgba(255,255,255,0.12)"}}>{i<step?"✓":i+1}</div>
@@ -56,8 +56,8 @@ export default function Wizard() {
             </div>
           </div>
         ))}
-        <div style={{marginTop:"auto",fontSize:11,color:"#334155",lineHeight:1.6}}>
-          <div style={{fontWeight:700,marginBottom:4,color:"#475569"}}>📊 Dataset Coverage</div>
+        <div style={{marginTop:"auto",fontSize:11,color:"rgba(255,255,255,0.45)",lineHeight:1.6}}>
+          <div style={{fontWeight:700,marginBottom:4,color:"rgba(255,255,255,0.65)"}}>📊 Dataset Coverage</div>
           DS1 Clean · DS2 Duplicates · DS3 Fraud Network · DS4 Procurement · DS5 Structuring · DS6 ML Anomalies
         </div>
       </div>
