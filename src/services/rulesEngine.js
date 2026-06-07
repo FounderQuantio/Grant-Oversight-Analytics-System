@@ -5,6 +5,7 @@ export const INIT_RULES = [
   {id:"R001",name:"Duplicate Invoice",           on:true,sev:"HIGH",     omb:"2 CFR 200.305(b)", thr:null,   cat:"Financial"},
   {id:"R002",name:"New Vendor Large Pay",         on:true,sev:"HIGH",     omb:"2 CFR 200.318",    thr:50000,  cat:"Vendor"},
   {id:"R003",name:"Overbudget Category",          on:true,sev:"MEDIUM",   omb:"2 CFR 200.405",    thr:1.1,    cat:"Budget"},
+  {id:"R004",name:"Split Procurement",            on:true,sev:"HIGH",     omb:"2 CFR 200.320(b)", thr:250000, cat:"Procurement"},
   {id:"R005",name:"Sole Source No Docs >$250K",   on:true,sev:"HIGH",     omb:"2 CFR 200.320",    thr:250000, cat:"Procurement"},
   {id:"R006",name:"Debarred Vendor",              on:true,sev:"CRITICAL", omb:"2 CFR 200.213",    thr:null,   cat:"Vendor"},
   {id:"R007",name:"Conflict of Interest",         on:true,sev:"CRITICAL", omb:"2 CFR 200.318(c)", thr:null,   cat:"Governance"},
@@ -17,6 +18,7 @@ const CTRL_INLINE = {
   R001:{ctrl:"CC-001",coso:"Control Activities",  gao:"OV1.10",fix:"Reject duplicate. Require unique invoice numbers per vendor per grant year per 2 CFR 200.305(b)."},
   R002:{ctrl:"CC-007",coso:"Control Activities",  gao:"AM2.02",fix:"Suspend payment. Verify vendor registration >= 90 days. Re-run SAM.gov check per 2 CFR 200.318."},
   R003:{ctrl:"CC-008",coso:"Monitoring",          gao:"OV1.05",fix:"Freeze category. Prepare budget modification SF-424A. Get grants officer approval per 2 CFR 200.405."},
+  R004:{ctrl:"CC-006",coso:"Control Activities",  gao:"AM1.04",fix:"HOLD all related payments. Combined vendor/grant spend exceeds $250K threshold. Require retroactive competitive bid justification per 2 CFR 200.320(b)."},
   R005:{ctrl:"CC-002",coso:"Control Activities",  gao:"AM1.03",fix:"Suspend payment. Require competitive bid or sole-source justification >$250K per 2 CFR 200.320(f)."},
   R006:{ctrl:"CC-003",coso:"Control Environment", gao:"AM2.01",fix:"IMMEDIATE HOLD. Terminate contract. Report to OIG within 48hrs. Deobligate funds per 2 CFR 200.213."},
   R007:{ctrl:"CC-004",coso:"Control Environment", gao:"OV2.01",fix:"IMMEDIATE HOLD. Remove conflicted official. Refer to Ethics Office per 2 CFR 200.318(c)."},
@@ -32,6 +34,7 @@ export function humanLabel(ruleId, meta, txn, ven) {
     case "R001": return `Duplicate invoice ${meta.inv||""} — ${vid} → ${txn&&txn.grantId||""}`;
     case "R002": return `New vendor (${meta.days}d old) payment ${amt} — ${vid}`;
     case "R003": return `Budget overrun ${meta.pct}% in ${txn&&txn.category} — ${txn&&txn.grantId||""}`;
+    case "R004": return `Split procurement: ${meta.count} payments totaling $${(meta.total||0).toLocaleString()} — ${vid} → ${txn&&txn.grantId||""}`;
     case "R005": return `Sole-source >$250K without bid docs — ${vid} (${amt})`;
     case "R006": return `Payment to debarred vendor ${vid} — ${txn&&txn.grantId||""}`;
     case "R007": return `Conflict of interest: ${vid} — ${txn&&txn.grantId||""}`;
@@ -92,6 +95,29 @@ export function runRules(txns, vens, rules) {
       if(sp>BUDGET_LIMIT*1.1) {
         const t=txns.find(x=>k.startsWith(x.grantId));
         if(t){const ven=vens.find(v=>v.id===t.vendorId);alerts.push(mkAlert("R003",t,ven,{pct:Math.round((sp/BUDGET_LIMIT)*100)},"MEDIUM",rules));}
+      }
+    });
+  }
+
+  if(active.includes("R004")) {
+    // Flag non-competitive vendor/grant pairs where individual payments are each
+    // under $250K (so R005 doesn't catch them) but combined total exceeds $250K —
+    // indicating deliberate contract splitting to avoid the competitive bid threshold.
+    const vgGroups = {};
+    txns.forEach(t=>{
+      if(t.procType==="COMPETITIVE") return;
+      if((t.amount||0)>=250000) return; // R005 already covers these
+      const k=`${t.vendorId}::${t.grantId}`;
+      if(!vgGroups[k]) vgGroups[k]=[];
+      vgGroups[k].push(t);
+    });
+    Object.values(vgGroups).forEach(grp=>{
+      const total=grp.reduce((sum,t)=>sum+(t.amount||0),0);
+      if(total>250000) {
+        grp.forEach(t=>{
+          const ven=vens.find(v=>v.id===t.vendorId);
+          alerts.push(mkAlert("R004",t,ven,{total,count:grp.length},"HIGH",rules));
+        });
       }
     });
   }
