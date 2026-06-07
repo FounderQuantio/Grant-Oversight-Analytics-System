@@ -174,7 +174,7 @@ export default function HomePage({ onEnterFraudGuard }) {
               color: "rgba(255,255,255,0.55)", lineHeight: 1.7, flex: 1,
             }}>{p.pitch}</p>
             <button
-              onClick={p.internal ? onEnterFraudGuard : p.url ? () => window.open(p.url, "_blank") : undefined}
+              onClick={p.internal ? onEnterFraudGuard : p.url ? () => { window.location.href = p.url; } : undefined}
               style={{
                 padding: "11px 20px",
                 background: p.accent, color: "#fff",
