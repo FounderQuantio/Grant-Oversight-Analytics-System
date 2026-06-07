@@ -28,7 +28,37 @@ const PRODUCTS = [
     cta: "Enter Gov Guard",
     accent: "#6366F1",
     accentBg: "rgba(99,102,241,0.15)",
-    internal: false,
+    url: GOVGUARD_URL,
+  },
+  {
+    icon: "⚙️",
+    name: "ERP",
+    tag: "Enterprise Resource Planning",
+    pitch: "Unified financial and operational data across your agency. Streamline procurement, budget execution, and reporting in one integrated platform built for government.",
+    cta: "Enter ERP",
+    accent: "#10B981",
+    accentBg: "rgba(16,185,129,0.15)",
+    url: null,
+  },
+  {
+    icon: "📋",
+    name: "Controlled Dashboard",
+    tag: "Operational Controls Overview",
+    pitch: "A single pane of glass across all active controls, exceptions, and remediation workflows. Know your control environment status at a glance — before the auditor does.",
+    cta: "Enter Controlled Dashboard",
+    accent: "#8B5CF6",
+    accentBg: "rgba(139,92,246,0.15)",
+    url: null,
+  },
+  {
+    icon: "📁",
+    name: "Audit Readiness Framework",
+    tag: "Audit Preparation & Evidence",
+    pitch: "Build audit packages automatically as work happens. Map evidence to findings, track remediation status, and walk into every review with documentation already done.",
+    cta: "Enter Audit Readiness Framework",
+    accent: "#F59E0B",
+    accentBg: "rgba(245,158,11,0.15)",
+    url: null,
   },
 ];
 
@@ -118,8 +148,8 @@ export default function HomePage({ onEnterFraudGuard }) {
       {/* Product cards */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: 20, maxWidth: 760, width: "100%", marginBottom: 56,
+        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+        gap: 20, maxWidth: 1100, width: "100%", marginBottom: 56,
       }}>
         {PRODUCTS.map(p => (
           <div key={p.name} style={{
@@ -144,7 +174,7 @@ export default function HomePage({ onEnterFraudGuard }) {
               color: "rgba(255,255,255,0.55)", lineHeight: 1.7, flex: 1,
             }}>{p.pitch}</p>
             <button
-              onClick={p.internal ? onEnterFraudGuard : () => window.open(GOVGUARD_URL, "_blank")}
+              onClick={p.internal ? onEnterFraudGuard : p.url ? () => window.open(p.url, "_blank") : undefined}
               style={{
                 padding: "11px 20px",
                 background: p.accent, color: "#fff",
