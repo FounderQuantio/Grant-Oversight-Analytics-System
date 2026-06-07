@@ -36,7 +36,7 @@ export default function Sidebar({ active, setActive }) {
               const isA=active===item.id;
               const count=item.badge?bc[item.badge]:0;
               return (
-                <button key={item.id} onClick={()=>setActive(item.id)} style={{display:"flex",alignItems:"center",gap:9,width:"100%",padding:"8px 10px",marginBottom:1,border:"none",borderRadius:DS.r2,cursor:"pointer",background:isA?DS.sideAct:"transparent",color:isA?"#fff":"#94A3B8",fontSize:12,fontWeight:isA?700:400,textAlign:"left",transition:"all .15s"}}>
+                <button key={item.id} onClick={()=>setActive(item.id)} style={{display:"flex",alignItems:"center",gap:9,width:"100%",padding:"8px 10px",marginBottom:1,border:"none",borderRadius:DS.r2,cursor:"pointer",background:isA?"#2C4E72":"transparent",color:isA?"#fff":"#94A3B8",fontSize:12,fontWeight:isA?700:400,textAlign:"left",transition:"all .15s"}}>
                   <span style={{fontSize:13,opacity:.9}}>{item.i}</span>
                   <span style={{flex:1}}>{item.l}</span>
                   {count>0&&<span style={{background:DS.critical,color:"#fff",fontSize:9,fontWeight:800,borderRadius:20,padding:"1px 5px",minWidth:14,textAlign:"center"}}>{count}</span>}
