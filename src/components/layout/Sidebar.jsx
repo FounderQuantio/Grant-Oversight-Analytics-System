@@ -18,7 +18,7 @@ export default function Sidebar({ active, setActive }) {
     cases:  s.cases.filter(c=>c.status==="OPEN").length,
   };
   return (
-    <aside style={{width:208,background:DS.side,display:"flex",flexDirection:"column",flexShrink:0,overflow:"hidden"}}>
+    <aside style={{width:208,background:"#1B3A5C",display:"flex",flexDirection:"column",flexShrink:0,overflow:"hidden"}}>
       <div style={{padding:"16px 14px 12px",borderBottom:"1px solid rgba(255,255,255,.06)"}}>
         <div style={{display:"flex",alignItems:"center",gap:9}}>
           <div style={{width:32,height:32,borderRadius:DS.r2,background:DS.p2,display:"flex",alignItems:"center",justifyContent:"center",fontSize:17,fontWeight:900,color:"#fff"}}>G</div>
