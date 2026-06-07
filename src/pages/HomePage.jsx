@@ -3,10 +3,16 @@ import { DS } from "@/utils/tokens";
 const GOVGUARD_URL = "https://grant-management-saas-git-main-founderquantios-projects.vercel.app";
 
 const STATS = [
-  { value: "$1.8T", label: "Federal grants disbursed annually" },
-  { value: "7–10%", label: "Estimated lost to fraud & waste" },
-  { value: "340+",  label: "OMB compliance controls" },
-  { value: "72hrs", label: "Avg. time to detect anomalies — manually" },
+  { value: "$1.8T", label: "Federal grants disbursed annually",      color: DS.p2      },
+  { value: "7–10%", label: "Estimated lost to fraud & waste",        color: "#EF4444"  },
+  { value: "340+",  label: "OMB compliance controls automated",      color: "#10B981"  },
+  { value: "72hrs", label: "Avg. detection time — done manually",    color: "#F59E0B"  },
+];
+
+const VALUE_PROPS = [
+  "Real-time ML fraud detection across all disbursements — before funds leave the door.",
+  "340+ OMB 2 CFR 200 controls automated, with live risk scoring and corrective workflows.",
+  "Audit packages assembled automatically as work happens — not the night before the review.",
 ];
 
 const PRODUCTS = [
@@ -94,53 +100,48 @@ export default function HomePage({ onEnterFraudGuard }) {
       </div>
 
       {/* Hero */}
-      <div style={{ textAlign: "center", maxWidth: 700, marginBottom: 56 }}>
-        <div style={{
-          display: "inline-block",
-          fontSize: 11, fontWeight: 700, letterSpacing: 1.5,
-          color: DS.p2, textTransform: "uppercase",
-          background: "rgba(26,109,212,0.15)",
-          padding: "5px 14px", borderRadius: 50, marginBottom: 20,
-        }}>
-          Federal Grant Oversight Platform
+      <div style={{ maxWidth: 900, width: "100%", marginBottom: 48 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+          <div style={{ width: 3, height: 18, background: DS.p2, borderRadius: 2, flexShrink: 0 }} />
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: "rgba(255,255,255,0.38)", textTransform: "uppercase" }}>
+            FounderQuantio · Platform Suite
+          </span>
         </div>
         <h1 style={{
-          margin: "0 0 18px",
-          fontSize: "clamp(28px, 4.5vw, 48px)",
+          margin: "0 0 28px",
+          fontSize: "clamp(30px, 4vw, 50px)",
           fontWeight: 800, color: "#fff",
-          lineHeight: 1.18, letterSpacing: "-0.8px",
+          lineHeight: 1.12, letterSpacing: "-1px", maxWidth: 620,
         }}>
-          Every dollar of federal funding,<br />accounted for and protected.
+          Federal Grant Oversight,{" "}
+          <span style={{ color: DS.p2 }}>Automated</span> End-to-End.
         </h1>
-        <p style={{
-          margin: 0, fontSize: 15,
-          color: "rgba(255,255,255,0.55)",
-          lineHeight: 1.75, maxWidth: 540,
-          marginLeft: "auto", marginRight: "auto",
-        }}>
-          Grant fraud costs taxpayers over <strong style={{ color: "rgba(255,255,255,0.8)" }}>$126 billion a year</strong>.
-          Most of it goes undetected until the audit — by then, the money is gone.
-          GovGuard™ puts automated intelligence between disbursement and loss.
-        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {VALUE_PROPS.map((text, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+              <div style={{ width: 5, height: 5, borderRadius: "50%", background: DS.p2, marginTop: 8, flexShrink: 0 }} />
+              <span style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.65 }}>{text}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Stats bar */}
+      {/* Stats */}
       <div style={{
-        display: "flex", gap: 0, flexWrap: "wrap", justifyContent: "center",
-        maxWidth: 800, width: "100%",
-        background: "rgba(255,255,255,0.04)",
+        display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
+        maxWidth: 900, width: "100%", marginBottom: 48,
         border: "1px solid rgba(255,255,255,0.08)",
-        borderRadius: DS.r3, marginBottom: 56, overflow: "hidden",
+        borderRadius: DS.r3, overflow: "hidden",
       }}>
         {STATS.map((s, i) => (
           <div key={s.label} style={{
-            flex: "1 1 180px",
             padding: "22px 20px",
-            textAlign: "center",
-            borderRight: i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+            borderTop: `3px solid ${s.color}`,
+            background: "rgba(255,255,255,0.03)",
+            borderRight: i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
           }}>
-            <div style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 4 }}>{s.value}</div>
-            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", lineHeight: 1.4 }}>{s.label}</div>
+            <div style={{ fontSize: 26, fontWeight: 800, color: "#fff", marginBottom: 6, letterSpacing: "-0.5px" }}>{s.value}</div>
+            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.38)", lineHeight: 1.5 }}>{s.label}</div>
           </div>
         ))}
       </div>
