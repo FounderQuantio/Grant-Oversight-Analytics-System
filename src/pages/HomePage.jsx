@@ -66,7 +66,7 @@ export default function HomePage({ onEnterFraudGuard }) {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#1E3A5F",
+      background: "#2C5F8E",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
