@@ -41,7 +41,7 @@ export default function Wizard() {
   return (
     <div style={{height:"100vh",display:"flex",background:DS.bg}}>
       {/* Left panel */}
-      <div style={{width:300,background:DS.side,display:"flex",flexDirection:"column",padding:"40px 26px",flexShrink:0}}>
+      <div style={{width:300,background:"#1B3A5C",display:"flex",flexDirection:"column",padding:"40px 26px",flexShrink:0}}>
         <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:44}}>
           <div style={{width:34,height:34,borderRadius:DS.r2,background:DS.p2,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,color:"#fff",fontSize:17}}>G</div>
           <div style={{fontWeight:800,fontSize:15,color:"#F1F5F9"}}>FraudGuard Enterprise</div>
@@ -49,7 +49,7 @@ export default function Wizard() {
         <div style={{fontSize:10,fontWeight:700,color:"#475569",letterSpacing:1,marginBottom:18,textTransform:"uppercase"}}>Setup Guide</div>
         {STEPS.map((st,i)=>(
           <div key={i} style={{display:"flex",alignItems:"center",gap:12,marginBottom:18,opacity:i>step?.4:1}}>
-            <div style={{width:26,height:26,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:"#fff",background:i<step?DS.ok:i===step?DS.p2:"#1E3A5F"}}>{i<step?"✓":i+1}</div>
+            <div style={{width:26,height:26,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:"#fff",background:i<step?DS.ok:i===step?DS.p2:"rgba(255,255,255,0.12)"}}>{i<step?"✓":i+1}</div>
             <div>
               <div style={{fontSize:12,fontWeight:700,color:i===step?"#F1F5F9":"#64748B"}}>{st.l}</div>
               <div style={{fontSize:10,color:"#475569"}}>{st.d}</div>
