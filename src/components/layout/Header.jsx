@@ -9,6 +9,13 @@ export default function Header({ title, sub }) {
   const role = ROLES[s.role] || ROLES.compliance;
   return (
     <div style={{height:55,background:DS.surface,borderBottom:`1px solid ${DS.bd}`,display:"flex",alignItems:"center",padding:"0 22px",gap:16,flexShrink:0,zIndex:100}}>
+      <button
+        onClick={() => window.location.href = "/"}
+        title="Back to Home"
+        style={{background:"none",border:`1px solid ${DS.bd}`,borderRadius:DS.r2,padding:"4px 10px",cursor:"pointer",color:DS.t3,fontSize:12,fontWeight:600,display:"flex",alignItems:"center",gap:5,flexShrink:0}}
+      >
+        ← Home
+      </button>
       <div style={{flex:"0 0 auto"}}>
         <h1 style={{margin:0,fontSize:15,fontWeight:800,color:DS.t1,letterSpacing:-.3}}>{title}</h1>
         {sub&&<p style={{margin:0,fontSize:10,color:DS.t4}}>{sub}</p>}

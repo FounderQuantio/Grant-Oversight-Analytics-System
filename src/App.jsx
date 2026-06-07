@@ -1,9 +1,3 @@
-/**
- * App.jsx — Top-level shell with React Router.
- * Routes map to the six workspace views + onboarding wizard.
- * The shell renders Sidebar + Header on all authenticated routes.
- */
-import { useState } from "react";
 import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { DS, ROLES } from "@/utils/tokens";
 import { Sidebar, Header, Notifications } from "@/components/layout";
@@ -18,17 +12,15 @@ import Cases from "@/pages/Cases";
 import Compliance from "@/pages/Compliance";
 import Settings from "@/pages/Settings";
 
-// Metadata for each route — used by Header
 const VIEW_META = {
-  "/":            { title:"Overview",           sub:"Portfolio risk · ROI calculator · DS1–DS6 real-time monitoring" },
-  "/alerts":      { title:"Alert Queue",        sub:"OMB 2 CFR 200 violations · Corrective actions · Case creation" },
-  "/transactions":{ title:"Transactions",       sub:"150 real transactions (DS1–DS6) · ML risk scoring · Batch payment holds" },
-  "/cases":       { title:"Case Management",    sub:"Investigation workflow · Evidence packages · OIG report export" },
-  "/compliance":  { title:"Compliance Reports", sub:"OMB control matrix (CC-001–CC-010) · GAO Green Book · Audit readiness" },
-  "/settings":    { title:"Settings",           sub:"Detection rules (R001–R010) · Graph analytics · Role-based access control" },
+  "/fraud-guard":              { title:"Overview",           sub:"Portfolio risk · ROI calculator · DS1–DS6 real-time monitoring" },
+  "/fraud-guard/alerts":       { title:"Alert Queue",        sub:"OMB 2 CFR 200 violations · Corrective actions · Case creation" },
+  "/fraud-guard/transactions": { title:"Transactions",       sub:"150 real transactions (DS1–DS6) · ML risk scoring · Batch payment holds" },
+  "/fraud-guard/cases":        { title:"Case Management",    sub:"Investigation workflow · Evidence packages · OIG report export" },
+  "/fraud-guard/compliance":   { title:"Compliance Reports", sub:"OMB control matrix (CC-001–CC-010) · GAO Green Book · Audit readiness" },
+  "/fraud-guard/settings":     { title:"Settings",           sub:"Detection rules (R001–R010) · Graph analytics · Role-based access control" },
 };
 
-/** Loading screen — shown while AppContext initialises data */
 function LoadingScreen() {
   return (
     <div style={{height:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:DS.bg,flexDirection:"column",gap:13}}>
@@ -39,21 +31,35 @@ function LoadingScreen() {
   );
 }
 
-/** Shell — the persistent chrome (sidebar + header) wrapping page content */
 function Shell() {
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate  = useNavigate();
   const { s }    = useAppState();
   const role     = ROLES[s.role] || ROLES.compliance;
   const meta     = VIEW_META[location.pathname] || { title:"FraudGuard", sub:"" };
 
-  // Derive which nav id is active from the pathname
-  const pathToId = { "/":"overview", "/alerts":"alerts", "/transactions":"transactions", "/cases":"cases", "/compliance":"compliance", "/settings":"settings" };
-  const active   = pathToId[location.pathname] || "overview";
-  const setActive = (id) => {
-    const idToPath = { overview:"/", alerts:"/alerts", transactions:"/transactions", cases:"/cases", compliance:"/compliance", settings:"/settings" };
-    navigate(idToPath[id] || "/");
+  const pathToId = {
+    "/fraud-guard":              "overview",
+    "/fraud-guard/alerts":       "alerts",
+    "/fraud-guard/transactions": "transactions",
+    "/fraud-guard/cases":        "cases",
+    "/fraud-guard/compliance":   "compliance",
+    "/fraud-guard/settings":     "settings",
   };
+  const active    = pathToId[location.pathname] || "overview";
+  const setActive = (id) => {
+    const idToPath = {
+      overview:     "/fraud-guard",
+      alerts:       "/fraud-guard/alerts",
+      transactions: "/fraud-guard/transactions",
+      cases:        "/fraud-guard/cases",
+      compliance:   "/fraud-guard/compliance",
+      settings:     "/fraud-guard/settings",
+    };
+    navigate(idToPath[id] || "/fraud-guard");
+  };
+
+  if (s.wizard) return <Wizard />;
 
   return (
     <div style={{display:"flex",height:"100vh",background:DS.bg,overflow:"hidden"}}>
@@ -67,8 +73,8 @@ function Shell() {
             <Route path="/transactions" element={<Transactions/>}/>
             <Route path="/cases"        element={<Cases/>}/>
             <Route path="/compliance"   element={<Compliance/>}/>
-            <Route path="/settings"     element={role.views.includes("settings") ? <Settings/> : <Navigate to="/" replace/>}/>
-            <Route path="*"             element={<Navigate to="/" replace/>}/>
+            <Route path="/settings"     element={role.views.includes("settings") ? <Settings/> : <Navigate to="/fraud-guard" replace/>}/>
+            <Route path="*"             element={<Navigate to="/fraud-guard" replace/>}/>
           </Routes>
         </main>
       </div>
@@ -77,17 +83,18 @@ function Shell() {
   );
 }
 
-/** Root component — handles wizard / loading / home / shell states */
 export default function App() {
   const { s } = useAppState();
-  const [showHome, setShowHome] = useState(true);
 
-  if(!s.loaded) return <LoadingScreen/>;
-  if(showHome)  return <HomePage onEnterFraudGuard={() => setShowHome(false)}/>;
-  if(s.wizard)  return <Wizard/>;
+  if (!s.loaded) return <LoadingScreen />;
+
   return (
     <>
-      <Shell/>
+      <Routes>
+        <Route path="/"            element={<HomePage onEnterFraudGuard={() => window.open("/fraud-guard", "_blank")} />} />
+        <Route path="/fraud-guard/*" element={<Shell />} />
+        <Route path="*"            element={<Navigate to="/" replace />} />
+      </Routes>
       <style>{`
         @keyframes spin    { to { transform: rotate(360deg); } }
         @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
