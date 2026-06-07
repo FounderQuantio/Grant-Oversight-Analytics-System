@@ -170,7 +170,7 @@ export default function Overview() {
             {["30d", "90d", "YTD"].map(r => (
               <button key={r} onClick={() => setTimeRange(r)} style={{
                 padding: "6px 12px", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600,
-                background: timeRange === r ? DS.p2 : "transparent",
+                background: timeRange === r ? "#2C4E72" : "transparent",
                 color: timeRange === r ? "#fff" : T.t3,
               }}>{r}</button>
             ))}
@@ -186,8 +186,8 @@ export default function Overview() {
             const isActive = activeDS === f.id;
             return (
               <button key={String(f.id)} onClick={() => setActiveDS(f.id)} style={{
-                padding: "5px 14px", borderRadius: 20, border: `1px solid ${isActive ? DS.p2 : T.border}`,
-                background: isActive ? DS.p2 : T.pillBg,
+                padding: "5px 14px", borderRadius: 20, border: `1px solid ${isActive ? "#2C4E72" : T.border}`,
+                background: isActive ? "#2C4E72" : T.pillBg,
                 color: isActive ? "#fff" : T.t2,
                 fontSize: 12, fontWeight: isActive ? 700 : 400, cursor: "pointer",
                 transition: "all 0.15s",
@@ -261,7 +261,7 @@ export default function Overview() {
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <span style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Top risk vendors</span>
-            <span style={{ fontSize: 12, color: DS.p2, cursor: "pointer", fontWeight: 600 }}>View all →</span>
+            <span style={{ fontSize: 12, color: "#2C4E72", cursor: "pointer", fontWeight: 600 }}>View all →</span>
           </div>
           {topVendors.length === 0 && (
             <div style={{ color: T.t4, fontSize: 12, textAlign: "center", padding: "20px 0" }}>✅ No flagged vendors</div>
@@ -293,7 +293,7 @@ export default function Overview() {
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <span style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Recent critical alerts</span>
-            <span style={{ fontSize: 12, color: DS.p2, cursor: "pointer", fontWeight: 600 }}>View all →</span>
+            <span style={{ fontSize: 12, color: "#2C4E72", cursor: "pointer", fontWeight: 600 }}>View all →</span>
           </div>
           {critAlerts.length === 0 && (
             <div style={{ color: T.t4, fontSize: 12, textAlign: "center", padding: "20px 0" }}>✅ No critical alerts</div>
