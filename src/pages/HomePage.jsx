@@ -100,30 +100,24 @@ export default function HomePage({ onEnterFraudGuard }) {
       </div>
 
       {/* Hero */}
-      <div style={{ maxWidth: 900, width: "100%", marginBottom: 48 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
-          <div style={{ width: 3, height: 18, background: DS.p2, borderRadius: 2, flexShrink: 0 }} />
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: "rgba(255,255,255,0.38)", textTransform: "uppercase" }}>
+      <div style={{ maxWidth: 680, width: "100%", marginBottom: 48, textAlign: "center" }}>
+        <div style={{ marginBottom: 16 }}>
+          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2, color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}>
             FounderQuantio · Platform Suite
           </span>
         </div>
         <h1 style={{
-          margin: "0 0 28px",
-          fontSize: "clamp(30px, 4vw, 50px)",
-          fontWeight: 800, color: "#fff",
-          lineHeight: 1.12, letterSpacing: "-1px", maxWidth: 620,
+          margin: "0 0 20px",
+          fontSize: "clamp(24px, 3vw, 36px)",
+          fontWeight: 700, color: "#fff",
+          lineHeight: 1.2, letterSpacing: "-0.5px",
         }}>
           Federal Grant Oversight,{" "}
           <span style={{ color: DS.p2 }}>Automated</span> End-to-End.
         </h1>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          {VALUE_PROPS.map((text, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-              <div style={{ width: 5, height: 5, borderRadius: "50%", background: DS.p2, marginTop: 8, flexShrink: 0 }} />
-              <span style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.65 }}>{text}</span>
-            </div>
-          ))}
-        </div>
+        <p style={{ margin: 0, fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.7 }}>
+          Real-time fraud detection · 340+ OMB controls automated · Audit-ready evidence, built as you work.
+        </p>
       </div>
 
       {/* Stats */}
