@@ -62,7 +62,7 @@ function Shell() {
   if (s.wizard) return <Wizard />;
 
   return (
-    <div style={{display:"flex",height:"100vh",background:DS.bg,overflow:"hidden"}}>
+    <div style={{display:"flex",height:"100vh",background:s.darkMode?"#0F172A":DS.bg,overflow:"hidden"}}>
       <Sidebar active={active} setActive={setActive}/>
       <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
         <Header title={meta.title} sub={meta.sub}/>

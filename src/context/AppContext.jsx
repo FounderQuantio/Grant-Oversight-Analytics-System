@@ -22,6 +22,7 @@ function reducer(s, a) {
     case "RULE_TOG":    return {...s,rules:s.rules.map(r=>r.id===a.id?{...r,on:!r.on}:r)};
     case "DISMISS":     return {...s,notifs:s.notifs.filter(n=>n.id!==a.id)};
     case "LOG":         return {...s,log:[{id:Date.now(),act:a.act,detail:a.detail,ts:new Date().toISOString()},...s.log].slice(0,500)};
+    case "TOGGLE_DARK": return {...s,darkMode:!s.darkMode};
     default: return s;
   }
 }
@@ -31,6 +32,7 @@ const INIT_STATE = {
   txns:[],vens:[],alerts:[],cases:[],rules:INIT_RULES,
   log:[],notifs:[],graphAlerts:[],mlStats:null,
   roi:{vol:15000000,findCost:25000,rate:65,sub:12000},
+  darkMode:false,
 };
 
 const Ctx = createContext(null);

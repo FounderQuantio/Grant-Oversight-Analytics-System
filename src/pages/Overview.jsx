@@ -1,109 +1,326 @@
+import { useState, useMemo } from "react";
 import { DS, RM } from "@/utils/tokens";
-import { Card, Sec, Chip, Tip } from "@/components/ui";
-import { Spark, MBar, Donut } from "@/components/charts";
 import { useAppState } from "@/context/AppContext";
 import ROICalculator from "@/components/ROICalculator";
-import Badge from "@/components/ui/Badge";
 
-function KPI({ icon, label, value, sub, tip, color, spark }) {
+const DS_FILTERS = [
+  { id: null,  label: "All datasets" },
+  { id: "1",   label: "DS1 · Clean Baseline" },
+  { id: "2",   label: "DS2 · Duplicate Payments" },
+  { id: "3",   label: "DS3 · Vendor Fraud Network" },
+  { id: "4",   label: "DS4 · Procurement Violations" },
+  { id: "5",   label: "DS5 · Transaction Structuring" },
+  { id: "6",   label: "DS6 · ML Anomalies" },
+];
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May"];
+
+function lightTheme() {
+  return {
+    bg: "#F8FAFC", card: "#FFFFFF", border: "#E2E8F0",
+    t1: "#0F172A", t2: "#334155", t3: "#64748B", t4: "#94A3B8",
+    pillBg: "#F1F5F9", pillBorder: "#E2E8F0", activePillBg: "#1A6DD4",
+    sectionLabel: "#94A3B8",
+  };
+}
+function darkTheme() {
+  return {
+    bg: "#0F172A", card: "#1E293B", border: "#334155",
+    t1: "#F1F5F9", t2: "#CBD5E1", t3: "#64748B", t4: "#475569",
+    pillBg: "#1E293B", pillBorder: "#334155", activePillBg: "#1A6DD4",
+    sectionLabel: "#475569",
+  };
+}
+
+function LineChart({ totalData, flaggedData, labels, dark }) {
+  const W = 480, H = 160;
+  const pad = { t: 8, r: 12, b: 22, l: 8 };
+  const iW = W - pad.l - pad.r;
+  const iH = H - pad.t - pad.b;
+  const maxV = Math.max(...totalData, ...flaggedData, 1);
+  const xp = (i) => pad.l + (i / (labels.length - 1)) * iW;
+  const yp = (v) => pad.t + iH - (v / maxV) * iH;
+
+  const totalPts = totalData.map((v, i) => `${xp(i)},${yp(v)}`).join(" ");
+  const flagPts  = flaggedData.map((v, i) => `${xp(i)},${yp(v)}`).join(" ");
+  const areaPath = totalData.map((v, i) => `${i === 0 ? "M" : "L"} ${xp(i)} ${yp(v)}`).join(" ") +
+    ` L ${xp(totalData.length - 1)} ${yp(0) + iH} L ${xp(0)} ${yp(0) + iH} Z`;
+  const gridYs = [0.25, 0.5, 0.75].map(p => pad.t + iH * (1 - p));
+
   return (
-    <Card sx={{flex:1,minWidth:130}}>
-      <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
-        <div style={{width:32,height:32,borderRadius:DS.r2,background:`${color}18`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>{icon}</div>
-        {spark && <Spark data={spark} color={color} w={58} h={26}/>}
-      </div>
-      <div style={{fontSize:24,fontWeight:800,color:DS.t1,letterSpacing:-.5}}>{value}</div>
-      <Tip txt={tip}>
-        <div style={{fontSize:11,fontWeight:600,color:DS.t2,marginTop:2,cursor:"help",borderBottom:`1px dashed ${DS.bd2}`,display:"inline"}}>{label}</div>
-      </Tip>
-      {sub && <div style={{fontSize:10,color:DS.t3,marginTop:2}}>{sub}</div>}
-    </Card>
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ display: "block" }}>
+      {gridYs.map((gy, i) => (
+        <line key={i} x1={pad.l} y1={gy} x2={W - pad.r} y2={gy}
+          stroke={dark ? "#334155" : "#E2E8F0"} strokeWidth={1} />
+      ))}
+      <path d={areaPath} fill={dark ? "rgba(26,109,212,0.10)" : "rgba(26,109,212,0.07)"} />
+      <polyline points={totalPts} fill="none" stroke="#1A6DD4" strokeWidth={2} strokeLinejoin="round" />
+      {totalData.map((v, i) => (
+        <circle key={i} cx={xp(i)} cy={yp(v)} r={3}
+          fill={dark ? "#1E293B" : "#FFFFFF"} stroke="#1A6DD4" strokeWidth={1.5} />
+      ))}
+      <polyline points={flagPts} fill="none" stroke="#EF4444" strokeWidth={1.5}
+        strokeDasharray="4,3" strokeLinejoin="round" />
+      {labels.map((l, i) => (
+        <text key={i} x={xp(i)} y={H - 4} textAnchor="middle" fontSize="9"
+          fill={dark ? "#64748B" : "#94A3B8"}>{l}</text>
+      ))}
+    </svg>
+  );
+}
+
+function StatCard({ label, value, sub1, sub2, dot1, dot2, T }) {
+  return (
+    <div style={{
+      background: T.card, border: `1px solid ${T.border}`, borderRadius: 12,
+      padding: "18px 20px", flex: 1, minWidth: 0,
+    }}>
+      <div style={{ fontSize: 9, fontWeight: 600, color: T.t3, letterSpacing: 1, textTransform: "uppercase", marginBottom: 10 }}>{label}</div>
+      <div style={{ fontSize: 32, fontWeight: 800, color: T.t1, lineHeight: 1, letterSpacing: -1, marginBottom: 10 }}>{value}</div>
+      {sub1 && (
+        <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: sub2 ? 4 : 0 }}>
+          <span style={{ width: 7, height: 7, borderRadius: "50%", background: dot1 || T.t4, flexShrink: 0 }} />
+          <span style={{ fontSize: 11, color: T.t3 }}>{sub1}</span>
+        </div>
+      )}
+      {sub2 && (
+        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+          <span style={{ width: 7, height: 7, borderRadius: "50%", background: dot2 || T.t4, flexShrink: 0 }} />
+          <span style={{ fontSize: 11, color: T.t3 }}>{sub2}</span>
+        </div>
+      )}
+    </div>
   );
 }
 
 export default function Overview() {
   const { s } = useAppState();
-  const { txns, alerts, vens, cases, graphAlerts, mlStats } = s;
-  const sc = {CRITICAL:0,HIGH:0,MEDIUM:0,LOW:0,INFORMATIONAL:0};
-  alerts.forEach(a=>{if(sc[a.severity]!==undefined) sc[a.severity]++;});
-  const riskExp = txns.filter(t=>t.riskTier==="CRITICAL"||t.riskTier==="HIGH").reduce((acc,t)=>acc+(t.amount||0),0);
-  const regions = ["Southwest","Southeast","Midwest","Northwest","Northeast"];
-  const regionSpend = regions.map(r=>txns.filter(t=>t.region===r).reduce((s,t)=>s+(t.amount||0),0));
-  const wk = Array.from({length:8},(_,i)=>({l:`W${i+1}`,v:txns.filter(t=>new Date(t.date)>=new Date(Date.now()-(7-i)*7*864e5)&&new Date(t.date)<new Date(Date.now()-(6-i)*7*864e5)).reduce((s,t)=>s+(t.amount||0),0)}));
-  const donut = [{label:"Critical",v:sc.CRITICAL||.1,color:DS.critical},{label:"High",v:sc.HIGH||.1,color:DS.high},{label:"Medium",v:sc.MEDIUM||.1,color:DS.medium},{label:"Low",v:sc.LOW||.1,color:DS.low}];
-  const topV = vens.map(v=>({...v,ac:alerts.filter(a=>a.vendorId===v.id).length})).sort((a,b)=>b.ac-a.ac).slice(0,5);
+  const [activeDS, setActiveDS] = useState(null);
+  const [timeRange, setTimeRange] = useState("YTD");
+  const dark = s.darkMode;
+  const T = dark ? darkTheme() : lightTheme();
+
+  const filteredTxns = useMemo(() => {
+    if (!activeDS) return s.txns;
+    return s.txns.filter(t => t.id.startsWith(`TXN-${activeDS}`));
+  }, [activeDS, s.txns]);
+
+  const filteredAlerts = useMemo(() => {
+    if (!activeDS) return s.alerts;
+    return s.alerts.filter(a => a.txnId && a.txnId.startsWith(`TXN-${activeDS}`));
+  }, [activeDS, s.alerts]);
+
+  const totalAmount  = filteredTxns.reduce((sum, t) => sum + (t.amount || 0), 0);
+  const openAlerts   = filteredAlerts.filter(a => a.status === "OPEN").length;
+  const critHigh     = filteredAlerts.filter(a => (a.severity === "CRITICAL" || a.severity === "HIGH") && a.status === "OPEN").length;
+  const riskExposure = filteredTxns.filter(t => t.riskTier === "CRITICAL" || t.riskTier === "HIGH").reduce((sum, t) => sum + (t.amount || 0), 0);
+  const openCases    = s.cases.filter(c => c.status === "OPEN").length;
+
+  const sc = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0, INFORMATIONAL: 0 };
+  filteredAlerts.forEach(a => { if (sc[a.severity] !== undefined) sc[a.severity]++; });
+  const totalSev = Math.max(Object.values(sc).reduce((s, v) => s + v, 0), 1);
+
+  const monthTotals = MONTHS.map((_, i) => {
+    const m = i + 1;
+    return filteredTxns.filter(t => new Date(t.date).getMonth() + 1 === m).reduce((sum, t) => sum + (t.amount || 0), 0);
+  });
+  const flaggedTotals = MONTHS.map((_, i) => {
+    const m = i + 1;
+    return filteredTxns.filter(t => new Date(t.date).getMonth() + 1 === m && (t.riskTier === "CRITICAL" || t.riskTier === "HIGH")).reduce((sum, t) => sum + (t.amount || 0), 0);
+  });
+
+  const topVendors = s.vens.map(v => {
+    const va = filteredAlerts.filter(a => a.vendorId === v.id);
+    const score = Math.min(100, va.length * 12 + va.filter(a => a.severity === "CRITICAL").length * 15);
+    return { ...v, alertCount: va.length, score };
+  }).filter(v => v.alertCount > 0).sort((a, b) => b.score - a.score).slice(0, 4);
+  const maxScore = Math.max(...topVendors.map(v => v.score), 1);
+
+  const critAlerts = filteredAlerts.filter(a => a.severity === "CRITICAL" || a.severity === "HIGH").slice(0, 5);
+
+  const fmt = (n) => n >= 1e6 ? `$${(n / 1e6).toFixed(2)}M` : n >= 1e3 ? `$${(n / 1e3).toFixed(1)}K` : `$${n.toLocaleString()}`;
+
+  const SEVS = [
+    { label: "Critical",      color: "#EF4444", count: sc.CRITICAL },
+    { label: "High",          color: "#F97316", count: sc.HIGH },
+    { label: "Medium",        color: "#EAB308", count: sc.MEDIUM },
+    { label: "Low",           color: "#22C55E", count: sc.LOW },
+    { label: "Informational", color: "#94A3B8", count: sc.INFORMATIONAL },
+  ];
 
   return (
-    <div style={{display:"flex",flexDirection:"column",gap:18}}>
-      {/* Dataset banner */}
-      <div style={{padding:"8px 14px",background:DS.p3,border:`1px solid ${DS.p4}`,borderRadius:DS.r2,fontSize:11,color:DS.primary,display:"flex",gap:12,flexWrap:"wrap",alignItems:"center"}}>
-        <span style={{fontWeight:700}}>📊 Active Datasets:</span>
-        {["DS1 Clean Baseline (TX)","DS2 Duplicate Payments (TN)","DS3 Vendor Fraud Network (AZ/SW)","DS4 Procurement Violations (Midwest)","DS5 Split Transactions (FL)","DS6 ML Anomalies (Pacific NW)"].map(d=>(
-          <span key={d} style={{background:DS.p4,borderRadius:DS.r1,padding:"1px 7px",fontWeight:600}}>{d}</span>
-        ))}
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, color: T.t1 }}>
+
+      {/* Page header row */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div>
+          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 800, color: T.t1, letterSpacing: -0.5 }}>Overview</h1>
+          <p style={{ margin: "3px 0 0", fontSize: 12, color: T.t3 }}>Real-time grant integrity across all active programs</p>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {/* DS selector */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6, border: `1px solid ${T.border}`, borderRadius: 8, padding: "6px 12px", background: T.card, fontSize: 12, color: T.t2, cursor: "default" }}>
+            <span style={{ fontWeight: 600 }}>
+              {activeDS ? DS_FILTERS.find(f => f.id === activeDS)?.label : "All datasets"}
+            </span>
+            <span style={{ color: T.t4 }}>▾</span>
+          </div>
+          {/* Time range */}
+          <div style={{ display: "flex", border: `1px solid ${T.border}`, borderRadius: 8, overflow: "hidden", background: T.card }}>
+            {["30d", "90d", "YTD"].map(r => (
+              <button key={r} onClick={() => setTimeRange(r)} style={{
+                padding: "6px 12px", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600,
+                background: timeRange === r ? DS.p2 : "transparent",
+                color: timeRange === r ? "#fff" : T.t3,
+              }}>{r}</button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* KPI strip */}
-      <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
-        <KPI icon="📄" label="Transactions"   value={txns.length}  sub={`$${(txns.reduce((a,t)=>a+(t.amount||0),0)/1e6).toFixed(2)}M total`} color={DS.p2}     tip="Total grant expenditure transactions (DS1-DS6)" spark={wk.map(w=>w.v)}/>
-        <KPI icon="🚨" label="Open Alerts"    value={alerts.filter(a=>a.status==="OPEN").length} sub={`${sc.CRITICAL} critical`} color={DS.critical} tip="Active rule violations requiring review" spark={[3,5,4,7,8,6,9,alerts.length]}/>
-        <KPI icon="💰" label="Risk Exposure"  value={`$${(riskExp/1e6).toFixed(2)}M`} sub="Critical+High txns" color={DS.high}   tip="Dollar value of high-risk transactions" spark={regionSpend}/>
-        <KPI icon="🧠" label="ML Anomalies"   value={mlStats?mlStats.cnt:0} sub={mlStats?`${mlStats.bases} baselines`:"—"} color={DS.purple} tip="Z-score outliers (|z|>2.5σ)"/>
-        <KPI icon="🕸" label="Network Alerts" value={graphAlerts?graphAlerts.length:0} sub="Graph patterns" color={DS.teal}   tip="Entity relationship fraud patterns"/>
-        <KPI icon="📁" label="Open Cases"     value={cases.filter(c=>c.status==="OPEN").length} sub={`${cases.length} total`} color={DS.purple} tip="Active investigation cases"/>
+      {/* Dataset filter pills */}
+      <div>
+        <div style={{ fontSize: 9, fontWeight: 700, color: T.sectionLabel, letterSpacing: 1.2, textTransform: "uppercase", marginBottom: 8 }}>Active Datasets</div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {DS_FILTERS.map(f => {
+            const isActive = activeDS === f.id;
+            return (
+              <button key={String(f.id)} onClick={() => setActiveDS(f.id)} style={{
+                padding: "5px 14px", borderRadius: 20, border: `1px solid ${isActive ? DS.p2 : T.border}`,
+                background: isActive ? DS.p2 : T.pillBg,
+                color: isActive ? "#fff" : T.t2,
+                fontSize: 12, fontWeight: isActive ? 700 : 400, cursor: "pointer",
+                transition: "all 0.15s",
+              }}>{f.label}</button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* KPI stat cards */}
+      <div style={{ display: "flex", gap: 12 }}>
+        <StatCard T={T} label="Transactions"   value={filteredTxns.length} sub1={`${fmt(totalAmount)} total`} dot1={DS.p2} />
+        <StatCard T={T} label="Open Alerts"    value={openAlerts} sub1={`${critHigh} critical / high`} dot1="#F97316" />
+        <StatCard T={T} label="Risk Exposure"  value={fmt(riskExposure)} sub1="Critical + High txns" dot1="#EF4444" />
+        <StatCard T={T} label="ML Anomalies"   value={s.mlStats?.cnt ?? 0} sub1={`${s.mlStats?.bases ?? 0} baselines`} dot1="#EAB308" />
+        <StatCard T={T} label="Network Alerts" value={s.graphAlerts?.length ?? 0} sub1="Graph patterns" dot1="#EF4444" />
+        <StatCard T={T} label="Open Cases"     value={openCases} sub1={`${s.cases.length} total`} dot1={DS.p2} />
       </div>
 
       {/* Charts row */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 250px",gap:16}}>
-        <Card><Sec title="Grant Spend — 8 Weeks" sub="Weekly transaction volume across all 6 datasets"><MBar data={wk} h={80} color={DS.p2}/></Sec></Card>
-        <Card><Sec title="Risk Distribution">
-          <div style={{display:"flex",alignItems:"center",gap:12}}>
-            <Donut data={donut} size={90}/>
-            <div style={{flex:1}}>{donut.map(d=>(
-              <div key={d.label} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"3px 0",fontSize:11}}>
-                <div style={{display:"flex",alignItems:"center",gap:5}}>
-                  <span style={{width:7,height:7,borderRadius:"50%",background:d.color,display:"inline-block"}}/>
-                  <span style={{color:DS.t2}}>{d.label}</span>
-                </div>
-                <span style={{fontWeight:700,color:d.color}}>{Math.floor(d.v)}</span>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 14 }}>
+
+        {/* Line chart */}
+        <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: "20px 20px 12px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Disbursement flow · 12 weeks</div>
+            <div style={{ display: "flex", gap: 16, fontSize: 11, color: T.t3 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                <svg width="20" height="2" style={{ display: "inline-block" }}><line x1="0" y1="1" x2="20" y2="1" stroke="#1A6DD4" strokeWidth="2"/></svg>
+                Total
               </div>
-            ))}</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                <svg width="20" height="2" style={{ display: "inline-block" }}><line x1="0" y1="1" x2="20" y2="1" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="4,2"/></svg>
+                Flagged
+              </div>
+            </div>
           </div>
-        </Sec></Card>
-      </div>
+          <div style={{ height: 160 }}>
+            <LineChart totalData={monthTotals} flaggedData={flaggedTotals} labels={MONTHS} dark={dark} />
+          </div>
+        </div>
 
-      {/* Vendor + Alerts row */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
-        <Card><Sec title="Top Risk Vendors" sub="Most flagged across DS1-DS6">
-          {topV.map((v,i)=>(
-            <div key={v.id} style={{display:"flex",alignItems:"center",gap:10,padding:"7px 0",borderBottom:i<4?`1px solid ${DS.bd}`:"none"}}>
-              <div style={{width:24,height:24,borderRadius:DS.r1,background:DS.p3,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:700,color:DS.p2,flexShrink:0}}>{i+1}</div>
-              <div style={{flex:1,minWidth:0}}>
-                <div style={{fontSize:12,fontWeight:600,color:DS.t1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{v.name}</div>
-                <div style={{fontSize:10,color:DS.t4}}>{v.region}</div>
-              </div>
-              {v.debar&&<Chip c={DS.critical} bg={DS.cBg} bd={DS.cBd} sm>Debarred</Chip>}
-              {v.coi&&<Chip c={DS.high} bg={DS.hBg} bd={DS.hBd} sm>COI</Chip>}
-              <div style={{fontSize:12,fontWeight:700,color:v.ac>0?DS.critical:DS.t3}}>{v.ac} alerts</div>
+        {/* Risk distribution */}
+        <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: T.t1, marginBottom: 16 }}>Risk distribution</div>
+          {/* Gradient bar */}
+          <div style={{ display: "flex", height: 8, borderRadius: 4, overflow: "hidden", marginBottom: 16 }}>
+            {SEVS.map((seg, i) => (
+              <div key={i} style={{ width: `${(seg.count / totalSev) * 100}%`, background: seg.color, minWidth: seg.count > 0 ? 3 : 0 }} />
+            ))}
+          </div>
+          {/* List */}
+          {SEVS.map((row, i) => (
+            <div key={row.label} style={{
+              display: "flex", alignItems: "center", padding: "7px 0",
+              borderBottom: i < SEVS.length - 1 ? `1px solid ${T.border}` : "none",
+            }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: row.color, display: "inline-block", marginRight: 10, flexShrink: 0 }} />
+              <span style={{ flex: 1, fontSize: 13, color: T.t2 }}>{row.label}</span>
+              <span style={{ fontSize: 13, fontWeight: 700, color: T.t1, width: 22, textAlign: "right" }}>{row.count}</span>
+              <span style={{ fontSize: 11, color: T.t4, width: 38, textAlign: "right" }}>{Math.round(row.count / totalSev * 100)}%</span>
             </div>
           ))}
-        </Sec></Card>
-        <Card><Sec title="Recent Critical Alerts">
-          {alerts.filter(a=>a.severity==="CRITICAL"||a.severity==="HIGH").slice(0,5).map((a,i)=>(
-            <div key={a.id} style={{display:"flex",gap:9,padding:"7px 0",borderBottom:i<4?`1px solid ${DS.bd}`:"none"}}>
-              <div style={{width:3,borderRadius:2,background:RM[a.severity]&&RM[a.severity].dot,flexShrink:0,alignSelf:"stretch"}}/>
-              <div style={{flex:1,minWidth:0}}>
-                <div style={{fontSize:11,fontWeight:600,color:DS.t1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{(a.label||"").slice(0,55)}</div>
-                <div style={{fontSize:10,color:DS.t4,marginTop:1}}>{a.ruleId} · {a.omb}</div>
-              </div>
-              <Badge tier={a.severity} sm/>
-            </div>
-          ))}
-          {alerts.length===0&&<div style={{color:DS.t4,fontSize:12,textAlign:"center",padding:"20px 0"}}>✅ No alerts — system is clean.</div>}
-        </Sec></Card>
+        </div>
       </div>
 
-      <ROICalculator/>
+      {/* Vendors + Alerts row */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+
+        {/* Top risk vendors */}
+        <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Top risk vendors</span>
+            <span style={{ fontSize: 12, color: DS.p2, cursor: "pointer", fontWeight: 600 }}>View all →</span>
+          </div>
+          {topVendors.length === 0 && (
+            <div style={{ color: T.t4, fontSize: 12, textAlign: "center", padding: "20px 0" }}>✅ No flagged vendors</div>
+          )}
+          {topVendors.map((v, i) => (
+            <div key={v.id} style={{
+              display: "flex", alignItems: "center", gap: 12, padding: "11px 0",
+              borderBottom: i < topVendors.length - 1 ? `1px solid ${T.border}` : "none",
+            }}>
+              <span style={{ fontSize: 13, color: T.t3, width: 16, fontWeight: 500 }}>{i + 1}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: T.t1 }}>{v.short || v.name}</div>
+                <div style={{ fontSize: 11, color: T.t3 }}>{v.region} · {v.alertCount} alert{v.alertCount !== 1 ? "s" : ""}</div>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, width: 120 }}>
+                <div style={{ flex: 1, height: 6, borderRadius: 3, background: T.border, overflow: "hidden" }}>
+                  <div style={{
+                    width: `${(v.score / maxScore) * 100}%`, height: "100%", borderRadius: 3,
+                    background: v.score > 70 ? "#EF4444" : v.score > 40 ? "#F97316" : "#EAB308",
+                  }} />
+                </div>
+                <span style={{ fontSize: 14, fontWeight: 700, color: T.t1, minWidth: 24, textAlign: "right" }}>{v.score}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Recent critical alerts */}
+        <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Recent critical alerts</span>
+            <span style={{ fontSize: 12, color: DS.p2, cursor: "pointer", fontWeight: 600 }}>View all →</span>
+          </div>
+          {critAlerts.length === 0 && (
+            <div style={{ color: T.t4, fontSize: 12, textAlign: "center", padding: "20px 0" }}>✅ No critical alerts</div>
+          )}
+          {critAlerts.map((a, i) => {
+            const dotColor = RM[a.severity]?.dot || T.t4;
+            const txnAmt = (s.txns.find(t => t.id === a.txnId)?.amount) || 0;
+            return (
+              <div key={a.id} style={{
+                display: "flex", alignItems: "flex-start", gap: 10, padding: "10px 0",
+                borderBottom: i < critAlerts.length - 1 ? `1px solid ${T.border}` : "none",
+              }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: dotColor, marginTop: 4, flexShrink: 0 }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 12, fontWeight: 500, color: T.t1, lineHeight: 1.4 }}>{a.label || a.description || "Alert"}</div>
+                  <div style={{ fontSize: 10, color: T.t4, marginTop: 2 }}>{a.ruleId} · {a.omb}</div>
+                </div>
+                {txnAmt > 0 && (
+                  <span style={{ fontSize: 12, fontWeight: 700, color: T.t1, whiteSpace: "nowrap" }}>{fmt(txnAmt)}</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <ROICalculator />
     </div>
   );
 }

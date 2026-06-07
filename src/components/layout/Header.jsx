@@ -24,6 +24,11 @@ export default function Header({ title, sub }) {
       </div>
       <div style={{flex:1,display:"flex",justifyContent:"center"}}><GSearch/></div>
       <div style={{display:"flex",alignItems:"center",gap:10}}>
+        <button
+          onClick={() => d({type:"TOGGLE_DARK"})}
+          title={s.darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          style={{background:"none",border:`1px solid ${DS.bd}`,borderRadius:DS.r2,padding:"4px 8px",cursor:"pointer",fontSize:14,lineHeight:1,color:DS.t3}}
+        >{s.darkMode ? "☀" : "🌙"}</button>
         <Tip txt={`${crit} critical alert${crit!==1?"s":""} need action`}>
           <button style={{position:"relative",background:"none",border:"none",cursor:"pointer",padding:4,color:DS.t3,fontSize:18}}>
             🔔
