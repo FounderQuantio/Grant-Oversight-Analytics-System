@@ -35,16 +35,16 @@ const PRODUCTS = [
     pitch: "Unified financial and operational data across your agency. Streamline procurement, budget execution, and reporting in one integrated platform built for government.",
     cta: "Enter ERP",
     accent: "#10B981",
-    url: null,
+    url: "https://erp-framework.vercel.app",
   },
   {
     mono: "CD",
-    name: "Controlled Dashboard",
+    name: "Control Dashboard",
     tag: "Operational Controls Overview",
     pitch: "A single pane of glass across all active controls, exceptions, and remediation workflows. Know your control environment status at a glance — before the auditor does.",
-    cta: "Enter Controlled Dashboard",
+    cta: "Enter Control Dashboard",
     accent: "#8B5CF6",
-    url: null,
+    url: "https://icm-dashboard.vercel.app",
   },
   {
     mono: "ARF",
@@ -53,7 +53,7 @@ const PRODUCTS = [
     pitch: "Build audit packages automatically as work happens. Map evidence to findings, track remediation status, and walk into every review with documentation already done.",
     cta: "Enter Audit Readiness",
     accent: "#F59E0B",
-    url: null,
+    url: "https://audit-readiness.vercel.app",
   },
 ];
 
