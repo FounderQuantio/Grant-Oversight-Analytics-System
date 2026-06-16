@@ -41,18 +41,18 @@ export default function Wizard() {
   return (
     <div style={{height:"100vh",display:"flex",background:DS.bg}}>
       {/* Left panel */}
-      <div style={{width:300,background:"#1B3A5C",display:"flex",flexDirection:"column",padding:"40px 26px",flexShrink:0}}>
+      <div style={{width:300,background:"#1A1A1A",borderRight:"1px solid rgba(255,255,255,0.07)",display:"flex",flexDirection:"column",padding:"40px 26px",flexShrink:0}}>
         <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:44}}>
-          <div style={{width:34,height:34,borderRadius:DS.r2,background:DS.p2,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,color:"#fff",fontSize:17}}>G</div>
-          <div style={{fontWeight:800,fontSize:15,color:"#F1F5F9"}}>FraudGuard Enterprise</div>
+          <div style={{width:34,height:34,borderRadius:DS.r2,background:"rgba(201,168,76,0.15)",border:"1px solid rgba(201,168,76,0.30)",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,color:"#C9A84C",fontSize:12}}>FG</div>
+          <div style={{fontWeight:800,fontSize:15,color:"#FFFFFF"}}>FraudGuard Enterprise</div>
         </div>
-        <div style={{fontSize:10,fontWeight:700,color:"rgba(255,255,255,0.4)",letterSpacing:1,marginBottom:18,textTransform:"uppercase"}}>Setup Guide</div>
+        <div style={{fontSize:10,fontWeight:700,color:"rgba(255,255,255,0.30)",letterSpacing:1,marginBottom:18,textTransform:"uppercase"}}>Setup Guide</div>
         {STEPS.map((st,i)=>(
           <div key={i} style={{display:"flex",alignItems:"center",gap:12,marginBottom:18,opacity:i>step?.4:1}}>
-            <div style={{width:26,height:26,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:"#fff",background:i<step?DS.ok:i===step?"#2C4E72":"rgba(255,255,255,0.12)"}}>{i<step?"✓":i+1}</div>
+            <div style={{width:26,height:26,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:i===step?"#1A1A1A":"#fff",background:i<step?DS.ok:i===step?"#C9A84C":"rgba(255,255,255,0.12)"}}>{i<step?"✓":i+1}</div>
             <div>
-              <div style={{fontSize:12,fontWeight:700,color:i===step?"#F1F5F9":"#64748B"}}>{st.l}</div>
-              <div style={{fontSize:10,color:"#475569"}}>{st.d}</div>
+              <div style={{fontSize:12,fontWeight:700,color:i===step?"#FFFFFF":"rgba(255,255,255,0.40)"}}>{st.l}</div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,0.25)"}}>{st.d}</div>
             </div>
           </div>
         ))}
@@ -65,15 +65,15 @@ export default function Wizard() {
       {/* Right panel */}
       <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",padding:48}}>
         <div style={{maxWidth:500,width:"100%"}}>
-          <div style={{fontSize:10,fontWeight:700,color:"#2C4E72",letterSpacing:1,marginBottom:8,textTransform:"uppercase"}}>Step {step+1} of 3</div>
+          <div style={{fontSize:10,fontWeight:700,color:"#C9A84C",letterSpacing:1,marginBottom:8,textTransform:"uppercase"}}>Step {step+1} of 3</div>
 
           {step===0 && <>
             <h2 style={{margin:"0 0 6px",fontSize:24,fontWeight:800,color:DS.t1}}>What type of organization are you?</h2>
             <p style={{margin:"0 0 24px",color:DS.t3,fontSize:13}}>We will pre-configure detection rules and OMB templates for your grant type.</p>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
               {ORGS.map(o=>(
-                <button key={o} onClick={()=>setOrg(o)} style={{padding:"14px",borderRadius:DS.r2,border:`2px solid ${org===o?"#2C4E72":DS.bd}`,background:org===o?"rgba(44,78,114,0.07)":DS.surface,cursor:"pointer",textAlign:"left",fontFamily:"inherit"}}>
-                  <div style={{fontSize:12,fontWeight:700,color:org===o?"#2C4E72":DS.t1}}>{o}</div>
+                <button key={o} onClick={()=>setOrg(o)} style={{padding:"14px",borderRadius:DS.r2,border:`2px solid ${org===o?"#C9A84C":DS.bd}`,background:org===o?"rgba(201,168,76,0.10)":DS.surface,cursor:"pointer",textAlign:"left",fontFamily:"inherit"}}>
+                  <div style={{fontSize:12,fontWeight:700,color:org===o?"#C9A84C":DS.t1}}>{o}</div>
                 </button>
               ))}
             </div>
@@ -85,13 +85,13 @@ export default function Wizard() {
             <p style={{margin:"0 0 22px",color:DS.t3,fontSize:13}}>The demo dataset contains 150 transactions across 6 fraud scenarios (DS1-DS6).</p>
             <div style={{display:"flex",flexDirection:"column",gap:9}}>
               {SRCS.map(sr=>(
-                <button key={sr.l} onClick={()=>setSrc(sr.l)} style={{padding:"13px 16px",borderRadius:DS.r2,border:`2px solid ${src===sr.l?"#2C4E72":DS.bd}`,background:src===sr.l?"rgba(44,78,114,0.07)":DS.surface,cursor:"pointer",display:"flex",alignItems:"center",gap:12,fontFamily:"inherit"}}>
+                <button key={sr.l} onClick={()=>setSrc(sr.l)} style={{padding:"13px 16px",borderRadius:DS.r2,border:`2px solid ${src===sr.l?"#C9A84C":DS.bd}`,background:src===sr.l?"rgba(201,168,76,0.10)":DS.surface,cursor:"pointer",display:"flex",alignItems:"center",gap:12,fontFamily:"inherit"}}>
                   <span style={{fontSize:20,flexShrink:0}}>{sr.e}</span>
                   <div style={{textAlign:"left",flex:1}}>
-                    <div style={{fontSize:13,fontWeight:700,color:src===sr.l?"#2C4E72":DS.t1}}>{sr.l}</div>
+                    <div style={{fontSize:13,fontWeight:700,color:src===sr.l?"#C9A84C":DS.t1}}>{sr.l}</div>
                     <div style={{fontSize:10,color:DS.t3}}>{sr.d}</div>
                   </div>
-                  {src===sr.l&&<span style={{color:"#2C4E72",fontWeight:800,marginLeft:"auto"}}>✓</span>}
+                  {src===sr.l&&<span style={{color:"#C9A84C",fontWeight:800,marginLeft:"auto"}}>✓</span>}
                 </button>
               ))}
             </div>
@@ -104,8 +104,8 @@ export default function Wizard() {
           {step===2 && <>
             <h2 style={{margin:"0 0 6px",fontSize:24,fontWeight:800,color:DS.t1}}>Ready to scan for fraud</h2>
             <p style={{margin:"0 0 20px",color:DS.t3,fontSize:13}}><strong>{org}</strong> · <strong>{src}</strong></p>
-            <Card sx={{background:"#F1F5F9",border:"1px solid #E2E8F0",marginBottom:18}}>
-              <div style={{fontSize:13,fontWeight:700,color:"#2C4E72",marginBottom:8}}>📋 Pre-configured for your organization</div>
+            <Card sx={{background:"rgba(201,168,76,0.06)",border:"1px solid rgba(201,168,76,0.20)",marginBottom:18}}>
+              <div style={{fontSize:13,fontWeight:700,color:"#C9A84C",marginBottom:8}}>📋 Pre-configured for your organization</div>
               {["OMB 2 CFR 200 Uniform Guidance rules active (R001-R010)","SAM.gov debarment & COI screening enabled","Statistical anomaly detection (Z-score) ready","Graph entity relationship analysis enabled","150 real transactions across DS1-DS6 loaded"].map(txt=>(
                 <div key={txt} style={{fontSize:12,color:DS.t2,marginBottom:3}}>✓ {txt}</div>
               ))}

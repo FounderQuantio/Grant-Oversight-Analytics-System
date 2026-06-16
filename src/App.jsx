@@ -5,6 +5,7 @@ import { Spin } from "@/components/ui";
 import { useAppState } from "@/context/AppContext";
 import Wizard from "@/pages/Wizard";
 import HomePage from "@/pages/HomePage";
+import QuantioLandingPreview from "@/pages/QuantioLandingPreview";
 import Overview from "@/pages/Overview";
 import Transactions from "@/pages/Transactions";
 import Alerts from "@/pages/Alerts";
@@ -97,15 +98,20 @@ export default function App() {
     <>
       <Routes>
         <Route path="/"              element={<HomeRoute />} />
+        <Route path="/preview"       element={<QuantioLandingPreview />} />
         <Route path="/fraud-guard/*" element={<Shell />} />
         <Route path="*"              element={<Navigate to="/" replace />} />
       </Routes>
       <style>{`
+        *, body { color: inherit; }
+        body { background: #141414; color: #ffffff; }
         @keyframes spin    { to { transform: rotate(360deg); } }
         @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes barFill { from { width: 0; } to { width: 100%; } }
-        button:not([disabled]):hover { filter: brightness(.95); }
-        tr:hover td { background: rgba(235,243,255,0.7) !important; }
+        button:not([disabled]):hover { filter: brightness(1.08); }
+        tr:hover td { background: rgba(255,255,255,0.04) !important; }
+        input, textarea, select { color-scheme: dark; }
+        ::placeholder { color: rgba(255,255,255,0.30); }
       `}</style>
     </>
   );

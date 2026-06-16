@@ -1,308 +1,542 @@
-import { DS } from "@/utils/tokens";
+import { useState, useEffect } from "react";
 
-const GOVGUARD_URL = "https://grant-management-saas-git-main-founderquantios-projects.vercel.app";
+/* ── Charcoal + Gold Design Tokens ────────────────────────────────── */
+const T = {
+  primary:   "#1A1A1A",
+  primaryDk: "#0D0D0D",
+  hero:      "linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 60%, #1F1F1F 100%)",
+  accent:    "#C9A84C",
+  accentLt:  "#E0BC6A",
+  surface:   "#F9F7F4",
+  white:     "#FFFFFF",
+  muted:     "#6B6B6B",
+  border:    "#E8E4DC",
+  valueBg:   "#1A1A1A",
+  visionBg:  "#0D0D0D",
+  ctaBg:     "#C9A84C",
+  ctaText:   "#1A1A1A",
+  footerBg:  "#111111",
+};
 
-const STATS = [
-  { value: "$1.8T", label: "Federal grants disbursed annually",   color: DS.p2     },
-  { value: "7–10%", label: "Estimated lost to fraud & waste",     color: "#EF4444" },
-  { value: "340+",  label: "OMB compliance controls automated",   color: "#10B981" },
-  { value: "72hrs", label: "Avg. detection time — done manually", color: "#F59E0B" },
-];
+const wrap = { maxWidth: 1200, margin: "0 auto", padding: "0 40px" };
+const sectionLabel = {
+  fontSize: 11, fontWeight: 700, letterSpacing: 2,
+  textTransform: "uppercase", color: T.accent, marginBottom: 12,
+};
 
-const PRODUCTS = [
-  {
-    mono: "FG",
-    name: "Fraud Guard",
-    tag: "Transaction Intelligence",
-    pitch: "Stop fraud before funds leave the door. ML-powered screening catches duplicate invoices, vendor collusion, and shell entities in real time — not after an OIG audit.",
-    cta: "Enter Fraud Guard",
-    accent: DS.p2,
-    internal: true,
-  },
-  {
-    mono: "GG",
-    name: "Gov Guard",
-    tag: "Grant Lifecycle Management",
-    pitch: "From pre-award to closeout, every compliance checkpoint covered. Automated 2 CFR 200 controls, live risk scoring, and audit packages built as you work.",
-    cta: "Enter Gov Guard",
-    accent: "#6366F1",
-    url: GOVGUARD_URL,
-  },
-  {
-    mono: "ERP",
-    name: "ERP",
-    tag: "Enterprise Resource Planning",
-    pitch: "Unified financial and operational data across your agency. Streamline procurement, budget execution, and reporting in one integrated platform built for government.",
-    cta: "Enter ERP",
-    accent: "#10B981",
-    url: "https://erp-framework.vercel.app",
-  },
-  {
-    mono: "CD",
-    name: "Control Dashboard",
-    tag: "Operational Controls Overview",
-    pitch: "A single pane of glass across all active controls, exceptions, and remediation workflows. Know your control environment status at a glance — before the auditor does.",
-    cta: "Enter Control Dashboard",
-    accent: "#8B5CF6",
-    url: "https://icm-dashboard.vercel.app",
-  },
-  {
-    mono: "ARF",
-    name: "Audit Readiness Framework",
-    tag: "Audit Preparation & Evidence",
-    pitch: "Build audit packages automatically as work happens. Map evidence to findings, track remediation status, and walk into every review with documentation already done.",
-    cta: "Enter Audit Readiness",
-    accent: "#F59E0B",
-    url: "https://audit-readiness.vercel.app",
-  },
-];
+function useHover() {
+  const [h, setH] = useState(false);
+  return [h, { onMouseEnter: () => setH(true), onMouseLeave: () => setH(false) }];
+}
 
-function ProductCard({ p, onEnterFraudGuard }) {
+/* ── Buttons ───────────────────────────────────────────────────────── */
+function BtnPrimary({ children, onClick }) {
+  const [h, hProps] = useHover();
   return (
-    <div style={{
-      background: "#FFFFFF",
-      border: "1px solid #E2E8F0",
-      borderRadius: DS.r3,
-      padding: "24px",
-      display: "flex", flexDirection: "column", gap: 14,
-      boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+    <button onClick={onClick} {...hProps} style={{
+      padding: "14px 32px", borderRadius: 8, border: "none", cursor: "pointer",
+      background: h ? T.accentLt : T.accent,
+      color: T.ctaText, fontSize: 14, fontWeight: 700, letterSpacing: 0.3,
+      boxShadow: h
+        ? `0 0 0 4px rgba(201,168,76,0.25), 0 4px 16px rgba(201,168,76,0.4)`
+        : `0 2px 8px rgba(201,168,76,0.35)`,
+      transform: h ? "scale(1.03)" : "scale(1)",
+      transition: "all 0.2s ease",
+    }}>{children}</button>
+  );
+}
+
+function BtnOutline({ children, dark }) {
+  const [h, hProps] = useHover();
+  return (
+    <button {...hProps} style={{
+      padding: "14px 32px", borderRadius: 8, cursor: "pointer",
+      background: "transparent",
+      border: `2px solid ${dark ? "rgba(255,255,255,0.45)" : T.primary}`,
+      color: dark ? "#fff" : T.primary,
+      fontSize: 14, fontWeight: 600, letterSpacing: 0.3,
+      opacity: h ? 0.75 : 1,
+      transform: h ? "scale(1.03)" : "scale(1)",
+      transition: "all 0.2s ease",
+    }}>{children}</button>
+  );
+}
+
+/* ── Navbar ────────────────────────────────────────────────────────── */
+function Nav({ onEnterApp }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+
+  const scrollToPlatforms = () => {
+    document.getElementById("platforms")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <nav style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 999,
+      background: scrolled ? "rgba(26,26,26,0.96)" : "transparent",
+      backdropFilter: scrolled ? "blur(14px)" : "none",
+      borderBottom: scrolled ? "1px solid rgba(255,255,255,0.07)" : "none",
+      transition: "all 0.3s ease", padding: "18px 0",
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <div style={{
-          width: 44, height: 44, borderRadius: DS.r2,
-          background: p.accent,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: p.mono.length > 2 ? 10 : 13,
-          fontWeight: 800, color: "#fff", letterSpacing: "-0.3px",
-          flexShrink: 0,
-        }}>{p.mono}</div>
-        <div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: "#0F172A" }}>{p.name}</div>
-          <div style={{ fontSize: 11, color: p.accent, fontWeight: 600, letterSpacing: 0.3 }}>{p.tag}</div>
+      <div style={{ ...wrap, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <img src="/qg-logo-gold.png" alt="Quantio Global" style={{ width: 46, height: "auto" }} />
+          <div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#fff", letterSpacing: 2.5, textTransform: "uppercase", lineHeight: 1 }}>Quantio</div>
+            <div style={{ fontSize: 9, fontWeight: 400, color: "rgba(255,255,255,0.45)", letterSpacing: 3.5, textTransform: "uppercase", marginTop: 2 }}>Global</div>
+          </div>
+        </div>
+        <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+          {["About", "Services", "Platforms", "Vision", "Contact"].map(l => (
+            <a key={l} href={`#${l.toLowerCase()}`} style={{
+              color: "rgba(255,255,255,0.7)", fontSize: 13, fontWeight: 500,
+              textDecoration: "none", padding: "7px 16px", borderRadius: 100,
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.07)",
+              transition: "all 0.18s",
+            }}
+              onMouseEnter={e => {
+                e.currentTarget.style.color = T.accent;
+                e.currentTarget.style.background = "rgba(201,168,76,0.10)";
+                e.currentTarget.style.borderColor = "rgba(201,168,76,0.30)";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+              }}
+            >{l}</a>
+          ))}
+          <div style={{ marginLeft: 8 }}>
+            <BtnPrimary onClick={scrollToPlatforms}>Enter Platform</BtnPrimary>
+          </div>
         </div>
       </div>
-      <p style={{ margin: 0, fontSize: 13, color: "#475569", lineHeight: 1.7, flex: 1 }}>{p.pitch}</p>
-      <button
-        onClick={p.internal ? onEnterFraudGuard : p.url ? () => { window.location.href = p.url; } : undefined}
-        style={{
-          padding: "10px 20px",
-          background: p.accent, color: "#fff",
-          border: "none", borderRadius: DS.r2,
-          fontSize: 13, fontWeight: 700, cursor: p.url || p.internal ? "pointer" : "default",
-          textAlign: "center", opacity: !p.url && !p.internal ? 0.6 : 1,
-        }}
-      >{p.cta} →</button>
+    </nav>
+  );
+}
+
+/* ── Hero Graphic ──────────────────────────────────────────────────── */
+function HeroGraphic() {
+  return (
+    <svg viewBox="0 0 480 400" fill="none" style={{ width: "100%", maxWidth: 480, opacity: 0.9 }}>
+      {[0,1,2,3,4].map(i => <line key={`h${i}`} x1="40" y1={60+i*70} x2="440" y2={60+i*70} stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>)}
+      {[0,1,2,3,4,5].map(i => <line key={`v${i}`} x1={40+i*80} y1="40" x2={40+i*80} y2="360" stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>)}
+      {[[240,180,22],[120,100,14],[360,120,16],[160,280,12],[340,270,18],[440,200,10],[80,220,10],[290,90,10]].map(([cx,cy,r],i) => (
+        <g key={i}>
+          <circle cx={cx} cy={cy} r={r+7} fill="rgba(201,168,76,0.07)"/>
+          <circle cx={cx} cy={cy} r={r} fill={i===0 ? T.accent : `rgba(201,168,76,${0.2+i*0.07})`}/>
+        </g>
+      ))}
+      {[[240,180,120,100],[240,180,360,120],[240,180,160,280],[240,180,340,270],[120,100,80,220],[360,120,440,200],[360,120,290,90],[340,270,440,200]].map(([x1,y1,x2,y2],i) => (
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(201,168,76,0.2)" strokeWidth="1.5"/>
+      ))}
+      <circle cx="240" cy="180" r="38" stroke="rgba(201,168,76,0.22)" strokeWidth="1.5" strokeDasharray="6 4"/>
+      <circle cx="240" cy="180" r="56" stroke="rgba(201,168,76,0.09)" strokeWidth="1" strokeDasharray="4 6"/>
+      {[0.4,0.65,0.85,0.55,0.9].map((h,i) => (
+        <rect key={i} x={310+i*22} y={320-h*60} width={14} height={h*60} rx="3" fill={`rgba(201,168,76,${0.25+i*0.14})`}/>
+      ))}
+      <text x="310" y="335" fill="rgba(255,255,255,0.2)" fontSize="9" fontFamily="monospace">RISK SCORE</text>
+      <text x="100" y="94"  fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">GOV</text>
+      <text x="346" y="114" fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">FIN</text>
+      <text x="143" y="276" fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">RISK</text>
+      <text x="325" y="265" fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">ADV</text>
+    </svg>
+  );
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────── */
+function Hero({ onEnterApp }) {
+  return (
+    <section style={{ background: T.hero, minHeight: "100vh", display: "flex", alignItems: "center", padding: "120px 0 80px" }}>
+      <div style={{ ...wrap, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div>
+          <div style={{ ...sectionLabel, marginBottom: 20 }}>
+            Finance Governance · Risk Management · Digital Transformation
+          </div>
+          <h1 style={{ fontSize: 54, fontWeight: 700, color: "#fff", lineHeight: 1.12, margin: "0 0 24px", letterSpacing: -1.5 }}>
+            Governing Capital.<br/>
+            <span style={{ color: T.accent }}>Engineering</span> Trust.<br/>
+            Transforming Finance.
+          </h1>
+          <p style={{ fontSize: 17, color: "rgba(255,255,255,0.65)", lineHeight: 1.82, margin: "0 0 40px", maxWidth: 480 }}>
+            Quantio Global delivers finance governance, risk intelligence, and digital
+            transformation advisory to financial institutions, corporations, and
+            governments — at scale, with precision.
+          </p>
+          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+            <BtnPrimary onClick={() => document.getElementById("platforms")?.scrollIntoView({ behavior: "smooth" })}>Enter Platform</BtnPrimary>
+            <BtnOutline dark>Explore Services →</BtnOutline>
+          </div>
+          <div style={{ display: "flex", gap: 40, marginTop: 56, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+            {[["$1.8T+","Federal capital governed"],["15+ yrs","Senior advisory"],["3","Continents served"]].map(([v,l]) => (
+              <div key={v}>
+                <div style={{ fontSize: 24, fontWeight: 800, color: "#fff" }}>{v}</div>
+                <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginTop: 3 }}>{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <HeroGraphic />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── About ─────────────────────────────────────────────────────────── */
+function About() {
+  return (
+    <section id="about" style={{ background: T.white, padding: "100px 0" }}>
+      <div style={{ ...wrap, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div>
+          <p style={sectionLabel}>ABOUT QUANTIO GLOBAL</p>
+          <h2 style={{ fontSize: 40, fontWeight: 700, color: T.primary, lineHeight: 1.2, margin: "0 0 24px", letterSpacing: -0.8 }}>
+            Built for Complexity.<br/>Designed for Impact.
+          </h2>
+          <p style={{ fontSize: 16, color: T.muted, lineHeight: 1.88, margin: "0 0 20px" }}>
+            Quantio Global is a premier advisory firm operating at the intersection of financial
+            governance, regulatory intelligence, and digital transformation. We serve CFOs, CROs,
+            and government executives who cannot afford ambiguity — where decisions carry
+            systemic consequence.
+          </p>
+          <p style={{ fontSize: 16, color: T.muted, lineHeight: 1.88, margin: 0 }}>
+            Our work spans financial institutions, multinational corporates, and public-sector
+            bodies across emerging and established markets. Senior expertise, independent
+            judgment, and measurable outcomes — every engagement.
+          </p>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <svg viewBox="0 0 320 320" width="300" height="300" fill="none">
+            <rect x="40" y="40" width="100" height="100" rx="12" fill="rgba(26,26,26,0.05)" stroke={T.primary} strokeWidth="1.5"/>
+            <rect x="180" y="40" width="100" height="100" rx="12" fill="rgba(201,168,76,0.1)" stroke={T.accent} strokeWidth="1.5"/>
+            <rect x="40" y="180" width="100" height="100" rx="12" fill="rgba(201,168,76,0.1)" stroke={T.accent} strokeWidth="1.5"/>
+            <rect x="180" y="180" width="100" height="100" rx="12" fill="rgba(26,26,26,0.05)" stroke={T.primary} strokeWidth="1.5"/>
+            <text x="90" y="97" textAnchor="middle" fontSize="11" fill={T.primary} fontWeight="600">GOVERN</text>
+            <text x="230" y="97" textAnchor="middle" fontSize="11" fill={T.accent} fontWeight="600">RISK</text>
+            <text x="90" y="237" textAnchor="middle" fontSize="11" fill={T.accent} fontWeight="600">DIGITAL</text>
+            <text x="230" y="237" textAnchor="middle" fontSize="11" fill={T.primary} fontWeight="600">ADVISORY</text>
+            <line x1="140" y1="90" x2="180" y2="90" stroke={T.border} strokeWidth="1.5" strokeDasharray="4 3"/>
+            <line x1="140" y1="230" x2="180" y2="230" stroke={T.border} strokeWidth="1.5" strokeDasharray="4 3"/>
+            <line x1="90" y1="140" x2="90" y2="180" stroke={T.border} strokeWidth="1.5" strokeDasharray="4 3"/>
+            <line x1="230" y1="140" x2="230" y2="180" stroke={T.border} strokeWidth="1.5" strokeDasharray="4 3"/>
+            <circle cx="160" cy="160" r="18" fill={T.accent}/>
+            <text x="160" y="165" textAnchor="middle" fontSize="13" fill={T.ctaText} fontWeight="900">Q</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Services ──────────────────────────────────────────────────────── */
+const SERVICES = [
+  { icon:"⚖", title:"Financial Governance & Compliance",  desc:"Designing the frameworks that make financial systems trustworthy — from OMB 2 CFR 200 compliance to internal control architecture and audit readiness." },
+  { icon:"📊", title:"Risk Management & Controls",         desc:"Quantifying exposure, engineering controls, and embedding risk intelligence into operations — so your organization acts before risk becomes loss." },
+  { icon:"⚡", title:"Digital Finance Transformation",     desc:"Modernizing legacy financial infrastructure through AI-enabled automation, data architecture, and compliance platforms built for government-grade security." },
+  { icon:"🌐", title:"Strategic Advisory",                 desc:"Senior counsel to executives navigating transformation, M&A integration, regulatory change, and cross-border expansion. Independent. Confidential." },
+];
+
+function ServiceCard({ s }) {
+  const [h, hProps] = useHover();
+  return (
+    <div {...hProps} style={{
+      background: T.white, border: `1px solid ${T.border}`,
+      borderRadius: 12, padding: "36px 28px",
+      borderTop: `3px solid ${T.accent}`,
+      boxShadow: h ? "0 16px 48px rgba(0,0,0,0.1)" : "0 2px 8px rgba(0,0,0,0.04)",
+      transform: h ? "translateY(-5px)" : "translateY(0)",
+      transition: "all 0.25s ease",
+    }}>
+      <div style={{ fontSize: 30, marginBottom: 18 }}>{s.icon}</div>
+      <h3 style={{ fontSize: 16, fontWeight: 700, color: T.primary, margin: "0 0 12px", lineHeight: 1.3 }}>{s.title}</h3>
+      <p style={{ fontSize: 13.5, color: T.muted, lineHeight: 1.82, margin: 0 }}>{s.desc}</p>
     </div>
   );
 }
 
-export default function HomePage({ onEnterFraudGuard }) {
+function Services() {
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "#EEF2F7",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      fontFamily: "inherit",
+    <section id="services" style={{ background: T.surface, padding: "100px 0" }}>
+      <div style={wrap}>
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <p style={{ ...sectionLabel, textAlign: "center" }}>WHAT WE DO</p>
+          <h2 style={{ fontSize: 40, fontWeight: 700, color: T.primary, margin: "0 auto", maxWidth: 560, lineHeight: 1.2, letterSpacing: -0.8 }}>
+            Precision Advisory.<br/>Across Every Dimension of Finance.
+          </h2>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+          {SERVICES.map(s => <ServiceCard key={s.title} s={s}/>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Platforms ─────────────────────────────────────────────────────── */
+const PLATFORMS = [
+  {
+    mono: "FG", name: "FraudGuard™ v4.1",
+    tag:  "Transaction Intelligence",
+    desc: "ML-powered fraud detection — duplicate invoices, vendor collusion, shell entities, and 47 GAO-aligned rules. Stop fraud before funds leave the door.",
+    internal: true,
+  },
+  {
+    mono: "GG", name: "GovGuard™",
+    tag:  "Grant Lifecycle Management",
+    desc: "From pre-award to closeout, every 2 CFR 200 compliance checkpoint automated. Live risk scoring, corrective action plans, and audit packages built as you work.",
+    url:  "https://grant-management-saas-git-main-founderquantios-projects.vercel.app",
+  },
+  {
+    mono: "ERP", name: "ERP Platform",
+    tag:  "Enterprise Resource Planning",
+    desc: "Unified financial and operational data across your agency. Streamline procurement, budget execution, and reporting in one integrated government-grade platform.",
+    url:  "https://erp-framework.vercel.app",
+  },
+  {
+    mono: "CD", name: "Control Dashboard",
+    tag:  "Operational Controls Overview",
+    desc: "A single pane of glass across all active controls, exceptions, and remediation workflows. Know your control environment status before the auditor does.",
+    url:  "https://icm-dashboard.vercel.app",
+  },
+  {
+    mono: "ARF", name: "Audit Readiness",
+    tag:  "Audit Preparation & Evidence",
+    desc: "Build audit packages automatically as work happens. Map evidence to findings, track remediation, and walk into every review with documentation already done.",
+    url:  "https://audit-readiness.vercel.app",
+  },
+];
+
+function PlatformCard({ p, onEnterFraudGuard }) {
+  const [h, hProps] = useHover();
+  const handleClick = () => {
+    if (p.internal) { onEnterFraudGuard(); return; }
+    if (p.url) window.open(p.url, "_blank", "noopener,noreferrer");
+  };
+  return (
+    <div {...hProps} onClick={handleClick} style={{
+      background: h ? "#242424" : "#1C1C1C",
+      border: `1px solid ${h ? "rgba(201,168,76,0.20)" : "rgba(255,255,255,0.06)"}`,
+      borderRadius: 14, padding: "26px 24px",
+      display: "flex", flexDirection: "column", gap: 14,
+      cursor: "pointer",
+      boxShadow: h ? "0 0 0 1px rgba(201,168,76,0.13), 0 20px 48px rgba(0,0,0,0.6)" : "none",
+      transform: h ? "translateY(-4px)" : "translateY(0)",
+      transition: "all 0.25s",
     }}>
-
-      {/* Layer 1: Official Trust Banner — Light Gray */}
-      <div style={{ width: "100%", background: "#F1F5F9", borderBottom: "1px solid #E2E8F0", display: "flex", justifyContent: "center" }}>
-        <div style={{ width: "100%", maxWidth: 1100, padding: "5px 24px", display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 12 }}>🇺🇸</span>
-          <span style={{ fontSize: 11, color: "#475569" }}>An official website of the United States government.</span>
-          <span style={{
-            fontSize: 11, color: DS.p2, cursor: "pointer", fontWeight: 600,
-            borderBottom: "1px dashed #93C5FD",
-          }}>Here's how you know ▾</span>
-        </div>
-      </div>
-
-      {/* Layer 2: Brand Anchor — Slate Gray-Blue */}
-      <div style={{ width: "100%", background: "#1B3A5C", display: "flex", justifyContent: "center", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-        <div style={{ width: "100%", maxWidth: 1100, padding: "13px 24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          {/* Logo + nav links */}
-          <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{
-                width: 34, height: 34, borderRadius: DS.r2, background: DS.p2,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontWeight: 900, color: "#fff", fontSize: 16, flexShrink: 0,
-              }}>G</div>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", lineHeight: 1.2 }}>FounderQuantio</div>
-                <div style={{ fontSize: 9, color: "rgba(255,255,255,0.6)", letterSpacing: 1, textTransform: "uppercase" }}>Platform Suite</div>
-              </div>
-            </div>
-            <div style={{ width: 1, height: 20, background: "rgba(255,255,255,0.12)" }} />
-            {["Policies", "National Briefs", "Audits & Data", "Agency Tools"].map((item, i) => (
-              <span key={i} style={{ fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.65)", cursor: "pointer", whiteSpace: "nowrap" }}>{item}</span>
-            ))}
-          </div>
-
-          {/* Right utilities */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <div style={{
-              display: "flex", alignItems: "center", gap: 6,
-              fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.75)",
-              border: "1px solid rgba(255,255,255,0.2)", borderRadius: DS.r2,
-              padding: "5px 12px", cursor: "pointer", whiteSpace: "nowrap",
-            }}>Compliance Frameworks ▾</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: DS.r2, padding: "5px 12px" }}>
-              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.4)" }}>🔍</span>
-              <input
-                placeholder="Search federal frameworks..."
-                style={{ background: "none", border: "none", outline: "none", fontSize: 11, color: "#fff", width: 180 }}
-              />
-            </div>
-            <div style={{ width: 1, height: 18, background: "rgba(255,255,255,0.15)" }} />
-            <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", cursor: "pointer" }}>EN ▾</span>
-            <div style={{ background: DS.p2, color: "#fff", fontSize: 11, fontWeight: 700, padding: "6px 16px", borderRadius: DS.r2, cursor: "pointer" }}>Sign In</div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: 10, flexShrink: 0,
+            background: h ? "rgba(201,168,76,0.18)" : "rgba(201,168,76,0.10)",
+            border: `1px solid ${h ? "rgba(201,168,76,0.45)" : "rgba(201,168,76,0.22)"}`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: p.mono.length > 2 ? 10 : 12, fontWeight: 800,
+            color: T.accent, transition: "all 0.2s",
+          }}>{p.mono}</div>
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>{p.name}</div>
+            <div style={{ fontSize: 10, color: T.accent, fontWeight: 600, letterSpacing: 0.4, marginTop: 1 }}>{p.tag}</div>
           </div>
         </div>
+        <div style={{
+          width: 34, height: 34, borderRadius: "50%", flexShrink: 0,
+          background: h ? T.accent : "rgba(255,255,255,0.05)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 15, color: h ? "#1A1A1A" : "rgba(255,255,255,0.22)",
+          transition: "all 0.22s",
+        }}>↗</div>
       </div>
+      <p style={{ fontSize: 12.5, color: "rgba(255,255,255,0.45)", lineHeight: 1.82, margin: 0, flex: 1 }}>{p.desc}</p>
+      <div style={{
+        fontSize: 11, fontWeight: 700, color: T.accent, letterSpacing: 0.9,
+        opacity: h ? 1 : 0.38, transition: "opacity 0.2s",
+        textTransform: "uppercase",
+      }}>Open Platform →</div>
+    </div>
+  );
+}
 
-      {/* Layer 3: Navigation Bar — Pure White */}
-      <div style={{ width: "100%", background: "#FFFFFF", borderBottom: "1px solid #E2E8F0", display: "flex", justifyContent: "center", marginBottom: 48 }}>
-        <div style={{ width: "100%", maxWidth: 1100, padding: "0 24px", display: "flex", alignItems: "center" }}>
-          {[
-            { label: "Policies & Frameworks", active: false },
-            { label: "National Briefs & Press", active: false },
-            { label: "Audits & Data Transparency", active: false },
-            { label: "Agency Tools", active: false },
-          ].map((item, i) => (
-            <div key={i} style={{
-              padding: "12px 20px", fontSize: 12, fontWeight: 600,
-              color: i === 0 ? "#0F172A" : "#475569",
-              cursor: "pointer",
-              borderBottom: i === 0 ? `2px solid ${DS.p2}` : "2px solid transparent",
-            }}>{item.label}</div>
-          ))}
-        </div>
-      </div>
-
-      {/* Page content */}
-      <div style={{ width: "100%", maxWidth: 1100, padding: "48px 24px 60px" }}>
-
-        {/* Hero */}
-        <div style={{ maxWidth: 640, marginBottom: 44, textAlign: "center", marginLeft: "auto", marginRight: "auto" }}>
-          <h1 style={{
-            margin: "0 0 16px",
-            fontSize: "clamp(28px, 3.5vw, 40px)",
-            fontWeight: 400, color: "#1B2F4A",
-            lineHeight: 1.3, letterSpacing: "0.2px",
-            fontFamily: "Georgia, 'Times New Roman', serif",
-          }}>
-            Every dollar of federal funding,<br />accounted for and protected.
-          </h1>
-          <p style={{ margin: 0, fontSize: 15, color: "#334155", lineHeight: 1.75 }}>
-            Grant fraud costs taxpayers over <strong style={{ color: "#0F172A" }}>$126 billion a year</strong>. Most of it goes
-            undetected until the audit — by then, the money is gone. GovGuard™ puts automated
-            intelligence between disbursement and loss.
+function Platforms({ onEnterFraudGuard }) {
+  return (
+    <section id="platforms" style={{ background: "#141414", padding: "100px 0" }}>
+      <div style={wrap}>
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <p style={{ ...sectionLabel, textAlign: "center" }}>OUR PLATFORMS</p>
+          <h2 style={{ fontSize: 40, fontWeight: 700, color: "#fff", margin: "0 auto", maxWidth: 600, lineHeight: 1.2, letterSpacing: -0.8 }}>
+            Five Integrated Tools.<br/>One Compliance Ecosystem.
+          </h2>
+          <p style={{ fontSize: 16, color: "rgba(255,255,255,0.45)", margin: "20px auto 0", maxWidth: 520, lineHeight: 1.75 }}>
+            The Quantio Global Compliance Suite — purpose-built for federal grant management,
+            financial governance, and enterprise risk control.
           </p>
         </div>
-
-        {/* Stats */}
-        <div style={{
-          display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 16, width: "100%", marginBottom: 44,
-        }}>
-          {STATS.map((s) => (
-            <div key={s.label} style={{
-              padding: "18px 20px",
-              background: "#FFFFFF",
-              border: "1px solid #E2E8F0",
-              borderRadius: DS.r3,
-              boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-            }}>
-              <div style={{ fontSize: 26, fontWeight: 800, color: "#0F172A", marginBottom: 6, letterSpacing: "-0.5px" }}>{s.value}</div>
-              <div style={{ fontSize: 11, color: "#475569", lineHeight: 1.5 }}>{s.label}</div>
-            </div>
-          ))}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          {PLATFORMS.slice(0, 3).map(p => <PlatformCard key={p.name} p={p} onEnterFraudGuard={onEnterFraudGuard}/>)}
         </div>
-
-        {/* Section label */}
-        <div style={{ fontSize: 11, fontWeight: 700, color: "#94A3B8", textTransform: "uppercase", letterSpacing: 2, marginBottom: 16 }}>
-          Platform Products
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20, marginTop: 20, maxWidth: 820, margin: "20px auto 0" }}>
+          {PLATFORMS.slice(3).map(p => <PlatformCard key={p.name} p={p} onEnterFraudGuard={onEnterFraudGuard}/>)}
         </div>
-
-        {/* Product cards — row 1: 3 cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
-          {PRODUCTS.slice(0, 3).map(p => <ProductCard key={p.name} p={p} onEnterFraudGuard={onEnterFraudGuard} />)}
-        </div>
-
-        {/* Product cards — row 2: 2 cards centered */}
-        <div style={{ display: "flex", gap: 20, justifyContent: "center" }}>
-          {PRODUCTS.slice(3).map(p => (
-            <div key={p.name} style={{ flex: "0 0 calc((100% - 40px) / 3)" }}>
-              <ProductCard p={p} onEnterFraudGuard={onEnterFraudGuard} />
-            </div>
-          ))}
-        </div>
-
       </div>
+    </section>
+  );
+}
 
-      {/* Pre-Footer: Impact Stats Bar */}
-      <div style={{ width: "100%", background: "#1B3A5C", display: "flex", justifyContent: "center", marginTop: "auto" }}>
-        <div style={{ width: "100%", maxWidth: 1100, padding: "28px 36px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
+/* ── Value Prop ────────────────────────────────────────────────────── */
+function ValueProp() {
+  return (
+    <section style={{ background: T.valueBg, padding: "100px 0" }}>
+      <div style={{ ...wrap, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div>
+          <p style={sectionLabel}>WHY QUANTIO GLOBAL</p>
+          <h2 style={{ fontSize: 40, fontWeight: 700, color: "#fff", margin: 0, lineHeight: 1.2, letterSpacing: -0.8 }}>
+            Why Global Executives<br/>Choose Quantio
+          </h2>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           {[
-            { stat: "$126B+",    label: "Lost to grant fraud annually"   },
-            { stat: "<3%",       label: "Anomalies caught manually"      },
-            { stat: "2 CFR 200", label: "One missed control = clawbacks" },
-          ].map((item, i) => (
-            <div key={i} style={{
-              padding: "0 32px",
-              borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.1)" : "none",
-            }}>
-              <div style={{ fontSize: 38, fontWeight: 800, color: "#fff", letterSpacing: "-1px", lineHeight: 1, marginBottom: 8 }}>{item.stat}</div>
-              <div style={{ fontSize: 12, color: "#94C4E8", fontWeight: 500, letterSpacing: 0.2 }}>{item.label}</div>
+            ["Independence","No conflicts. No product sales. Pure advisory."],
+            ["Intelligence","Every engagement backed by proprietary analytical frameworks and AI-enabled tooling."],
+            ["Scale","From single-entity governance reviews to multi-jurisdiction transformation programs."],
+            ["Accountability","We measure impact in dollars protected, controls strengthened, and systems transformed."],
+          ].map(([title, body]) => (
+            <div key={title} style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
+              <div style={{ width: 6, height: 6, borderRadius: "50%", background: T.accent, marginTop: 9, flexShrink: 0 }}/>
+              <div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 5 }}>{title}</div>
+                <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.75 }}>{body}</div>
+              </div>
             </div>
           ))}
         </div>
       </div>
+    </section>
+  );
+}
 
-      {/* Directory Footer */}
-      <div style={{ width: "100%", background: "#0F2035", display: "flex", justifyContent: "center" }}>
-        <div style={{ width: "100%", maxWidth: 1100, padding: "36px 36px 0" }}>
+/* ── Vision ────────────────────────────────────────────────────────── */
+function Vision() {
+  return (
+    <section id="vision" style={{ background: T.visionBg, padding: "120px 0" }}>
+      <div style={{ ...wrap, textAlign: "center" }}>
+        <p style={{ ...sectionLabel, textAlign: "center", marginBottom: 24 }}>OUR VISION</p>
+        <blockquote style={{
+          fontSize: 36, fontWeight: 600, color: "#fff",
+          lineHeight: 1.55, margin: "0 auto 28px",
+          maxWidth: 820, fontStyle: "italic", letterSpacing: -0.5,
+        }}>
+          "A world where every dollar of public and institutional capital is governed
+          with intelligence, transparency, and accountability."
+        </blockquote>
+        <p style={{ fontSize: 13, color: T.accent, fontWeight: 700, letterSpacing: 2, margin: 0 }}>— QUANTIO GLOBAL</p>
+      </div>
+    </section>
+  );
+}
 
-          {/* Link columns */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32, marginBottom: 32 }}>
-            {[
-              {
-                heading: "Resource Links",
-                links: ["Documentation", "Developer API", "Data Exports", "System Status"],
-              },
-              {
-                heading: "Legal & Compliance",
-                links: ["FOIA Requests", "Accessibility Statement", "Section 508 Compliance", "Vulnerability Disclosure Policy"],
-              },
-              {
-                heading: "Agency Policies",
-                links: ["Privacy Policy", "Terms of Service", "Cookie Policy", "Contact Admin"],
-              },
-            ].map((col) => (
-              <div key={col.heading}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 14 }}>{col.heading}</div>
-                {col.links.map(link => (
-                  <div key={link} style={{ fontSize: 12, color: "#94C4E8", marginBottom: 9, cursor: "pointer" }}>{link}</div>
-                ))}
-              </div>
-            ))}
-          </div>
-
-          {/* Sub-footer */}
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "16px 0", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 28, height: 28, borderRadius: DS.r1, background: DS.p2, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, color: "#fff", fontSize: 13 }}>G</div>
-              <span style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.5)" }}>FounderQuantio Platform Suite</span>
-            </div>
-            <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)" }}>© 2026 Official National System. All rights reserved.</span>
-          </div>
-
+/* ── Mission ───────────────────────────────────────────────────────── */
+function Mission() {
+  return (
+    <section style={{ background: T.white, padding: "100px 0" }}>
+      <div style={wrap}>
+        <div style={{ borderLeft: `4px solid ${T.accent}`, paddingLeft: 40, maxWidth: 800, margin: "0 auto" }}>
+          <p style={sectionLabel}>OUR MISSION</p>
+          <h2 style={{ fontSize: 32, fontWeight: 700, color: T.primary, margin: "0 0 20px", lineHeight: 1.3, letterSpacing: -0.5 }}>
+            Strengthening the Systems That Govern Capital.
+          </h2>
+          <p style={{ fontSize: 17, color: T.muted, lineHeight: 1.88, margin: "0 0 18px" }}>
+            To strengthen the governance systems that underpin financial institutions and
+            governments — enabling measurable transformation through technology, expertise,
+            and independent judgment.
+          </p>
+          <p style={{ fontSize: 17, color: T.muted, lineHeight: 1.88, margin: 0 }}>
+            We exist to make financial systems more resilient, more transparent, and more
+            accountable — at every scale of operation.
+          </p>
         </div>
       </div>
+    </section>
+  );
+}
 
+/* ── CTA ───────────────────────────────────────────────────────────── */
+function CTA({ onEnterApp }) {
+  return (
+    <section id="contact" style={{ background: T.ctaBg, padding: "100px 0" }}>
+      <div style={{ ...wrap, textAlign: "center" }}>
+        <h2 style={{ fontSize: 44, fontWeight: 700, color: T.ctaText, margin: "0 0 20px", lineHeight: 1.2, letterSpacing: -0.8 }}>
+          Ready to Elevate Your<br/>Governance Standard?
+        </h2>
+        <p style={{ fontSize: 17, color: "rgba(0,0,0,0.55)", margin: "0 auto 48px", maxWidth: 540, lineHeight: 1.8 }}>
+          Whether navigating regulatory change, modernizing financial infrastructure, or
+          building controls that last — Quantio Global is your strategic partner.
+        </p>
+        <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
+          <button onClick={onEnterApp} style={{ padding: "16px 36px", borderRadius: 8, border: "none", cursor: "pointer", background: T.primaryDk, color: T.accent, fontSize: 15, fontWeight: 700, letterSpacing: 0.2 }}>
+            Partner With Us
+          </button>
+          <button style={{ padding: "16px 36px", borderRadius: 8, cursor: "pointer", background: "transparent", border: "2px solid rgba(0,0,0,0.25)", color: T.ctaText, fontSize: 15, fontWeight: 600 }}>
+            Schedule a Consultation →
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Footer ────────────────────────────────────────────────────────── */
+function Footer() {
+  return (
+    <footer style={{ background: T.footerBg, padding: "52px 0" }}>
+      <div style={{ ...wrap, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+            <img src="/qg-logo-gold.png" alt="Quantio Global" style={{ width: 38, height: "auto" }} />
+            <div>
+              <div style={{ fontSize: 14, fontWeight: 800, color: "#fff", letterSpacing: 2.5, textTransform: "uppercase", lineHeight: 1 }}>Quantio</div>
+              <div style={{ fontSize: 8, fontWeight: 400, color: "rgba(255,255,255,0.4)", letterSpacing: 3.5, textTransform: "uppercase", marginTop: 2 }}>Global</div>
+            </div>
+          </div>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", margin: 0 }}>Finance Governance · Risk Management · Digital Transformation</p>
+        </div>
+        <div style={{ display: "flex", gap: 32 }}>
+          {["About","Services","Contact","Privacy"].map(l => (
+            <a key={l} href="#" style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}
+              onMouseEnter={e => e.target.style.color = "#fff"}
+              onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}
+            >{l}</a>
+          ))}
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", margin: 0 }}>contact@quantioglobal.net</p>
+          <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", margin: "6px 0 0" }}>© 2026 Quantio Global. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ── Page ──────────────────────────────────────────────────────────── */
+export default function HomePage({ onEnterFraudGuard }) {
+  return (
+    <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+      <Nav onEnterApp={onEnterFraudGuard}/>
+      <Hero onEnterApp={onEnterFraudGuard}/>
+      <About/>
+      <Services/>
+      <Platforms onEnterFraudGuard={onEnterFraudGuard}/>
+      <ValueProp/>
+      <Vision/>
+      <Mission/>
+      <CTA onEnterApp={onEnterFraudGuard}/>
+      <Footer/>
     </div>
   );
 }

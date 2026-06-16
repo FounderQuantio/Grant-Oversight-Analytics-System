@@ -54,13 +54,13 @@ export default function Compliance() {
       {/* Control matrix */}
       <Card sx={{padding:0,overflow:"hidden"}}>
         <div style={{padding:"12px 16px",borderBottom:`1px solid ${DS.bd}`,background:DS.s2}}>
-          <h4 style={{margin:0,fontSize:13,fontWeight:700}}>OMB 2 CFR 200 Internal Control Matrix (CC-001 – CC-010)</h4>
+          <h4 style={{margin:0,fontSize:13,fontWeight:700,color:DS.t1}}>OMB 2 CFR 200 Internal Control Matrix (CC-001 – CC-010)</h4>
           <p style={{margin:"2px 0 0",fontSize:10,color:DS.t4}}>COSO Framework · GAO Green Book · Real-time status from active alerts · DS1–DS6</p>
         </div>
         <table style={{width:"100%",borderCollapse:"collapse"}}>
           <thead><tr style={{background:DS.side}}>
             {["ID","Control","COSO","GAO","OMB Citation","Status"].map(h=>(
-              <th key={h} style={{padding:"9px 13px",textAlign:"left",fontSize:10,fontWeight:600,color:"#94A3B8"}}>{h}</th>
+              <th key={h} style={{padding:"9px 13px",textAlign:"left",fontSize:10,fontWeight:600,color:DS.t3}}>{h}</th>
             ))}
           </tr></thead>
           <tbody>

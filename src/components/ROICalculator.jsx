@@ -2,10 +2,10 @@ import { DS } from "@/utils/tokens";
 import { useAppState } from "@/context/AppContext";
 
 function lightT() {
-  return { card: "#FFFFFF", border: "#E2E8F0", t1: "#0F172A", t2: "#334155", t3: "#64748B", t4: "#94A3B8", rowBg: "#F8FAFC", roiBg: "#EBF3FF", roiBorder: "#DBEAFE" };
+  return { card: "#1C1C1C", border: "rgba(255,255,255,0.08)", t1: "#FFFFFF", t2: "rgba(255,255,255,0.85)", t3: "rgba(255,255,255,0.50)", t4: "rgba(255,255,255,0.30)", rowBg: "#242424", roiBg: "rgba(201,168,76,0.08)", roiBorder: "rgba(201,168,76,0.22)" };
 }
 function darkT() {
-  return { card: "#1E293B", border: "#334155", t1: "#F1F5F9", t2: "#CBD5E1", t3: "#64748B", t4: "#475569", rowBg: "#0F2A45", roiBg: "#0C1E38", roiBorder: "#1E4060" };
+  return { card: "#1C1C1C", border: "rgba(255,255,255,0.08)", t1: "#FFFFFF", t2: "rgba(255,255,255,0.85)", t3: "rgba(255,255,255,0.50)", t4: "rgba(255,255,255,0.30)", rowBg: "#242424", roiBg: "rgba(201,168,76,0.08)", roiBorder: "rgba(201,168,76,0.22)" };
 }
 
 export default function ROICalculator() {

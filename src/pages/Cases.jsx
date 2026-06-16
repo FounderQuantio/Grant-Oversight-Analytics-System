@@ -40,7 +40,7 @@ export default function Cases() {
       {conf&&(
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.45)",zIndex:900,display:"flex",alignItems:"center",justifyContent:"center"}}>
           <Card sx={{maxWidth:340,boxShadow:DS.sh3}}>
-            <h3 style={{margin:"0 0 8px",fontSize:15}}>Close this case?</h3>
+            <h3 style={{margin:"0 0 8px",fontSize:15,color:DS.t1}}>Close this case?</h3>
             <p style={{margin:"0 0 18px",fontSize:12,color:DS.t2}}>This marks the investigation complete. You can reopen if needed.</p>
             <div style={{display:"flex",gap:8,justifyContent:"flex-end"}}>
               <Btn onClick={()=>setConf(null)} v="secondary" sz="sm">Cancel</Btn>
@@ -53,10 +53,10 @@ export default function Cases() {
         {/* Case list */}
         <div style={{width:268,flexShrink:0,background:DS.surface,borderRight:`1px solid ${DS.bd}`,display:"flex",flexDirection:"column",borderRadius:`${DS.r3} 0 0 ${DS.r3}`,boxShadow:DS.sh1,overflow:"hidden"}}>
           <div style={{padding:"11px 13px",borderBottom:`1px solid ${DS.bd}`}}>
-            <h4 style={{margin:"0 0 8px",fontSize:13,fontWeight:700}}>Cases ({filtered.length})</h4>
+            <h4 style={{margin:"0 0 8px",fontSize:13,fontWeight:700,color:DS.t1}}>Cases ({filtered.length})</h4>
             <div style={{display:"flex",gap:3,flexWrap:"wrap"}}>
               {["ALL",...CS_ST].map(st=>(
-                <button key={st} onClick={()=>setFilt(st)} style={{padding:"2px 7px",borderRadius:20,fontSize:9,fontWeight:700,border:"none",cursor:"pointer",background:filt===st?(CS_C[st]||DS.p2):"#f1f5f9",color:filt===st?"#fff":DS.t3}}>{st}</button>
+                <button key={st} onClick={()=>setFilt(st)} style={{padding:"2px 7px",borderRadius:20,fontSize:9,fontWeight:700,border:`1px solid ${filt===st?"transparent":"rgba(255,255,255,0.10)"}`,cursor:"pointer",background:filt===st?(CS_C[st]||DS.p2):"rgba(255,255,255,0.06)",color:filt===st?"#fff":"rgba(255,255,255,0.65)"}}>{st}</button>
               ))}
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function Cases() {
                       </div>
                     ))}
                     <div style={{display:"flex",gap:7,marginTop:6}}>
-                      <input value={note} onChange={e=>setNote(e.target.value)} onKeyDown={e=>e.key==="Enter"&&addNote()} placeholder="Add investigation note..." style={{flex:1,padding:"7px 10px",borderRadius:DS.r2,border:`1px solid ${DS.bd2}`,fontSize:12,fontFamily:"inherit",color:DS.t1}}/>
+                      <input value={note} onChange={e=>setNote(e.target.value)} onKeyDown={e=>e.key==="Enter"&&addNote()} placeholder="Add investigation note..." style={{flex:1,padding:"7px 10px",borderRadius:DS.r2,border:`1px solid ${DS.bd2}`,fontSize:12,fontFamily:"inherit",color:DS.t1,background:DS.surface}}/>
                       <Btn onClick={addNote} sz="sm">Add</Btn>
                     </div>
                   </Sec></Card>

@@ -17,18 +17,18 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May"];
 
 function lightTheme() {
   return {
-    bg: "#F8FAFC", card: "#FFFFFF", border: "#E2E8F0",
-    t1: "#0F172A", t2: "#334155", t3: "#64748B", t4: "#94A3B8",
-    pillBg: "#F1F5F9", pillBorder: "#E2E8F0", activePillBg: "#1A6DD4",
-    sectionLabel: "#94A3B8",
+    bg: "#141414", card: "#1C1C1C", border: "rgba(255,255,255,0.08)",
+    t1: "#FFFFFF", t2: "rgba(255,255,255,0.85)", t3: "rgba(255,255,255,0.50)", t4: "rgba(255,255,255,0.30)",
+    pillBg: "#242424", pillBorder: "rgba(255,255,255,0.08)", activePillBg: "#C9A84C",
+    sectionLabel: "rgba(255,255,255,0.30)",
   };
 }
 function darkTheme() {
   return {
-    bg: "#0F172A", card: "#1E293B", border: "#334155",
-    t1: "#F1F5F9", t2: "#CBD5E1", t3: "#64748B", t4: "#475569",
-    pillBg: "#1E293B", pillBorder: "#334155", activePillBg: "#1A6DD4",
-    sectionLabel: "#475569",
+    bg: "#141414", card: "#1C1C1C", border: "rgba(255,255,255,0.08)",
+    t1: "#FFFFFF", t2: "rgba(255,255,255,0.85)", t3: "rgba(255,255,255,0.50)", t4: "rgba(255,255,255,0.30)",
+    pillBg: "#242424", pillBorder: "rgba(255,255,255,0.08)", activePillBg: "#C9A84C",
+    sectionLabel: "rgba(255,255,255,0.30)",
   };
 }
 
@@ -51,13 +51,13 @@ function LineChart({ totalData, flaggedData, labels, dark }) {
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ display: "block" }}>
       {gridYs.map((gy, i) => (
         <line key={i} x1={pad.l} y1={gy} x2={W - pad.r} y2={gy}
-          stroke={dark ? "#334155" : "#E2E8F0"} strokeWidth={1} />
+          stroke="rgba(255,255,255,0.07)" strokeWidth={1} />
       ))}
-      <path d={areaPath} fill={dark ? "rgba(26,109,212,0.10)" : "rgba(26,109,212,0.07)"} />
-      <polyline points={totalPts} fill="none" stroke="#1A6DD4" strokeWidth={2} strokeLinejoin="round" />
+      <path d={areaPath} fill="rgba(201,168,76,0.10)" />
+      <polyline points={totalPts} fill="none" stroke="#C9A84C" strokeWidth={2} strokeLinejoin="round" />
       {totalData.map((v, i) => (
         <circle key={i} cx={xp(i)} cy={yp(v)} r={3}
-          fill={dark ? "#1E293B" : "#FFFFFF"} stroke="#1A6DD4" strokeWidth={1.5} />
+          fill="#1C1C1C" stroke="#C9A84C" strokeWidth={1.5} />
       ))}
       <polyline points={flagPts} fill="none" stroke="#EF4444" strokeWidth={1.5}
         strokeDasharray="4,3" strokeLinejoin="round" />
@@ -170,7 +170,7 @@ export default function Overview() {
             {["30d", "90d", "YTD"].map(r => (
               <button key={r} onClick={() => setTimeRange(r)} style={{
                 padding: "6px 12px", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600,
-                background: timeRange === r ? "#2C4E72" : "transparent",
+                background: timeRange === r ? "#C9A84C" : "transparent",
                 color: timeRange === r ? "#fff" : T.t3,
               }}>{r}</button>
             ))}
@@ -186,8 +186,8 @@ export default function Overview() {
             const isActive = activeDS === f.id;
             return (
               <button key={String(f.id)} onClick={() => setActiveDS(f.id)} style={{
-                padding: "5px 14px", borderRadius: 20, border: `1px solid ${isActive ? "#2C4E72" : T.border}`,
-                background: isActive ? "#2C4E72" : T.pillBg,
+                padding: "5px 14px", borderRadius: 20, border: `1px solid ${isActive ? "#C9A84C" : T.border}`,
+                background: isActive ? "#C9A84C" : T.pillBg,
                 color: isActive ? "#fff" : T.t2,
                 fontSize: 12, fontWeight: isActive ? 700 : 400, cursor: "pointer",
                 transition: "all 0.15s",
@@ -216,7 +216,7 @@ export default function Overview() {
             <div style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Disbursement flow · 12 weeks</div>
             <div style={{ display: "flex", gap: 16, fontSize: 11, color: T.t3 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                <svg width="20" height="2" style={{ display: "inline-block" }}><line x1="0" y1="1" x2="20" y2="1" stroke="#1A6DD4" strokeWidth="2"/></svg>
+                <svg width="20" height="2" style={{ display: "inline-block" }}><line x1="0" y1="1" x2="20" y2="1" stroke="#C9A84C" strokeWidth="2"/></svg>
                 Total
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
@@ -261,7 +261,7 @@ export default function Overview() {
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <span style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Top risk vendors</span>
-            <span style={{ fontSize: 12, color: "#2C4E72", cursor: "pointer", fontWeight: 600 }}>View all →</span>
+            <span style={{ fontSize: 12, color: "#C9A84C", cursor: "pointer", fontWeight: 600 }}>View all →</span>
           </div>
           {topVendors.length === 0 && (
             <div style={{ color: T.t4, fontSize: 12, textAlign: "center", padding: "20px 0" }}>✅ No flagged vendors</div>
@@ -293,7 +293,7 @@ export default function Overview() {
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <span style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Recent critical alerts</span>
-            <span style={{ fontSize: 12, color: "#2C4E72", cursor: "pointer", fontWeight: 600 }}>View all →</span>
+            <span style={{ fontSize: 12, color: "#C9A84C", cursor: "pointer", fontWeight: 600 }}>View all →</span>
           </div>
           {critAlerts.length === 0 && (
             <div style={{ color: T.t4, fontSize: 12, textAlign: "center", padding: "20px 0" }}>✅ No critical alerts</div>
