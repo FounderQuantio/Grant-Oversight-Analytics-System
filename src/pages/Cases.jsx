@@ -56,7 +56,7 @@ export default function Cases() {
             <h4 style={{margin:"0 0 8px",fontSize:13,fontWeight:700,color:DS.t1}}>Cases ({filtered.length})</h4>
             <div style={{display:"flex",gap:3,flexWrap:"wrap"}}>
               {["ALL",...CS_ST].map(st=>(
-                <button key={st} onClick={()=>setFilt(st)} style={{padding:"2px 7px",borderRadius:20,fontSize:9,fontWeight:700,border:`1px solid ${filt===st?"transparent":"rgba(255,255,255,0.10)"}`,cursor:"pointer",background:filt===st?(CS_C[st]||DS.p2):"rgba(255,255,255,0.06)",color:filt===st?"#fff":"rgba(255,255,255,0.65)"}}>{st}</button>
+                <button key={st} onClick={()=>setFilt(st)} style={{padding:"2px 7px",borderRadius:20,fontSize:9,fontWeight:700,border:`1px solid ${filt===st?"transparent":DS.bd2}`,cursor:"pointer",background:filt===st?(CS_C[st]||DS.p2):DS.s2,color:filt===st?"#fff":DS.t3}}>{st}</button>
               ))}
             </div>
           </div>

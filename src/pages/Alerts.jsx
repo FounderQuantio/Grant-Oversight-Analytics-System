@@ -34,7 +34,7 @@ export default function Alerts() {
     <div>
       <div style={{display:"flex",gap:9,marginBottom:18}}>
         {["ALL","CRITICAL","HIGH","MEDIUM","LOW"].map(sv=>(
-          <button key={sv} onClick={()=>setSevF(sv)} style={{flex:1,padding:"9px 6px",borderRadius:DS.r2,border:`1px solid ${sevF===sv?(RM[sv]&&RM[sv].dot||DS.p2):"rgba(255,255,255,0.08)"}`,background:sevF===sv?(RM[sv]&&RM[sv].bg||DS.p3):"rgba(255,255,255,0.04)",cursor:"pointer",textAlign:"center"}}>
+          <button key={sv} onClick={()=>setSevF(sv)} style={{flex:1,padding:"9px 6px",borderRadius:DS.r2,border:`1px solid ${sevF===sv?(RM[sv]&&RM[sv].dot||DS.p2):DS.bd}`,background:sevF===sv?(RM[sv]&&RM[sv].bg||DS.p3):DS.surface,cursor:"pointer",textAlign:"center"}}>
             <div style={{fontSize:19,fontWeight:800,color:RM[sv]&&RM[sv].color||DS.p2}}>{sc[sv]||0}</div>
             <div style={{fontSize:10,fontWeight:700,color:RM[sv]&&RM[sv].color||DS.p2}}>{sv}</div>
           </button>

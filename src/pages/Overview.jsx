@@ -15,24 +15,8 @@ const DS_FILTERS = [
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May"];
 
-function lightTheme() {
-  return {
-    bg: "#141414", card: "#1C1C1C", border: "rgba(255,255,255,0.08)",
-    t1: "#FFFFFF", t2: "rgba(255,255,255,0.85)", t3: "rgba(255,255,255,0.50)", t4: "rgba(255,255,255,0.30)",
-    pillBg: "#242424", pillBorder: "rgba(255,255,255,0.08)", activePillBg: "#C9A84C",
-    sectionLabel: "rgba(255,255,255,0.30)",
-  };
-}
-function darkTheme() {
-  return {
-    bg: "#141414", card: "#1C1C1C", border: "rgba(255,255,255,0.08)",
-    t1: "#FFFFFF", t2: "rgba(255,255,255,0.85)", t3: "rgba(255,255,255,0.50)", t4: "rgba(255,255,255,0.30)",
-    pillBg: "#242424", pillBorder: "rgba(255,255,255,0.08)", activePillBg: "#C9A84C",
-    sectionLabel: "rgba(255,255,255,0.30)",
-  };
-}
 
-function LineChart({ totalData, flaggedData, labels, dark }) {
+function LineChart({ totalData, flaggedData, labels }) {
   const W = 480, H = 160;
   const pad = { t: 8, r: 12, b: 22, l: 8 };
   const iW = W - pad.l - pad.r;
@@ -51,19 +35,19 @@ function LineChart({ totalData, flaggedData, labels, dark }) {
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ display: "block" }}>
       {gridYs.map((gy, i) => (
         <line key={i} x1={pad.l} y1={gy} x2={W - pad.r} y2={gy}
-          stroke="rgba(255,255,255,0.07)" strokeWidth={1} />
+          style={{ stroke: "var(--qg-border)" }} strokeWidth={1} />
       ))}
       <path d={areaPath} fill="rgba(201,168,76,0.10)" />
       <polyline points={totalPts} fill="none" stroke="#C9A84C" strokeWidth={2} strokeLinejoin="round" />
       {totalData.map((v, i) => (
         <circle key={i} cx={xp(i)} cy={yp(v)} r={3}
-          fill="#1C1C1C" stroke="#C9A84C" strokeWidth={1.5} />
+          style={{ fill: "var(--qg-surface)" }} stroke="#C9A84C" strokeWidth={1.5} />
       ))}
       <polyline points={flagPts} fill="none" stroke="#EF4444" strokeWidth={1.5}
         strokeDasharray="4,3" strokeLinejoin="round" />
       {labels.map((l, i) => (
         <text key={i} x={xp(i)} y={H - 4} textAnchor="middle" fontSize="9"
-          fill={dark ? "#64748B" : "#94A3B8"}>{l}</text>
+          style={{ fill: "var(--qg-text-3)" }}>{l}</text>
       ))}
     </svg>
   );
@@ -97,8 +81,11 @@ export default function Overview() {
   const { s } = useAppState();
   const [activeDS, setActiveDS] = useState(null);
   const [timeRange, setTimeRange] = useState("YTD");
-  const dark = s.darkMode;
-  const T = dark ? darkTheme() : lightTheme();
+  const T = {
+    card: DS.surface, border: DS.bd,
+    t1: DS.t1, t2: DS.t2, t3: DS.t3, t4: DS.t4,
+    pillBg: DS.s2, sectionLabel: DS.t4,
+  };
 
   const filteredTxns = useMemo(() => {
     if (!activeDS) return s.txns;
@@ -226,7 +213,7 @@ export default function Overview() {
             </div>
           </div>
           <div style={{ height: 160 }}>
-            <LineChart totalData={monthTotals} flaggedData={flaggedTotals} labels={MONTHS} dark={dark} />
+            <LineChart totalData={monthTotals} flaggedData={flaggedTotals} labels={MONTHS} />
           </div>
         </div>
 
