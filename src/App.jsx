@@ -63,7 +63,7 @@ function Shell() {
   if (s.wizard) return <Wizard />;
 
   return (
-    <div style={{display:"flex",height:"100vh",background:s.darkMode?"#0F172A":DS.bg,overflow:"hidden"}}>
+    <div style={{display:"flex",height:"100vh",background:DS.bg,overflow:"hidden"}}>
       <Sidebar active={active} setActive={setActive}/>
       <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
         <Header title={meta.title} sub={meta.sub}/>
@@ -104,14 +104,13 @@ export default function App() {
       </Routes>
       <style>{`
         *, body { color: inherit; }
-        body { background: #141414; color: #ffffff; }
         @keyframes spin    { to { transform: rotate(360deg); } }
         @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes barFill { from { width: 0; } to { width: 100%; } }
         button:not([disabled]):hover { filter: brightness(1.08); }
-        tr:hover td { background: rgba(255,255,255,0.04) !important; }
-        input, textarea, select { color-scheme: dark; }
-        ::placeholder { color: rgba(255,255,255,0.30); }
+        [data-theme="dark"] tr:hover td { background: rgba(255,255,255,0.04) !important; }
+        [data-theme="light"] tr:hover td { background: rgba(201,168,76,0.06) !important; }
+        [data-theme="light"] button:not([disabled]):hover { filter: brightness(0.96); }
       `}</style>
     </>
   );

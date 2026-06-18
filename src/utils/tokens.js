@@ -1,23 +1,21 @@
 /**
- * Design Tokens — single source of truth for all colours, shadows, radii.
- * Imported by components that still need JS-level token access (inline styles / SVG).
+ * Design Tokens — all colour values reference CSS custom properties so they
+ * automatically respond to the [data-theme] attribute on <html>.
  */
 export const DS = {
-  primary:"#C9A84C", p2:"#D4AA50", p3:"rgba(201,168,76,0.12)", p4:"rgba(201,168,76,0.08)",
-  critical:"#EF4444", cBg:"rgba(239,68,68,0.13)",  cBd:"rgba(239,68,68,0.28)",
-  high:"#F97316",     hBg:"rgba(249,115,22,0.13)", hBd:"rgba(249,115,22,0.28)",
-  medium:"#EAB308",   mBg:"rgba(234,179,8,0.13)",  mBd:"rgba(234,179,8,0.28)",
-  low:"#22C55E",      lBg:"rgba(34,197,94,0.13)",  lBd:"rgba(34,197,94,0.28)",
-  info:"rgba(255,255,255,0.40)", iBg:"rgba(255,255,255,0.05)", iBd:"rgba(255,255,255,0.10)",
-  bg:"#141414", surface:"#1C1C1C", s2:"#242424",
-  bd:"rgba(255,255,255,0.08)", bd2:"rgba(255,255,255,0.13)",
-  t1:"#FFFFFF", t2:"rgba(255,255,255,0.85)", t3:"rgba(255,255,255,0.50)", t4:"rgba(255,255,255,0.30)",
-  side:"#1A1A1A", sideAct:"rgba(201,168,76,0.15)",
-  ok:"#22C55E", warn:"#EAB308", purple:"#A78BFA", teal:"#2DD4BF",
-  sh1:"0 1px 3px rgba(0,0,0,0.30),0 1px 2px rgba(0,0,0,0.20)",
-  sh2:"0 4px 12px rgba(0,0,0,0.35),0 2px 4px rgba(0,0,0,0.20)",
-  sh3:"0 20px 40px rgba(0,0,0,0.55),0 8px 16px rgba(0,0,0,0.30)",
-  r1:"4px", r2:"8px", r3:"12px",
+  primary:"var(--qg-gold)", p2:"var(--qg-gold-light)", p3:"var(--qg-gold-tint-2)", p4:"var(--qg-gold-tint-3)",
+  critical:"var(--qg-red)",  cBg:"var(--qg-red-bg)",    cBd:"var(--qg-red-border)",
+  high:"var(--qg-orange)",   hBg:"var(--qg-orange-bg)", hBd:"var(--qg-orange-border)",
+  medium:"var(--qg-yellow)", mBg:"var(--qg-yellow-bg)", mBd:"var(--qg-yellow-border)",
+  low:"var(--qg-green)",     lBg:"var(--qg-green-bg)",  lBd:"var(--qg-green-border)",
+  info:"var(--qg-info)",     iBg:"var(--qg-info-bg)",   iBd:"var(--qg-info-border)",
+  bg:"var(--qg-bg)", surface:"var(--qg-surface)", s2:"var(--qg-surface-2)",
+  bd:"var(--qg-border)", bd2:"var(--qg-border-2)",
+  t1:"var(--qg-text-1)", t2:"var(--qg-text-2)", t3:"var(--qg-text-3)", t4:"var(--qg-text-4)",
+  side:"var(--qg-sidebar)", sideAct:"var(--qg-gold-tint-1)",
+  ok:"var(--qg-green)", warn:"var(--qg-yellow)", purple:"var(--qg-purple)", teal:"var(--qg-teal)",
+  sh1:"var(--qg-shadow-sm)", sh2:"var(--qg-shadow-md)", sh3:"var(--qg-shadow-lg)",
+  r1:"var(--qg-radius-sm)", r2:"var(--qg-radius-md)", r3:"var(--qg-radius-lg)",
 };
 
 /** Risk level colour/badge maps keyed by severity string */

@@ -32,13 +32,18 @@ const INIT_STATE = {
   txns:[],vens:[],alerts:[],cases:[],rules:INIT_RULES,
   log:[],notifs:[],graphAlerts:[],mlStats:null,
   roi:{vol:15000000,findCost:25000,rate:65,sub:12000},
-  darkMode:false,
+  darkMode:true,
 };
 
 const Ctx = createContext(null);
 
 export function AppProvider({ children }) {
   const [s, d] = useReducer(reducer, INIT_STATE);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = s.darkMode ? "dark" : "light";
+  }, [s.darkMode]);
+
   useEffect(() => {
     const txns = buildRealTxns();
     const vens = VEND_DB.map(v=>({...v}));

@@ -29,8 +29,17 @@ export default function Header({ title, sub }) {
         <button
           onClick={() => d({type:"TOGGLE_DARK"})}
           title={s.darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          style={{background:"none",border:`1px solid ${DS.bd}`,borderRadius:DS.r2,padding:"4px 8px",cursor:"pointer",fontSize:14,lineHeight:1,color:DS.t3}}
-        >{s.darkMode ? "☀" : "🌙"}</button>
+          style={{
+            display:"flex",alignItems:"center",gap:6,
+            background:DS.s2,border:`1px solid ${DS.bd2}`,
+            borderRadius:DS.r2,padding:"5px 10px",cursor:"pointer",
+            fontSize:11,fontWeight:600,color:DS.t3,
+            transition:"all 0.15s",flexShrink:0,
+          }}
+        >
+          <span style={{fontSize:13,lineHeight:1}}>{s.darkMode ? "🌙" : "☀️"}</span>
+          <span>{s.darkMode ? "Dark" : "Light"}</span>
+        </button>
         <Tip txt={`${crit} critical alert${crit!==1?"s":""} need action`}>
           <button style={{position:"relative",background:"none",border:"none",cursor:"pointer",padding:4,color:DS.t3,fontSize:18}}>
             🔔

@@ -8,6 +8,8 @@
    1. COLOUR TOKENS
    -------------------------------------------------------------------------- */
 :root {
+  color-scheme: dark;
+
   /* Brand gold */
   --qg-gold:            #C9A84C;
   --qg-gold-light:      #D4AA50;
@@ -35,6 +37,11 @@
   --qg-text-2:          rgba(255, 255, 255, 0.85);
   --qg-text-3:          rgba(255, 255, 255, 0.50);
   --qg-text-4:          rgba(255, 255, 255, 0.30);
+
+  /* Informational (muted, theme-responsive) */
+  --qg-info:            rgba(255,255,255,0.40);
+  --qg-info-bg:         rgba(255,255,255,0.05);
+  --qg-info-border:     rgba(255,255,255,0.10);
 
   /* Semantic colours (keep recognisable — only backgrounds go dark) */
   --qg-red:             #EF4444;
@@ -129,7 +136,51 @@
 }
 
 /* --------------------------------------------------------------------------
-   7. BASE RESET
+   7. LIGHT MODE OVERRIDES
+   -------------------------------------------------------------------------- */
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Backgrounds */
+  --qg-bg:              #F4F6F9;
+  --qg-sidebar:         #FFFFFF;
+  --qg-surface:         #FFFFFF;
+  --qg-surface-2:       #EEF1F6;
+  --qg-overlay:         rgba(0,0,0,0.50);
+
+  /* Borders */
+  --qg-border:          rgba(0,0,0,0.08);
+  --qg-border-2:        rgba(0,0,0,0.13);
+  --qg-border-strong:   rgba(0,0,0,0.22);
+
+  /* Text */
+  --qg-text-1:          #111827;
+  --qg-text-2:          rgba(17,24,39,0.82);
+  --qg-text-3:          rgba(17,24,39,0.52);
+  --qg-text-4:          rgba(17,24,39,0.32);
+
+  /* Informational */
+  --qg-info:            rgba(17,24,39,0.40);
+  --qg-info-bg:         rgba(0,0,0,0.04);
+  --qg-info-border:     rgba(0,0,0,0.10);
+
+  /* Shadows — softer on light */
+  --qg-shadow-sm:  0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --qg-shadow-md:  0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+  --qg-shadow-lg:  0 20px 48px rgba(0,0,0,0.14), 0 8px 16px rgba(0,0,0,0.08);
+  --qg-shadow-gold: 0 0 0 1px rgba(201,168,76,0.22), 0 20px 48px rgba(0,0,0,0.12);
+
+  /* Gold tints — slightly stronger on light bg */
+  --qg-gold-tint-1:     rgba(201,168,76,0.16);
+  --qg-gold-tint-2:     rgba(201,168,76,0.10);
+  --qg-gold-tint-3:     rgba(201,168,76,0.06);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.50); }
+
+/* --------------------------------------------------------------------------
+   8. BASE RESET (renumbered)
    -------------------------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
