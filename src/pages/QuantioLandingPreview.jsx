@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const GOLD  = "#C9A84C";
 const GOLD2 = "rgba(201,168,76,0.55)";
@@ -46,7 +47,8 @@ function NavA() {
           );
         })}
       </div>
-      <div style={{ marginLeft:"auto" }}>
+      <div style={{ marginLeft:"auto", display:"flex", alignItems:"center", gap:8 }}>
+        <ThemeToggle/>
         <div style={{ background:GOLD, color:DARK, fontSize:13, fontWeight:700, padding:"9px 22px", borderRadius:100, cursor:"pointer" }}>Enter Platform</div>
       </div>
     </nav>

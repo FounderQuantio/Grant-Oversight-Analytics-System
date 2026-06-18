@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 /* ── Charcoal + Gold Design Tokens ────────────────────────────────── */
 const T = {
@@ -115,6 +116,7 @@ function Nav({ onEnterApp }) {
           <div style={{ marginLeft: 8 }}>
             <BtnPrimary onClick={scrollToPlatforms}>Enter Platform</BtnPrimary>
           </div>
+          <ThemeToggle style={{ marginLeft: 4 }} />
         </div>
       </div>
     </nav>

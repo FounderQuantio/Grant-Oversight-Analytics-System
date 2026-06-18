@@ -1,5 +1,5 @@
 import { DS, ROLES } from "@/utils/tokens";
-import { Tip, Pick } from "@/components/ui";
+import { Tip, Pick, ThemeToggle } from "@/components/ui";
 import { useAppState } from "@/context/AppContext";
 import { useNavigate } from "react-router-dom";
 import GSearch from "@/components/layout/GSearch";
@@ -26,20 +26,7 @@ export default function Header({ title, sub }) {
       </div>
       <div style={{flex:1,display:"flex",justifyContent:"center"}}><GSearch/></div>
       <div style={{display:"flex",alignItems:"center",gap:10}}>
-        <button
-          onClick={() => d({type:"TOGGLE_DARK"})}
-          title={s.darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          style={{
-            display:"flex",alignItems:"center",gap:6,
-            background:DS.s2,border:`1px solid ${DS.bd2}`,
-            borderRadius:DS.r2,padding:"5px 10px",cursor:"pointer",
-            fontSize:11,fontWeight:600,color:DS.t3,
-            transition:"all 0.15s",flexShrink:0,
-          }}
-        >
-          <span style={{fontSize:13,lineHeight:1}}>{s.darkMode ? "🌙" : "☀️"}</span>
-          <span>{s.darkMode ? "Dark" : "Light"}</span>
-        </button>
+        <ThemeToggle/>
         <Tip txt={`${crit} critical alert${crit!==1?"s":""} need action`}>
           <button style={{position:"relative",background:"none",border:"none",cursor:"pointer",padding:4,color:DS.t3,fontSize:18}}>
             🔔

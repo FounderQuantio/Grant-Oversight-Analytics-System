@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DS } from "@/utils/tokens";
-import { Card, Btn, Spin } from "@/components/ui";
+import { Card, Btn, Spin, ThemeToggle } from "@/components/ui";
 import { useAppState } from "@/context/AppContext";
 
 const ORGS = ["Municipality / County","Nonprofit / Housing Authority","State Agency","Tribal Government","Federal Contractor / Developer"];
@@ -41,28 +41,32 @@ export default function Wizard() {
   return (
     <div style={{height:"100vh",display:"flex",background:DS.bg}}>
       {/* Left panel */}
-      <div style={{width:300,background:"#1A1A1A",borderRight:"1px solid rgba(255,255,255,0.07)",display:"flex",flexDirection:"column",padding:"40px 26px",flexShrink:0}}>
+      <div style={{width:300,background:DS.side,borderRight:`1px solid ${DS.bd}`,display:"flex",flexDirection:"column",padding:"40px 26px",flexShrink:0}}>
         <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:44}}>
-          <div style={{width:34,height:34,borderRadius:DS.r2,background:"rgba(201,168,76,0.15)",border:"1px solid rgba(201,168,76,0.30)",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,color:"#C9A84C",fontSize:12}}>FG</div>
-          <div style={{fontWeight:800,fontSize:15,color:"#FFFFFF"}}>FraudGuard Enterprise</div>
+          <div style={{width:34,height:34,borderRadius:DS.r2,background:DS.sideAct,border:`1px solid ${DS.p3}`,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,color:DS.primary,fontSize:12}}>FG</div>
+          <div style={{fontWeight:800,fontSize:15,color:DS.t1}}>FraudGuard Enterprise</div>
         </div>
-        <div style={{fontSize:10,fontWeight:700,color:"rgba(255,255,255,0.30)",letterSpacing:1,marginBottom:18,textTransform:"uppercase"}}>Setup Guide</div>
+        <div style={{fontSize:10,fontWeight:700,color:DS.t4,letterSpacing:1,marginBottom:18,textTransform:"uppercase"}}>Setup Guide</div>
         {STEPS.map((st,i)=>(
           <div key={i} style={{display:"flex",alignItems:"center",gap:12,marginBottom:18,opacity:i>step?.4:1}}>
-            <div style={{width:26,height:26,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:i===step?"#1A1A1A":"#fff",background:i<step?DS.ok:i===step?"#C9A84C":"rgba(255,255,255,0.12)"}}>{i<step?"✓":i+1}</div>
+            <div style={{width:26,height:26,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,color:i===step?"#fff":DS.t3,background:i<step?DS.ok:i===step?DS.primary:DS.bd2}}>{i<step?"✓":i+1}</div>
             <div>
-              <div style={{fontSize:12,fontWeight:700,color:i===step?"#FFFFFF":"rgba(255,255,255,0.40)"}}>{st.l}</div>
-              <div style={{fontSize:10,color:"rgba(255,255,255,0.25)"}}>{st.d}</div>
+              <div style={{fontSize:12,fontWeight:700,color:i===step?DS.t1:DS.t3}}>{st.l}</div>
+              <div style={{fontSize:10,color:DS.t4}}>{st.d}</div>
             </div>
           </div>
         ))}
-        <div style={{marginTop:"auto",fontSize:11,color:"rgba(255,255,255,0.45)",lineHeight:1.6}}>
-          <div style={{fontWeight:700,marginBottom:4,color:"rgba(255,255,255,0.65)"}}>📊 Dataset Coverage</div>
+        <div style={{marginTop:"auto",fontSize:11,color:DS.t3,lineHeight:1.6}}>
+          <div style={{fontWeight:700,marginBottom:4,color:DS.t2}}>📊 Dataset Coverage</div>
           DS1 Clean · DS2 Duplicates · DS3 Fraud Network · DS4 Procurement · DS5 Structuring · DS6 ML Anomalies
         </div>
       </div>
 
       {/* Right panel */}
+      <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+        <div style={{display:"flex",justifyContent:"flex-end",padding:"14px 20px",borderBottom:`1px solid ${DS.bd}`}}>
+          <ThemeToggle/>
+        </div>
       <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",padding:48}}>
         <div style={{maxWidth:500,width:"100%"}}>
           <div style={{fontSize:10,fontWeight:700,color:"#C9A84C",letterSpacing:1,marginBottom:8,textTransform:"uppercase"}}>Step {step+1} of 3</div>
@@ -116,6 +120,7 @@ export default function Wizard() {
             </div>
           </>}
         </div>
+      </div>
       </div>
     </div>
   );
