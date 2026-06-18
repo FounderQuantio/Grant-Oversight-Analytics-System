@@ -2,7 +2,6 @@ import { useState } from "react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const GOLD  = "#C9A84C";
-const GOLD2 = "rgba(201,168,76,0.55)";
 const GOLD3 = "rgba(201,168,76,0.18)";
 const DARK  = "#1A1A1A";
 
@@ -21,15 +20,15 @@ const PLATFORMS = [
   { mono:"ARF", name:"Audit Readiness",   tag:"Audit Preparation & Evidence",  desc:"Build audit packages automatically. Map evidence to findings and walk into every review fully prepared." },
 ];
 
-/* ── Nav A ─────────────────────────────────── */
+/* ── Nav ─────────────────────────────────────── */
 function NavA() {
   return (
-    <nav style={{ background:"rgba(26,26,26,0.96)", padding:"16px 32px", borderRadius:10, display:"flex", gap:8, alignItems:"center", border:"1px solid rgba(255,255,255,0.07)" }}>
+    <nav style={{ background:"var(--qg-surface)", padding:"16px 32px", borderRadius:10, display:"flex", gap:8, alignItems:"center", border:"1px solid var(--qg-border)" }}>
       <div style={{ display:"flex", alignItems:"center", gap:10, marginRight:24 }}>
         <img src="/qg-logo-gold.png" alt="logo" style={{ width:40, height:"auto" }}/>
         <div>
-          <div style={{ fontSize:14, fontWeight:800, color:"#fff", letterSpacing:2.5, textTransform:"uppercase", lineHeight:1 }}>Quantio</div>
-          <div style={{ fontSize:8, color:"rgba(255,255,255,0.4)", letterSpacing:3.5, textTransform:"uppercase", marginTop:2 }}>Global</div>
+          <div style={{ fontSize:14, fontWeight:800, color:GOLD, letterSpacing:2.5, textTransform:"uppercase", lineHeight:1 }}>Quantio</div>
+          <div style={{ fontSize:8, color:"var(--qg-text-4)", letterSpacing:3.5, textTransform:"uppercase", marginTop:2 }}>Global</div>
         </div>
       </div>
       <div style={{ display:"flex", gap:6 }}>
@@ -37,11 +36,11 @@ function NavA() {
           const [h,hp] = useHover();
           return (
             <a key={l} {...hp} href="#" style={{
-              color: h ? GOLD : "rgba(255,255,255,0.7)",
+              color: h ? GOLD : "var(--qg-text-2)",
               fontSize:13, fontWeight:500, textDecoration:"none",
               padding:"7px 16px", borderRadius:100,
-              background: h ? "rgba(201,168,76,0.10)" : "rgba(255,255,255,0.04)",
-              border:`1px solid ${h ? "rgba(201,168,76,0.30)" : "rgba(255,255,255,0.07)"}`,
+              background: h ? "rgba(201,168,76,0.10)" : "var(--qg-border)",
+              border:`1px solid ${h ? "rgba(201,168,76,0.30)" : "var(--qg-border-2)"}`,
               transition:"all 0.18s",
             }}>{l}</a>
           );
@@ -55,18 +54,18 @@ function NavA() {
   );
 }
 
-/* ── Card Z — All Gold ─────────────────────── */
+/* ── Card ────────────────────────────────────── */
 function CardZ({ p }) {
   const [h,hp] = useHover();
   return (
     <div {...hp} style={{
-      background: h ? "#242424" : "#1C1C1C",
+      background: h ? "var(--qg-surface-2)" : "var(--qg-surface)",
       borderRadius:14, padding:"26px 24px",
-      border:`1px solid ${h ? GOLD+"33":"rgba(255,255,255,0.06)"}`,
+      border:`1px solid ${h ? "rgba(201,168,76,0.25)" : "var(--qg-border)"}`,
       display:"flex", flexDirection:"column", gap:14, cursor:"pointer",
       transform:h?"translateY(-4px)":"translateY(0)",
       transition:"all 0.25s",
-      boxShadow: h ? `0 0 0 1px ${GOLD}22, 0 20px 48px rgba(0,0,0,0.6)` : "none",
+      boxShadow: h ? "var(--qg-shadow-gold)" : "none",
     }}>
       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <div style={{ display:"flex", alignItems:"center", gap:12 }}>
@@ -79,19 +78,19 @@ function CardZ({ p }) {
             transition:"all 0.2s",
           }}>{p.mono}</div>
           <div>
-            <div style={{ fontSize:14, fontWeight:700, color:"#fff" }}>{p.name}</div>
+            <div style={{ fontSize:14, fontWeight:700, color:"var(--qg-text-1)" }}>{p.name}</div>
             <div style={{ fontSize:10, color:GOLD, fontWeight:600, letterSpacing:0.4, marginTop:1 }}>{p.tag}</div>
           </div>
         </div>
         <div style={{
           width:34, height:34, borderRadius:"50%", flexShrink:0,
-          background: h ? GOLD : "rgba(255,255,255,0.05)",
+          background: h ? GOLD : "var(--qg-border)",
           display:"flex", alignItems:"center", justifyContent:"center",
-          fontSize:15, color: h ? DARK : "rgba(255,255,255,0.22)",
+          fontSize:15, color: h ? DARK : "var(--qg-text-3)",
           transition:"all 0.22s",
         }}>↗</div>
       </div>
-      <p style={{ fontSize:12.5, color:"rgba(255,255,255,0.45)", lineHeight:1.82, margin:0, flex:1 }}>{p.desc}</p>
+      <p style={{ fontSize:12.5, color:"var(--qg-text-3)", lineHeight:1.82, margin:0, flex:1 }}>{p.desc}</p>
       <div style={{ fontSize:11, fontWeight:700, color:GOLD, letterSpacing:0.9, textTransform:"uppercase", opacity:h?1:0.38, transition:"opacity 0.2s" }}>
         Open Platform →
       </div>
@@ -99,22 +98,19 @@ function CardZ({ p }) {
   );
 }
 
-/* ── Line-by-line Row ──────────────────────── */
+/* ── Row ─────────────────────────────────────── */
 function PlatformRow({ p, i }) {
   const [h,hp] = useHover();
   return (
     <div {...hp} style={{
       display:"flex", alignItems:"center", gap:20,
       padding:"20px 24px", cursor:"pointer",
-      background: h ? "#222" : "transparent",
+      background: h ? "var(--qg-surface-2)" : "transparent",
       borderRadius:12,
-      borderBottom: i < 4 ? "1px solid rgba(255,255,255,0.05)" : "none",
+      borderBottom: i < 4 ? "1px solid var(--qg-border)" : "none",
       transition:"all 0.2s",
     }}>
-      {/* index */}
-      <div style={{ fontSize:12, fontWeight:700, color:"rgba(255,255,255,0.15)", width:20, flexShrink:0, textAlign:"right" }}>0{i+1}</div>
-
-      {/* badge */}
+      <div style={{ fontSize:12, fontWeight:700, color:"var(--qg-text-4)", width:20, flexShrink:0, textAlign:"right" }}>0{i+1}</div>
       <div style={{
         width:40, height:40, borderRadius:9, flexShrink:0,
         background: h ? GOLD3 : "rgba(201,168,76,0.08)",
@@ -123,20 +119,12 @@ function PlatformRow({ p, i }) {
         fontSize:p.mono.length>2?9:11, fontWeight:800, color:GOLD,
         transition:"all 0.2s",
       }}>{p.mono}</div>
-
-      {/* name + tag */}
       <div style={{ width:210, flexShrink:0 }}>
-        <div style={{ fontSize:14, fontWeight:700, color:h?"#fff":"rgba(255,255,255,0.85)" }}>{p.name}</div>
+        <div style={{ fontSize:14, fontWeight:700, color:h?"var(--qg-text-1)":"var(--qg-text-2)" }}>{p.name}</div>
         <div style={{ fontSize:10, color:GOLD, fontWeight:600, letterSpacing:0.4, marginTop:2 }}>{p.tag}</div>
       </div>
-
-      {/* divider */}
-      <div style={{ width:1, height:32, background:"rgba(255,255,255,0.07)", flexShrink:0 }}/>
-
-      {/* description */}
-      <p style={{ fontSize:12.5, color:"rgba(255,255,255,0.4)", lineHeight:1.7, margin:0, flex:1 }}>{p.desc}</p>
-
-      {/* CTA */}
+      <div style={{ width:1, height:32, background:"var(--qg-border-2)", flexShrink:0 }}/>
+      <p style={{ fontSize:12.5, color:"var(--qg-text-3)", lineHeight:1.7, margin:0, flex:1 }}>{p.desc}</p>
       <div style={{
         flexShrink:0, padding:"9px 20px", borderRadius:8,
         border:`1px solid ${h ? GOLD : "rgba(201,168,76,0.25)"}`,
@@ -152,36 +140,34 @@ function PlatformRow({ p, i }) {
   );
 }
 
-/* ── Preview Page ──────────────────────────── */
+/* ── Page ────────────────────────────────────── */
 export default function QuantioLandingPreview() {
   const SectionLabel = ({ text, note }) => (
     <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:20 }}>
       <div style={{ background:GOLD, color:DARK, fontSize:10, fontWeight:800, letterSpacing:2, padding:"4px 12px", borderRadius:4, textTransform:"uppercase" }}>{text}</div>
-      {note && <span style={{ color:"rgba(255,255,255,0.3)", fontSize:12 }}>{note}</span>}
+      {note && <span style={{ color:"var(--qg-text-3)", fontSize:12 }}>{note}</span>}
     </div>
   );
 
   return (
-    <div style={{ background:"#0D0D0D", minHeight:"100vh", fontFamily:"Inter,-apple-system,sans-serif", padding:"52px 0 80px" }}>
+    <div style={{ background:"var(--qg-bg)", minHeight:"100vh", fontFamily:"Inter,-apple-system,sans-serif", padding:"52px 0 80px" }}>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 
       <div style={{ maxWidth:1100, margin:"0 auto", padding:"0 44px" }}>
 
         <div style={{ marginBottom:52 }}>
-          <h1 style={{ color:"#fff", fontSize:26, fontWeight:700, margin:"0 0 6px" }}>Nav A + Card Z — Unified Gold</h1>
-          <p style={{ color:"rgba(255,255,255,0.35)", fontSize:13, margin:0 }}>All accent colors replaced with single brand gold · Two layout options for the platforms section</p>
+          <h1 style={{ color:"var(--qg-text-1)", fontSize:26, fontWeight:700, margin:"0 0 6px" }}>Nav A + Card Z — Unified Gold</h1>
+          <p style={{ color:"var(--qg-text-3)", fontSize:13, margin:0 }}>All accent colors replaced with single brand gold · Two layout options for the platforms section</p>
         </div>
 
-        {/* NAV */}
         <div style={{ marginBottom:56 }}>
           <SectionLabel text="Nav A" note="Pill buttons · single gold accent · hover to interact"/>
           <NavA/>
         </div>
 
-        {/* GRID LAYOUT */}
         <div style={{ marginBottom:56 }}>
           <SectionLabel text="Layout Option 1 — Grid" note="3 + 2 card grid · all gold · Card Z style"/>
-          <div style={{ background:"#141414", borderRadius:16, padding:"40px 32px" }}>
+          <div style={{ background:"var(--qg-surface-2)", borderRadius:16, padding:"40px 32px" }}>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:18, marginBottom:18 }}>
               {PLATFORMS.slice(0,3).map(p => <CardZ key={p.name} p={p}/>)}
             </div>
@@ -191,20 +177,18 @@ export default function QuantioLandingPreview() {
           </div>
         </div>
 
-        {/* LINE BY LINE LAYOUT */}
         <div style={{ marginBottom:40 }}>
           <SectionLabel text="Layout Option 2 — Line by Line" note="All 5 tools in rows · scannable · compact"/>
-          <div style={{ background:"#141414", borderRadius:16, padding:"16px 16px" }}>
+          <div style={{ background:"var(--qg-surface-2)", borderRadius:16, padding:"16px 16px" }}>
             {PLATFORMS.map((p,i) => <PlatformRow key={p.name} p={p} i={i}/>)}
           </div>
         </div>
 
-        {/* prompt */}
         <div style={{ background:"rgba(201,168,76,0.08)", border:"1px solid rgba(201,168,76,0.22)", borderRadius:8, padding:"16px 24px" }}>
           <div style={{ color:GOLD, fontSize:13, fontWeight:700, marginBottom:6 }}>Which layout do you prefer?</div>
-          <div style={{ color:"rgba(255,255,255,0.45)", fontSize:12, lineHeight:1.8 }}>
-            <strong style={{ color:"rgba(255,255,255,0.7)" }}>Grid (Option 1)</strong> — visual, card-based, each tool gets breathing room.<br/>
-            <strong style={{ color:"rgba(255,255,255,0.7)" }}>Line by Line (Option 2)</strong> — all 5 tools visible at once, scannable like a product table.<br/>
+          <div style={{ color:"var(--qg-text-3)", fontSize:12, lineHeight:1.8 }}>
+            <strong style={{ color:"var(--qg-text-2)" }}>Grid (Option 1)</strong> — visual, card-based, each tool gets breathing room.<br/>
+            <strong style={{ color:"var(--qg-text-2)" }}>Line by Line (Option 2)</strong> — all 5 tools visible at once, scannable like a product table.<br/>
             Or say <strong style={{ color:GOLD }}>"combine both"</strong> — show the list first, then expand to cards.
           </div>
         </div>
