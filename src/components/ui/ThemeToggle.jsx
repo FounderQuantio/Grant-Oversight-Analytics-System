@@ -9,15 +9,16 @@ export default function ThemeToggle({ style = {} }) {
       onClick={() => d({ type: "TOGGLE_DARK" })}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
       style={{
-        display: "flex", alignItems: "center", gap: 6,
+        display: "flex", alignItems: "center", gap: 5,
         background: DS.s2, border: `1px solid ${DS.bd2}`,
-        borderRadius: DS.r2, padding: "5px 11px",
+        borderRadius: "100px", padding: "5px 12px",
         cursor: "pointer", fontSize: 11, fontWeight: 600,
-        color: DS.t3, transition: "all 0.15s", flexShrink: 0,
+        color: DS.t2, transition: "all 0.15s", flexShrink: 0,
+        whiteSpace: "nowrap",
         ...style,
       }}
     >
-      <span style={{ fontSize: 14, lineHeight: 1 }}>{isDark ? "🌙" : "☀️"}</span>
+      <span style={{ fontSize: 12, lineHeight: 1 }}>{isDark ? "🌙" : "☀️"}</span>
       <span>{isDark ? "Dark" : "Light"}</span>
     </button>
   );

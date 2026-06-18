@@ -1,19 +1,16 @@
 import { DS } from "@/utils/tokens";
 import { useAppState } from "@/context/AppContext";
 
-function lightT() {
-  return { card: "#1C1C1C", border: "rgba(255,255,255,0.08)", t1: "#FFFFFF", t2: "rgba(255,255,255,0.85)", t3: "rgba(255,255,255,0.50)", t4: "rgba(255,255,255,0.30)", rowBg: "#242424", roiBg: "rgba(201,168,76,0.08)", roiBorder: "rgba(201,168,76,0.22)" };
-}
-function darkT() {
-  return { card: "#1C1C1C", border: "rgba(255,255,255,0.08)", t1: "#FFFFFF", t2: "rgba(255,255,255,0.85)", t3: "rgba(255,255,255,0.50)", t4: "rgba(255,255,255,0.30)", rowBg: "#242424", roiBg: "rgba(201,168,76,0.08)", roiBorder: "rgba(201,168,76,0.22)" };
-}
-
 export default function ROICalculator() {
   const { s, d } = useAppState();
   const { roi } = s;
   const upd = (k, v) => d({ type: "SET_ROI", v: { [k]: +v || 0 } });
-  const dark = s.darkMode;
-  const T = dark ? darkT() : lightT();
+  const T = {
+    card: DS.surface, border: DS.bd,
+    t1: DS.t1, t2: DS.t2, t3: DS.t3, t4: DS.t4,
+    rowBg: DS.s2,
+    roiBg: "rgba(201,168,76,0.08)", roiBorder: "rgba(201,168,76,0.22)",
+  };
 
   const flagAmt  = s.txns.filter(t => t.riskTier !== "INFORMATIONAL").reduce((acc, t) => acc + (t.amount || 0), 0);
   const fPrev    = Math.round(flagAmt * 0.65 * 0.4);
