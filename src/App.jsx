@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { DS, ROLES } from "@/utils/tokens";
-import { Sidebar, Header, Notifications } from "@/components/layout";
+import { Sidebar, Header, Notifications, SiteHeader, SiteFooter } from "@/components/layout";
 import { Spin } from "@/components/ui";
 import { useAppState } from "@/context/AppContext";
 import Wizard from "@/pages/Wizard";
@@ -63,23 +63,27 @@ function Shell() {
   if (s.wizard) return <Wizard />;
 
   return (
-    <div style={{display:"flex",height:"100vh",background:DS.bg,overflow:"hidden"}}>
-      <Sidebar active={active} setActive={setActive}/>
-      <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-        <Header title={meta.title} sub={meta.sub}/>
-        <main style={{flex:1,overflowY:"auto",padding:20}}>
-          <Routes>
-            <Route path="/"             element={<Overview/>}/>
-            <Route path="/alerts"       element={<Alerts/>}/>
-            <Route path="/transactions" element={<Transactions/>}/>
-            <Route path="/cases"        element={<Cases/>}/>
-            <Route path="/compliance"   element={<Compliance/>}/>
-            <Route path="/settings"     element={role.views.includes("settings") ? <Settings/> : <Navigate to="/fraud-guard" replace/>}/>
-            <Route path="*"             element={<Navigate to="/fraud-guard" replace/>}/>
-          </Routes>
-        </main>
+    <div style={{display:"flex",flexDirection:"column",height:"100vh",background:DS.bg,overflow:"hidden"}}>
+      <SiteHeader/>
+      <div style={{flex:1,display:"flex",overflow:"hidden"}}>
+        <Sidebar active={active} setActive={setActive}/>
+        <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+          <Header title={meta.title} sub={meta.sub}/>
+          <main style={{flex:1,overflowY:"auto",padding:20}}>
+            <Routes>
+              <Route path="/"             element={<Overview/>}/>
+              <Route path="/alerts"       element={<Alerts/>}/>
+              <Route path="/transactions" element={<Transactions/>}/>
+              <Route path="/cases"        element={<Cases/>}/>
+              <Route path="/compliance"   element={<Compliance/>}/>
+              <Route path="/settings"     element={role.views.includes("settings") ? <Settings/> : <Navigate to="/fraud-guard" replace/>}/>
+              <Route path="*"             element={<Navigate to="/fraud-guard" replace/>}/>
+            </Routes>
+          </main>
+        </div>
+        <Notifications/>
       </div>
-      <Notifications/>
+      <SiteFooter/>
     </div>
   );
 }
