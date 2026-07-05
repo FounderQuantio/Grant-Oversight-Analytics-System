@@ -32,7 +32,7 @@ const INIT_STATE = {
   txns:[],vens:[],alerts:[],cases:[],rules:INIT_RULES,
   log:[],notifs:[],graphAlerts:[],mlStats:null,
   roi:{vol:15000000,findCost:25000,rate:65,sub:12000},
-  darkMode:true,
+  darkMode:false,
 };
 
 const Ctx = createContext(null);

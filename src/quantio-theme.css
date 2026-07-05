@@ -8,65 +8,65 @@
    1. COLOUR TOKENS
    -------------------------------------------------------------------------- */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
   /* Brand gold */
-  --qg-gold:            #ABABAB;
-  --qg-gold-light:      #C2C2C2;
-  --qg-gold-dim:        rgba(171, 171, 171, 0.55);
-  --qg-gold-tint-1:     rgba(171, 171, 171, 0.18);
-  --qg-gold-tint-2:     rgba(171, 171, 171, 0.12);
-  --qg-gold-tint-3:     rgba(171, 171, 171, 0.08);
-  --qg-gold-border:     rgba(171, 171, 171, 0.25);
-  --qg-gold-border-h:   rgba(171, 171, 171, 0.45);
+  --qg-gold:            #2563EB;
+  --qg-gold-light:      #3B82F6;
+  --qg-gold-dim:        rgba(37, 99, 235, 0.55);
+  --qg-gold-tint-1:     rgba(37, 99, 235, 0.12);
+  --qg-gold-tint-2:     rgba(37, 99, 235, 0.08);
+  --qg-gold-tint-3:     rgba(37, 99, 235, 0.05);
+  --qg-gold-border:     rgba(37, 99, 235, 0.28);
+  --qg-gold-border-h:   rgba(37, 99, 235, 0.45);
 
   /* Backgrounds */
-  --qg-bg:              #141414;   /* page background */
-  --qg-sidebar:         #1A1A1A;   /* sidebar / nav panel */
-  --qg-surface:         #1C1C1C;   /* card surface */
-  --qg-surface-2:       #242424;   /* elevated card / hover state */
-  --qg-overlay:         rgba(0, 0, 0, 0.72);
+  --qg-bg:              #F4F7FC;   /* page background */
+  --qg-sidebar:         #FFFFFF;   /* sidebar / nav panel */
+  --qg-surface:         #FFFFFF;   /* card surface */
+  --qg-surface-2:       #EEF2FA;   /* elevated card / hover state */
+  --qg-overlay:         rgba(15, 23, 42, 0.45);
 
   /* Borders */
-  --qg-border:          rgba(255, 255, 255, 0.08);
-  --qg-border-2:        rgba(255, 255, 255, 0.13);
-  --qg-border-strong:   rgba(255, 255, 255, 0.22);
+  --qg-border:          rgba(15, 23, 42, 0.08);
+  --qg-border-2:        rgba(15, 23, 42, 0.13);
+  --qg-border-strong:   rgba(15, 23, 42, 0.22);
 
   /* Text */
-  --qg-text-1:          #FFFFFF;
-  --qg-text-2:          rgba(255, 255, 255, 0.85);
-  --qg-text-3:          rgba(255, 255, 255, 0.50);
-  --qg-text-4:          rgba(255, 255, 255, 0.30);
+  --qg-text-1:          #0F172A;
+  --qg-text-2:          rgba(15, 23, 42, 0.78);
+  --qg-text-3:          rgba(15, 23, 42, 0.50);
+  --qg-text-4:          rgba(15, 23, 42, 0.32);
 
   /* Informational (muted, theme-responsive) */
-  --qg-info:            rgba(255,255,255,0.40);
-  --qg-info-bg:         rgba(255,255,255,0.05);
-  --qg-info-border:     rgba(255,255,255,0.10);
+  --qg-info:            rgba(15,23,42,0.45);
+  --qg-info-bg:         rgba(15,23,42,0.05);
+  --qg-info-border:     rgba(15,23,42,0.10);
 
   /* Semantic colours (keep recognisable — only backgrounds go dark) */
   --qg-red:             #EF4444;
-  --qg-red-bg:          rgba(239, 68, 68, 0.13);
-  --qg-red-border:      rgba(239, 68, 68, 0.28);
+  --qg-red-bg:          rgba(239, 68, 68, 0.09);
+  --qg-red-border:      rgba(239, 68, 68, 0.25);
 
   --qg-orange:          #F97316;
-  --qg-orange-bg:       rgba(249, 115, 22, 0.13);
-  --qg-orange-border:   rgba(249, 115, 22, 0.28);
+  --qg-orange-bg:       rgba(249, 115, 22, 0.09);
+  --qg-orange-border:   rgba(249, 115, 22, 0.25);
 
   --qg-yellow:          #EAB308;
-  --qg-yellow-bg:       rgba(234, 179, 8, 0.13);
-  --qg-yellow-border:   rgba(234, 179, 8, 0.28);
+  --qg-yellow-bg:       rgba(234, 179, 8, 0.09);
+  --qg-yellow-border:   rgba(234, 179, 8, 0.25);
 
   --qg-green:           #22C55E;
-  --qg-green-bg:        rgba(34, 197, 94, 0.13);
-  --qg-green-border:    rgba(34, 197, 94, 0.28);
+  --qg-green-bg:        rgba(34, 197, 94, 0.09);
+  --qg-green-border:    rgba(34, 197, 94, 0.25);
 
-  --qg-purple:          #A78BFA;
-  --qg-purple-bg:       rgba(167, 139, 250, 0.13);
-  --qg-purple-border:   rgba(167, 139, 250, 0.28);
+  --qg-purple:          #7C3AED;
+  --qg-purple-bg:       rgba(124, 58, 237, 0.09);
+  --qg-purple-border:   rgba(124, 58, 237, 0.25);
 
-  --qg-teal:            #2DD4BF;
-  --qg-teal-bg:         rgba(45, 212, 191, 0.13);
-  --qg-teal-border:     rgba(45, 212, 191, 0.28);
+  --qg-teal:            #0D9488;
+  --qg-teal-bg:         rgba(13, 148, 136, 0.09);
+  --qg-teal-border:     rgba(13, 148, 136, 0.25);
 
   /* --------------------------------------------------------------------------
      2. TYPOGRAPHY TOKENS
@@ -123,10 +123,10 @@
   /* --------------------------------------------------------------------------
      5. SHADOW TOKENS
      -------------------------------------------------------------------------- */
-  --qg-shadow-sm:  0 1px 3px rgba(0,0,0,0.30), 0 1px 2px rgba(0,0,0,0.20);
-  --qg-shadow-md:  0 4px 12px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.20);
-  --qg-shadow-lg:  0 20px 48px rgba(0,0,0,0.60), 0 8px 16px rgba(0,0,0,0.30);
-  --qg-shadow-gold: 0 0 0 1px rgba(171,171,171,0.20), 0 20px 48px rgba(0,0,0,0.60);
+  --qg-shadow-sm:  0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.05);
+  --qg-shadow-md:  0 4px 12px rgba(15,23,42,0.10), 0 2px 4px rgba(15,23,42,0.05);
+  --qg-shadow-lg:  0 20px 48px rgba(15,23,42,0.14), 0 8px 16px rgba(15,23,42,0.07);
+  --qg-shadow-gold: 0 0 0 1px rgba(37,99,235,0.20), 0 8px 24px rgba(15,23,42,0.10);
 
   /* --------------------------------------------------------------------------
      6. TRANSITION
@@ -136,52 +136,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   7. LIGHT MODE OVERRIDES
-   -------------------------------------------------------------------------- */
-[data-theme="light"] {
-  color-scheme: light;
-
-  /* Backgrounds — warm cream palette */
-  --qg-bg:              #F0EBE0;
-  --qg-sidebar:         #FFFFFF;
-  --qg-surface:         #FFFFFF;
-  --qg-surface-2:       #E6DFD3;
-  --qg-overlay:         rgba(0,0,0,0.45);
-
-  /* Borders */
-  --qg-border:          rgba(26,20,10,0.09);
-  --qg-border-2:        rgba(26,20,10,0.14);
-  --qg-border-strong:   rgba(26,20,10,0.24);
-
-  /* Text */
-  --qg-text-1:          #1A1A1A;
-  --qg-text-2:          rgba(26,26,26,0.80);
-  --qg-text-3:          rgba(26,26,26,0.50);
-  --qg-text-4:          rgba(26,26,26,0.35);
-
-  /* Informational */
-  --qg-info:            rgba(26,26,26,0.42);
-  --qg-info-bg:         rgba(26,26,26,0.04);
-  --qg-info-border:     rgba(26,26,26,0.10);
-
-  /* Shadows — softer warm shadows */
-  --qg-shadow-sm:  0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
-  --qg-shadow-md:  0 4px 16px rgba(0,0,0,0.09), 0 2px 4px rgba(0,0,0,0.05);
-  --qg-shadow-lg:  0 20px 48px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.06);
-  --qg-shadow-gold: 0 0 0 1px rgba(171,171,171,0.25), 0 20px 48px rgba(0,0,0,0.10);
-
-  /* Gold tints — visible on light cream bg */
-  --qg-gold-tint-1:     rgba(171,171,171,0.18);
-  --qg-gold-tint-2:     rgba(171,171,171,0.12);
-  --qg-gold-tint-3:     rgba(171,171,171,0.07);
-  --qg-gold-dim:        rgba(171,171,171,0.65);
-}
-
-[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); }
-[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(171,171,171,0.50); }
-
-/* --------------------------------------------------------------------------
-   8. BASE RESET (renumbered)
+   7. BASE RESET
    -------------------------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -203,7 +158,7 @@ html, body, #root {
 /* Native inputs inherit dark scheme */
 input, textarea, select, button {
   font-family: var(--qg-font);
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 ::placeholder {
@@ -296,7 +251,7 @@ input, textarea, select, button {
    -------------------------------------------------------------------------- */
 .qg-nav {
   height: 60px;
-  background: rgba(26, 26, 26, 0.96);
+  background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--qg-border);
   display: flex;
   align-items: center;
@@ -338,14 +293,14 @@ input, textarea, select, button {
 }
 
 .qg-nav-link {
-  color: rgba(255,255,255,0.70);
+  color: rgba(15,23,42,0.70);
   font-size: var(--qg-text-base);
   font-weight: var(--qg-weight-medium);
   text-decoration: none;
   padding: 7px 16px;
   border-radius: var(--qg-radius-pill);
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(15,23,42,0.04);
+  border: 1px solid rgba(15,23,42,0.07);
   transition: var(--qg-ease);
 }
 
@@ -386,7 +341,7 @@ input, textarea, select, button {
 .qg-sidebar-group-label {
   font-size: var(--qg-text-xs);
   font-weight: var(--qg-weight-bold);
-  color: rgba(255,255,255,0.20);
+  color: rgba(15,23,42,0.20);
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 5px 10px 3px;
@@ -405,15 +360,15 @@ input, textarea, select, button {
   cursor: pointer;
   font-size: 12px;
   font-weight: var(--qg-weight-normal);
-  color: rgba(255,255,255,0.50);
+  color: rgba(15,23,42,0.50);
   background: transparent;
   text-align: left;
   transition: var(--qg-ease);
 }
 
 .qg-sidebar-item:hover {
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.80);
+  background: rgba(15,23,42,0.05);
+  color: rgba(15,23,42,0.80);
 }
 
 .qg-sidebar-item.active {
@@ -435,7 +390,7 @@ input, textarea, select, button {
 
 .qg-card:hover {
   background: var(--qg-surface-2);
-  border-color: rgba(171,171,171,0.20);
+  border-color: rgba(37,99,235,0.20);
   box-shadow: var(--qg-shadow-gold);
   transform: translateY(-4px);
 }
@@ -449,7 +404,7 @@ input, textarea, select, button {
   height: 44px;
   border-radius: var(--qg-radius-lg);
   background: var(--qg-gold-tint-2);
-  border: 1px solid rgba(171,171,171,0.22);
+  border: 1px solid rgba(37,99,235,0.22);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -462,26 +417,26 @@ input, textarea, select, button {
 
 .qg-card:hover .qg-card-icon {
   background: var(--qg-gold-tint-1);
-  border-color: rgba(171,171,171,0.45);
+  border-color: rgba(37,99,235,0.45);
 }
 
 .qg-card-arrow {
   width: 34px;
   height: 34px;
   border-radius: var(--qg-radius-circle);
-  background: rgba(255,255,255,0.05);
+  background: rgba(15,23,42,0.05);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  color: rgba(255,255,255,0.22);
+  color: rgba(15,23,42,0.22);
   flex-shrink: 0;
   transition: var(--qg-ease);
 }
 
 .qg-card:hover .qg-card-arrow {
   background: var(--qg-gold);
-  color: #1A1A1A;
+  color: #FFFFFF;
 }
 
 .qg-card-tag {
@@ -494,7 +449,7 @@ input, textarea, select, button {
 
 .qg-card-desc {
   font-size: 12.5px;
-  color: rgba(255,255,255,0.45);
+  color: rgba(15,23,42,0.45);
   line-height: var(--qg-leading-loose);
 }
 
@@ -536,23 +491,23 @@ input, textarea, select, button {
 
 .qg-btn-primary {
   background: var(--qg-gold);
-  color: #1A1A1A;
+  color: #FFFFFF;
 }
 
 .qg-btn-primary:hover {
   background: var(--qg-gold-light);
-  box-shadow: 0 4px 20px rgba(171,171,171,0.35);
+  box-shadow: 0 4px 20px rgba(37,99,235,0.35);
   transform: translateY(-1px);
 }
 
 .qg-btn-secondary {
-  background: rgba(255,255,255,0.06);
+  background: rgba(15,23,42,0.06);
   color: var(--qg-text-2);
   border: 1px solid var(--qg-border-2);
 }
 
 .qg-btn-secondary:hover {
-  background: rgba(255,255,255,0.10);
+  background: rgba(15,23,42,0.10);
   border-color: var(--qg-border-strong);
 }
 
@@ -622,8 +577,8 @@ input, textarea, select, button {
   padding: 4px 12px;
   border-radius: var(--qg-radius-pill);
   border: 1px solid var(--qg-border-2);
-  background: rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.65);
+  background: rgba(15,23,42,0.06);
+  color: rgba(15,23,42,0.65);
   font-size: var(--qg-text-xs);
   font-weight: var(--qg-weight-bold);
   cursor: pointer;
@@ -632,13 +587,13 @@ input, textarea, select, button {
 }
 
 .qg-pill:hover {
-  background: rgba(255,255,255,0.10);
+  background: rgba(15,23,42,0.10);
   color: var(--qg-text-1);
 }
 
 .qg-pill.active {
   background: var(--qg-gold);
-  color: #1A1A1A;
+  color: #FFFFFF;
   border-color: transparent;
 }
 
@@ -708,11 +663,11 @@ input, textarea, select, button {
 }
 
 .qg-table tbody tr:nth-child(even) td {
-  background: rgba(255,255,255,0.018);
+  background: rgba(15,23,42,0.018);
 }
 
 .qg-table tbody tr:hover td {
-  background: rgba(255,255,255,0.04);
+  background: rgba(15,23,42,0.04);
 }
 
 /* --------------------------------------------------------------------------
@@ -734,7 +689,7 @@ input, textarea, select, button {
 .qg-badge-medium   { background: var(--qg-yellow-bg); color: var(--qg-yellow); border: 1px solid var(--qg-yellow-border); }
 .qg-badge-low      { background: var(--qg-green-bg);  color: var(--qg-green);  border: 1px solid var(--qg-green-border); }
 .qg-badge-gold     { background: var(--qg-gold-tint-2); color: var(--qg-gold); border: 1px solid var(--qg-gold-border); }
-.qg-badge-muted    { background: rgba(255,255,255,0.06); color: var(--qg-text-3); border: 1px solid var(--qg-border); }
+.qg-badge-muted    { background: rgba(15,23,42,0.06); color: var(--qg-text-3); border: 1px solid var(--qg-border); }
 
 /* --------------------------------------------------------------------------
    18. SECTION HEADERS (page-level)
@@ -748,7 +703,7 @@ input, textarea, select, button {
 
 .qg-section-label-badge {
   background: var(--qg-gold);
-  color: #1A1A1A;
+  color: #FFFFFF;
   font-size: var(--qg-text-xs);
   font-weight: var(--qg-weight-extra);
   letter-spacing: 2px;
@@ -777,8 +732,8 @@ input, textarea, select, button {
    -------------------------------------------------------------------------- */
 ::-webkit-scrollbar          { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track    { background: transparent; }
-::-webkit-scrollbar-thumb    { background: rgba(255,255,255,0.12); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(171,171,171,0.40); }
+::-webkit-scrollbar-thumb    { background: rgba(15,23,42,0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(37,99,235,0.40); }
 
 /* --------------------------------------------------------------------------
    21. FOCUS RING (accessibility)
@@ -806,8 +761,8 @@ input, textarea, select, button {
 }
 
 @keyframes qg-pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0   rgba(171,171,171,0.40); }
-  50%       { box-shadow: 0 0 0 8px rgba(171,171,171,0.00); }
+  0%, 100% { box-shadow: 0 0 0 0   rgba(37,99,235,0.40); }
+  50%       { box-shadow: 0 0 0 8px rgba(37,99,235,0.00); }
 }
 
 .qg-animate-in   { animation: qg-fade-in   0.22s ease both; }

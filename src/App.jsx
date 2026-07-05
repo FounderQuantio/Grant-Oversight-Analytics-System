@@ -111,10 +111,8 @@ export default function App() {
         @keyframes spin    { to { transform: rotate(360deg); } }
         @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes barFill { from { width: 0; } to { width: 100%; } }
-        button:not([disabled]):hover { filter: brightness(1.08); }
-        [data-theme="dark"] tr:hover td { background: rgba(255,255,255,0.04) !important; }
-        [data-theme="light"] tr:hover td { background: rgba(201,168,76,0.06) !important; }
-        [data-theme="light"] button:not([disabled]):hover { filter: brightness(0.96); }
+        button:not([disabled]):hover { filter: brightness(0.96); }
+        tr:hover td { background: rgba(15,23,42,0.04) !important; }
       `}</style>
     </>
   );

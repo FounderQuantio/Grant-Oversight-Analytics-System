@@ -1,12 +1,12 @@
 import { DS } from "@/utils/tokens";
 const SZ = { sm:{padding:"5px 12px",fontSize:12,gap:4}, md:{padding:"8px 16px",fontSize:13,gap:5}, lg:{padding:"10px 22px",fontSize:14,gap:6} };
 const VARS = {
-  primary:  {background:"#ABABAB",color:"#1A1A1A",  border:"none",            borderRadius:"100px"},
+  primary:  {background:"#2563EB",color:"#FFFFFF",  border:"none",            borderRadius:"100px"},
   secondary:{background:DS.s2,    color:DS.t1,      border:`1px solid ${DS.bd2}`, borderRadius:"100px"},
   danger:   {background:DS.cBg,   color:DS.critical,border:`1px solid ${DS.cBd}`},
   ghost:    {background:"transparent",color:DS.t3,  border:"none"},
   ok:       {background:DS.lBg,   color:DS.ok,      border:`1px solid ${DS.lBd}`},
-  purple:   {background:"rgba(167,139,250,0.12)",color:DS.purple,border:"1px solid rgba(167,139,250,0.30)"},
+  purple:   {background:"rgba(124,58,237,0.12)",color:DS.purple,border:"1px solid rgba(124,58,237,0.30)"},
 };
 export default function Btn({ onClick, children, v = "primary", sz = "md", dis, sx = {} }) {
   return (
