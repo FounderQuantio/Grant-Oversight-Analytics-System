@@ -173,7 +173,7 @@ const ComplianceMatrix = () => {
           </div>
           <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', justifyContent: 'center' }}>
             {['2 CFR Part 200', 'GAO Green Book', 'COSO'].map(f => (
-              <span key={f} style={{ padding: '2px 8px', background: 'rgba(37,99,235,0.1)', border: '1px solid rgba(37,99,235,0.2)', borderRadius: 'var(--radius-sm)', fontSize: 10, color: 'var(--text-accent)', fontFamily: 'var(--font-mono)' }}>{f}</span>
+              <span key={f} style={{ padding: '2px 8px', background: 'rgba(91,127,166,0.1)', border: '1px solid rgba(91,127,166,0.2)', borderRadius: 'var(--radius-sm)', fontSize: 10, color: 'var(--text-accent)', fontFamily: 'var(--font-mono)' }}>{f}</span>
             ))}
           </div>
         </Card>

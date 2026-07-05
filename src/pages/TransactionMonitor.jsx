@@ -270,7 +270,7 @@ const TransactionMonitor = () => {
                   style={{
                     borderBottom: '1px solid var(--border-subtle)',
                     cursor: 'pointer',
-                    background: selected?.id === txn.id ? 'rgba(37,99,235,0.08)' : 'transparent',
+                    background: selected?.id === txn.id ? 'rgba(91,127,166,0.08)' : 'transparent',
                     transition: 'background var(--transition-fast)',
                   }}
                   onMouseEnter={e => { if (selected?.id !== txn.id) e.currentTarget.style.background = 'var(--bg-hover)' }}

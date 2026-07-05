@@ -14,9 +14,9 @@ export default function Header({ title, sub }) {
       <button
         onClick={() => navigate("/")}
         title="Back to Home"
-        style={{background:"rgba(37,99,235,0.08)",border:"1px solid rgba(37,99,235,0.25)",borderRadius:DS.r2,padding:"5px 12px",cursor:"pointer",color:"#2563EB",fontSize:12,fontWeight:700,display:"flex",alignItems:"center",gap:5,flexShrink:0,transition:"all 0.15s"}}
-        onMouseEnter={e=>{e.currentTarget.style.background="rgba(37,99,235,0.16)";e.currentTarget.style.borderColor="rgba(37,99,235,0.45)";}}
-        onMouseLeave={e=>{e.currentTarget.style.background="rgba(37,99,235,0.08)";e.currentTarget.style.borderColor="rgba(37,99,235,0.25)";}}
+        style={{background:"rgba(91,127,166,0.08)",border:"1px solid rgba(91,127,166,0.25)",borderRadius:DS.r2,padding:"5px 12px",cursor:"pointer",color:"#5B7FA6",fontSize:12,fontWeight:700,display:"flex",alignItems:"center",gap:5,flexShrink:0,transition:"all 0.15s"}}
+        onMouseEnter={e=>{e.currentTarget.style.background="rgba(91,127,166,0.16)";e.currentTarget.style.borderColor="rgba(91,127,166,0.45)";}}
+        onMouseLeave={e=>{e.currentTarget.style.background="rgba(91,127,166,0.08)";e.currentTarget.style.borderColor="rgba(91,127,166,0.25)";}}
       >
         ← Home
       </button>

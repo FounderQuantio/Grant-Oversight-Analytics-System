@@ -9,7 +9,7 @@ export default function ROICalculator() {
     card: DS.surface, border: DS.bd,
     t1: DS.t1, t2: DS.t2, t3: DS.t3, t4: DS.t4,
     rowBg: DS.s2,
-    roiBg: "rgba(37,99,235,0.08)", roiBorder: "rgba(37,99,235,0.22)",
+    roiBg: "rgba(91,127,166,0.08)", roiBorder: "rgba(91,127,166,0.22)",
   };
 
   const flagAmt  = s.txns.filter(t => t.riskTier !== "INFORMATIONAL").reduce((acc, t) => acc + (t.amount || 0), 0);

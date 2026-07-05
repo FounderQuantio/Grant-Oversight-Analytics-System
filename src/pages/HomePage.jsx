@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
-/* ── Charcoal + Gold Design Tokens ────────────────────────────────── */
+/* ── Soft Cool + Blue Design Tokens ──────────────────────────────── */
 const T = {
-  primary:   "#1A1A1A",
-  primaryDk: "#0D0D0D",
-  hero:      "linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 60%, #1F1F1F 100%)",
-  accent:    "#2563EB",
-  accentLt:  "#3B82F6",
+  primary:   "#0F172A",
+  primaryDk: "#0F172A",
+  hero:      "linear-gradient(135deg, #F4F7FC 0%, #EEF2FA 60%, #F4F7FC 100%)",
+  accent:    "#5B7FA6",
+  accentLt:  "#7295B8",
   surface:   "#F9F7F4",
   white:     "#FFFFFF",
   muted:     "#6B6B6B",
   border:    "#E8E4DC",
-  valueBg:   "#1A1A1A",
-  visionBg:  "#0D0D0D",
-  ctaBg:     "#2563EB",
+  valueBg:   "#EEF2FA",
+  visionBg:  "#F4F7FC",
+  ctaBg:     "#5B7FA6",
   ctaText:   "#FFFFFF",
-  footerBg:  "#111111",
+  footerBg:  "#F4F7FC",
 };
 
 const wrap = { maxWidth: 1200, margin: "0 auto", padding: "0 40px" };
@@ -39,22 +39,22 @@ function BtnPrimary({ children, onClick }) {
       background: h ? T.accentLt : T.accent,
       color: T.ctaText, fontSize: 14, fontWeight: 700, letterSpacing: 0.3,
       boxShadow: h
-        ? `0 0 0 4px rgba(37,99,235,0.25), 0 4px 16px rgba(37,99,235,0.4)`
-        : `0 2px 8px rgba(37,99,235,0.35)`,
+        ? `0 0 0 4px rgba(91,127,166,0.25), 0 4px 16px rgba(91,127,166,0.4)`
+        : `0 2px 8px rgba(91,127,166,0.35)`,
       transform: h ? "scale(1.03)" : "scale(1)",
       transition: "all 0.2s ease",
     }}>{children}</button>
   );
 }
 
-function BtnOutline({ children, dark }) {
+function BtnOutline({ children }) {
   const [h, hProps] = useHover();
   return (
     <button {...hProps} style={{
       padding: "14px 32px", borderRadius: 8, cursor: "pointer",
       background: "transparent",
-      border: `2px solid ${dark ? "rgba(255,255,255,0.45)" : T.primary}`,
-      color: dark ? "#fff" : T.primary,
+      border: `2px solid ${T.primary}`,
+      color: T.primary,
       fontSize: 14, fontWeight: 600, letterSpacing: 0.3,
       opacity: h ? 0.75 : 1,
       transform: h ? "scale(1.03)" : "scale(1)",
@@ -79,37 +79,37 @@ function Nav({ onEnterApp }) {
   return (
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 999,
-      background: scrolled ? "rgba(26,26,26,0.96)" : "transparent",
+      background: scrolled ? "rgba(255,255,255,0.96)" : "transparent",
       backdropFilter: scrolled ? "blur(14px)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(255,255,255,0.07)" : "none",
+      borderBottom: scrolled ? "1px solid rgba(15,23,42,0.07)" : "none",
       transition: "all 0.3s ease", padding: "18px 0",
     }}>
       <div style={{ ...wrap, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <img src="/qg-logo-gold.png" alt="Quantio Global" style={{ width: 46, height: "auto" }} />
           <div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: "#fff", letterSpacing: 2.5, textTransform: "uppercase", lineHeight: 1 }}>Quantio</div>
-            <div style={{ fontSize: 9, fontWeight: 400, color: "rgba(255,255,255,0.45)", letterSpacing: 3.5, textTransform: "uppercase", marginTop: 2 }}>Global</div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#0F172A", letterSpacing: 2.5, textTransform: "uppercase", lineHeight: 1 }}>Quantio</div>
+            <div style={{ fontSize: 9, fontWeight: 400, color: "rgba(15,23,42,0.45)", letterSpacing: 3.5, textTransform: "uppercase", marginTop: 2 }}>Global</div>
           </div>
         </div>
         <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
           {["About", "Services", "Platforms", "Vision", "Contact"].map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} style={{
-              color: "rgba(255,255,255,0.7)", fontSize: 13, fontWeight: 500,
+              color: "rgba(15,23,42,0.7)", fontSize: 13, fontWeight: 500,
               textDecoration: "none", padding: "7px 16px", borderRadius: 100,
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.07)",
+              background: "rgba(15,23,42,0.04)",
+              border: "1px solid rgba(15,23,42,0.07)",
               transition: "all 0.18s",
             }}
               onMouseEnter={e => {
                 e.currentTarget.style.color = T.accent;
-                e.currentTarget.style.background = "rgba(37,99,235,0.10)";
-                e.currentTarget.style.borderColor = "rgba(37,99,235,0.30)";
+                e.currentTarget.style.background = "rgba(91,127,166,0.10)";
+                e.currentTarget.style.borderColor = "rgba(91,127,166,0.30)";
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.color = "rgba(255,255,255,0.7)";
-                e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+                e.currentTarget.style.color = "rgba(15,23,42,0.7)";
+                e.currentTarget.style.background = "rgba(15,23,42,0.04)";
+                e.currentTarget.style.borderColor = "rgba(15,23,42,0.07)";
               }}
             >{l}</a>
           ))}
@@ -126,27 +126,27 @@ function Nav({ onEnterApp }) {
 function HeroGraphic() {
   return (
     <svg viewBox="0 0 480 400" fill="none" style={{ width: "100%", maxWidth: 480, opacity: 0.9 }}>
-      {[0,1,2,3,4].map(i => <line key={`h${i}`} x1="40" y1={60+i*70} x2="440" y2={60+i*70} stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>)}
-      {[0,1,2,3,4,5].map(i => <line key={`v${i}`} x1={40+i*80} y1="40" x2={40+i*80} y2="360" stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>)}
+      {[0,1,2,3,4].map(i => <line key={`h${i}`} x1="40" y1={60+i*70} x2="440" y2={60+i*70} stroke="rgba(15,23,42,0.04)" strokeWidth="1"/>)}
+      {[0,1,2,3,4,5].map(i => <line key={`v${i}`} x1={40+i*80} y1="40" x2={40+i*80} y2="360" stroke="rgba(15,23,42,0.04)" strokeWidth="1"/>)}
       {[[240,180,22],[120,100,14],[360,120,16],[160,280,12],[340,270,18],[440,200,10],[80,220,10],[290,90,10]].map(([cx,cy,r],i) => (
         <g key={i}>
-          <circle cx={cx} cy={cy} r={r+7} fill="rgba(37,99,235,0.07)"/>
-          <circle cx={cx} cy={cy} r={r} fill={i===0 ? T.accent : `rgba(37,99,235,${0.2+i*0.07})`}/>
+          <circle cx={cx} cy={cy} r={r+7} fill="rgba(91,127,166,0.07)"/>
+          <circle cx={cx} cy={cy} r={r} fill={i===0 ? T.accent : `rgba(91,127,166,${0.2+i*0.07})`}/>
         </g>
       ))}
       {[[240,180,120,100],[240,180,360,120],[240,180,160,280],[240,180,340,270],[120,100,80,220],[360,120,440,200],[360,120,290,90],[340,270,440,200]].map(([x1,y1,x2,y2],i) => (
-        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(37,99,235,0.2)" strokeWidth="1.5"/>
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(91,127,166,0.2)" strokeWidth="1.5"/>
       ))}
-      <circle cx="240" cy="180" r="38" stroke="rgba(37,99,235,0.22)" strokeWidth="1.5" strokeDasharray="6 4"/>
-      <circle cx="240" cy="180" r="56" stroke="rgba(37,99,235,0.09)" strokeWidth="1" strokeDasharray="4 6"/>
+      <circle cx="240" cy="180" r="38" stroke="rgba(91,127,166,0.22)" strokeWidth="1.5" strokeDasharray="6 4"/>
+      <circle cx="240" cy="180" r="56" stroke="rgba(91,127,166,0.09)" strokeWidth="1" strokeDasharray="4 6"/>
       {[0.4,0.65,0.85,0.55,0.9].map((h,i) => (
-        <rect key={i} x={310+i*22} y={320-h*60} width={14} height={h*60} rx="3" fill={`rgba(37,99,235,${0.25+i*0.14})`}/>
+        <rect key={i} x={310+i*22} y={320-h*60} width={14} height={h*60} rx="3" fill={`rgba(91,127,166,${0.25+i*0.14})`}/>
       ))}
-      <text x="310" y="335" fill="rgba(255,255,255,0.2)" fontSize="9" fontFamily="monospace">RISK SCORE</text>
-      <text x="100" y="94"  fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">GOV</text>
-      <text x="346" y="114" fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">FIN</text>
-      <text x="143" y="276" fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">RISK</text>
-      <text x="325" y="265" fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">ADV</text>
+      <text x="310" y="335" fill="rgba(15,23,42,0.2)" fontSize="9" fontFamily="monospace">RISK SCORE</text>
+      <text x="100" y="94"  fill="rgba(15,23,42,0.35)" fontSize="9" fontFamily="monospace">GOV</text>
+      <text x="346" y="114" fill="rgba(15,23,42,0.35)" fontSize="9" fontFamily="monospace">FIN</text>
+      <text x="143" y="276" fill="rgba(15,23,42,0.35)" fontSize="9" fontFamily="monospace">RISK</text>
+      <text x="325" y="265" fill="rgba(15,23,42,0.35)" fontSize="9" fontFamily="monospace">ADV</text>
     </svg>
   );
 }
@@ -160,25 +160,25 @@ function Hero({ onEnterApp }) {
           <div style={{ ...sectionLabel, marginBottom: 20 }}>
             Finance Governance · Risk Management · Digital Transformation
           </div>
-          <h1 style={{ fontSize: 54, fontWeight: 700, color: "#fff", lineHeight: 1.12, margin: "0 0 24px", letterSpacing: -1.5 }}>
+          <h1 style={{ fontSize: 54, fontWeight: 700, color: "#0F172A", lineHeight: 1.12, margin: "0 0 24px", letterSpacing: -1.5 }}>
             Governing Capital.<br/>
             <span style={{ color: T.accent }}>Engineering</span> Trust.<br/>
             Transforming Finance.
           </h1>
-          <p style={{ fontSize: 17, color: "rgba(255,255,255,0.65)", lineHeight: 1.82, margin: "0 0 40px", maxWidth: 480 }}>
+          <p style={{ fontSize: 17, color: "rgba(15,23,42,0.65)", lineHeight: 1.82, margin: "0 0 40px", maxWidth: 480 }}>
             Quantio Global delivers finance governance, risk intelligence, and digital
             transformation advisory to financial institutions, corporations, and
             governments — at scale, with precision.
           </p>
           <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
             <BtnPrimary onClick={() => document.getElementById("platforms")?.scrollIntoView({ behavior: "smooth" })}>Enter Platform</BtnPrimary>
-            <BtnOutline dark>Explore Services →</BtnOutline>
+            <BtnOutline>Explore Services →</BtnOutline>
           </div>
-          <div style={{ display: "flex", gap: 40, marginTop: 56, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          <div style={{ display: "flex", gap: 40, marginTop: 56, paddingTop: 32, borderTop: "1px solid rgba(15,23,42,0.08)" }}>
             {[["$1.8T+","Federal capital governed"],["15+ yrs","Senior advisory"],["3","Continents served"]].map(([v,l]) => (
               <div key={v}>
-                <div style={{ fontSize: 24, fontWeight: 800, color: "#fff" }}>{v}</div>
-                <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginTop: 3 }}>{l}</div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: "#0F172A" }}>{v}</div>
+                <div style={{ fontSize: 11, color: "rgba(15,23,42,0.4)", marginTop: 3 }}>{l}</div>
               </div>
             ))}
           </div>
@@ -216,8 +216,8 @@ function About() {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <svg viewBox="0 0 320 320" width="300" height="300" fill="none">
             <rect x="40" y="40" width="100" height="100" rx="12" fill="rgba(26,26,26,0.05)" stroke={T.primary} strokeWidth="1.5"/>
-            <rect x="180" y="40" width="100" height="100" rx="12" fill="rgba(37,99,235,0.1)" stroke={T.accent} strokeWidth="1.5"/>
-            <rect x="40" y="180" width="100" height="100" rx="12" fill="rgba(37,99,235,0.1)" stroke={T.accent} strokeWidth="1.5"/>
+            <rect x="180" y="40" width="100" height="100" rx="12" fill="rgba(91,127,166,0.1)" stroke={T.accent} strokeWidth="1.5"/>
+            <rect x="40" y="180" width="100" height="100" rx="12" fill="rgba(91,127,166,0.1)" stroke={T.accent} strokeWidth="1.5"/>
             <rect x="180" y="180" width="100" height="100" rx="12" fill="rgba(26,26,26,0.05)" stroke={T.primary} strokeWidth="1.5"/>
             <text x="90" y="97" textAnchor="middle" fontSize="11" fill={T.primary} fontWeight="600">GOVERN</text>
             <text x="230" y="97" textAnchor="middle" fontSize="11" fill={T.accent} fontWeight="600">RISK</text>
@@ -322,12 +322,12 @@ function PlatformCard({ p, onEnterFraudGuard }) {
   };
   return (
     <div {...hProps} onClick={handleClick} style={{
-      background: h ? "#242424" : "#1C1C1C",
-      border: `1px solid ${h ? "rgba(37,99,235,0.20)" : "rgba(255,255,255,0.06)"}`,
+      background: h ? "#EEF2FA" : "#FFFFFF",
+      border: `1px solid ${h ? "rgba(91,127,166,0.20)" : "rgba(15,23,42,0.06)"}`,
       borderRadius: 14, padding: "26px 24px",
       display: "flex", flexDirection: "column", gap: 14,
       cursor: "pointer",
-      boxShadow: h ? "0 0 0 1px rgba(37,99,235,0.13), 0 20px 48px rgba(0,0,0,0.6)" : "none",
+      boxShadow: h ? "0 0 0 1px rgba(91,127,166,0.13), 0 12px 32px rgba(15,23,42,0.12)" : "none",
       transform: h ? "translateY(-4px)" : "translateY(0)",
       transition: "all 0.25s",
     }}>
@@ -335,26 +335,26 @@ function PlatformCard({ p, onEnterFraudGuard }) {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{
             width: 44, height: 44, borderRadius: 10, flexShrink: 0,
-            background: h ? "rgba(37,99,235,0.18)" : "rgba(37,99,235,0.10)",
-            border: `1px solid ${h ? "rgba(37,99,235,0.45)" : "rgba(37,99,235,0.22)"}`,
+            background: h ? "rgba(91,127,166,0.18)" : "rgba(91,127,166,0.10)",
+            border: `1px solid ${h ? "rgba(91,127,166,0.45)" : "rgba(91,127,166,0.22)"}`,
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: p.mono.length > 2 ? 10 : 12, fontWeight: 800,
             color: T.accent, transition: "all 0.2s",
           }}>{p.mono}</div>
           <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>{p.name}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#0F172A" }}>{p.name}</div>
             <div style={{ fontSize: 10, color: T.accent, fontWeight: 600, letterSpacing: 0.4, marginTop: 1 }}>{p.tag}</div>
           </div>
         </div>
         <div style={{
           width: 34, height: 34, borderRadius: "50%", flexShrink: 0,
-          background: h ? T.accent : "rgba(255,255,255,0.05)",
+          background: h ? T.accent : "rgba(15,23,42,0.05)",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 15, color: h ? "#FFFFFF" : "rgba(255,255,255,0.22)",
+          fontSize: 15, color: h ? "#FFFFFF" : "rgba(15,23,42,0.22)",
           transition: "all 0.22s",
         }}>↗</div>
       </div>
-      <p style={{ fontSize: 12.5, color: "rgba(255,255,255,0.45)", lineHeight: 1.82, margin: 0, flex: 1 }}>{p.desc}</p>
+      <p style={{ fontSize: 12.5, color: "rgba(15,23,42,0.45)", lineHeight: 1.82, margin: 0, flex: 1 }}>{p.desc}</p>
       <div style={{
         fontSize: 11, fontWeight: 700, color: T.accent, letterSpacing: 0.9,
         opacity: h ? 1 : 0.38, transition: "opacity 0.2s",
@@ -366,14 +366,14 @@ function PlatformCard({ p, onEnterFraudGuard }) {
 
 function Platforms({ onEnterFraudGuard }) {
   return (
-    <section id="platforms" style={{ background: "#141414", padding: "100px 0" }}>
+    <section id="platforms" style={{ background: "#F9F7F4", padding: "100px 0" }}>
       <div style={wrap}>
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <p style={{ ...sectionLabel, textAlign: "center" }}>OUR PLATFORMS</p>
-          <h2 style={{ fontSize: 40, fontWeight: 700, color: "#fff", margin: "0 auto", maxWidth: 600, lineHeight: 1.2, letterSpacing: -0.8 }}>
+          <h2 style={{ fontSize: 40, fontWeight: 700, color: "#0F172A", margin: "0 auto", maxWidth: 600, lineHeight: 1.2, letterSpacing: -0.8 }}>
             Five Integrated Tools.<br/>One Compliance Ecosystem.
           </h2>
-          <p style={{ fontSize: 16, color: "rgba(255,255,255,0.45)", margin: "20px auto 0", maxWidth: 520, lineHeight: 1.75 }}>
+          <p style={{ fontSize: 16, color: "rgba(15,23,42,0.45)", margin: "20px auto 0", maxWidth: 520, lineHeight: 1.75 }}>
             The Quantio Global Compliance Suite — purpose-built for federal grant management,
             financial governance, and enterprise risk control.
           </p>
@@ -396,7 +396,7 @@ function ValueProp() {
       <div style={{ ...wrap, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
         <div>
           <p style={sectionLabel}>WHY QUANTIO GLOBAL</p>
-          <h2 style={{ fontSize: 40, fontWeight: 700, color: "#fff", margin: 0, lineHeight: 1.2, letterSpacing: -0.8 }}>
+          <h2 style={{ fontSize: 40, fontWeight: 700, color: "#0F172A", margin: 0, lineHeight: 1.2, letterSpacing: -0.8 }}>
             Why Global Executives<br/>Choose Quantio
           </h2>
         </div>
@@ -410,8 +410,8 @@ function ValueProp() {
             <div key={title} style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
               <div style={{ width: 6, height: 6, borderRadius: "50%", background: T.accent, marginTop: 9, flexShrink: 0 }}/>
               <div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 5 }}>{title}</div>
-                <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.75 }}>{body}</div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: "#0F172A", marginBottom: 5 }}>{title}</div>
+                <div style={{ fontSize: 14, color: "rgba(15,23,42,0.5)", lineHeight: 1.75 }}>{body}</div>
               </div>
             </div>
           ))}
@@ -428,7 +428,7 @@ function Vision() {
       <div style={{ ...wrap, textAlign: "center" }}>
         <p style={{ ...sectionLabel, textAlign: "center", marginBottom: 24 }}>OUR VISION</p>
         <blockquote style={{
-          fontSize: 36, fontWeight: 600, color: "#fff",
+          fontSize: 36, fontWeight: 600, color: "#0F172A",
           lineHeight: 1.55, margin: "0 auto 28px",
           maxWidth: 820, fontStyle: "italic", letterSpacing: -0.5,
         }}>
@@ -479,7 +479,7 @@ function CTA({ onEnterApp }) {
           building controls that last — Quantio Global is your strategic partner.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
-          <button onClick={onEnterApp} style={{ padding: "16px 36px", borderRadius: 8, border: "none", cursor: "pointer", background: T.primaryDk, color: T.accent, fontSize: 15, fontWeight: 700, letterSpacing: 0.2 }}>
+          <button onClick={onEnterApp} style={{ padding: "16px 36px", borderRadius: 8, border: "none", cursor: "pointer", background: "#FFFFFF", color: T.accent, fontSize: 15, fontWeight: 700, letterSpacing: 0.2 }}>
             Partner With Us
           </button>
           <button style={{ padding: "16px 36px", borderRadius: 8, cursor: "pointer", background: "transparent", border: "2px solid rgba(255,255,255,0.35)", color: T.ctaText, fontSize: 15, fontWeight: 600 }}>
@@ -500,23 +500,23 @@ function Footer() {
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
             <img src="/qg-logo-gold.png" alt="Quantio Global" style={{ width: 38, height: "auto" }} />
             <div>
-              <div style={{ fontSize: 14, fontWeight: 800, color: "#fff", letterSpacing: 2.5, textTransform: "uppercase", lineHeight: 1 }}>Quantio</div>
-              <div style={{ fontSize: 8, fontWeight: 400, color: "rgba(255,255,255,0.4)", letterSpacing: 3.5, textTransform: "uppercase", marginTop: 2 }}>Global</div>
+              <div style={{ fontSize: 14, fontWeight: 800, color: "#0F172A", letterSpacing: 2.5, textTransform: "uppercase", lineHeight: 1 }}>Quantio</div>
+              <div style={{ fontSize: 8, fontWeight: 400, color: "rgba(15,23,42,0.4)", letterSpacing: 3.5, textTransform: "uppercase", marginTop: 2 }}>Global</div>
             </div>
           </div>
-          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", margin: 0 }}>Finance Governance · Risk Management · Digital Transformation</p>
+          <p style={{ fontSize: 12, color: "rgba(15,23,42,0.3)", margin: 0 }}>Finance Governance · Risk Management · Digital Transformation</p>
         </div>
         <div style={{ display: "flex", gap: 32 }}>
           {["About","Services","Contact","Privacy"].map(l => (
-            <a key={l} href="#" style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}
-              onMouseEnter={e => e.target.style.color = "#fff"}
-              onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}
+            <a key={l} href="#" style={{ fontSize: 13, color: "rgba(15,23,42,0.4)", textDecoration: "none" }}
+              onMouseEnter={e => e.target.style.color = "#0F172A"}
+              onMouseLeave={e => e.target.style.color = "rgba(15,23,42,0.4)"}
             >{l}</a>
           ))}
         </div>
         <div style={{ textAlign: "right" }}>
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", margin: 0 }}>contact@quantioglobal.net</p>
-          <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", margin: "6px 0 0" }}>© 2026 Quantio Global. All rights reserved.</p>
+          <p style={{ fontSize: 13, color: "rgba(15,23,42,0.4)", margin: 0 }}>contact@quantioglobal.net</p>
+          <p style={{ fontSize: 11, color: "rgba(15,23,42,0.2)", margin: "6px 0 0" }}>© 2026 Quantio Global. All rights reserved.</p>
         </div>
       </div>
     </footer>

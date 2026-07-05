@@ -238,8 +238,8 @@ const RiskDashboard = () => {
         {['GAO Green Book', 'COSO Framework', 'OMB 2 CFR Part 200', 'Single Audit Act'].map(f => (
           <span key={f} style={{
             padding: '2px 10px',
-            background: 'rgba(37,99,235,0.1)',
-            border: '1px solid rgba(37,99,235,0.2)',
+            background: 'rgba(91,127,166,0.1)',
+            border: '1px solid rgba(91,127,166,0.2)',
             borderRadius: 'var(--radius-sm)',
             fontSize: 11,
             color: 'var(--text-accent)',
