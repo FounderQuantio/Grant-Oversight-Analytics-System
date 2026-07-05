@@ -1,7 +1,7 @@
 import { DS } from "@/utils/tokens";
 const SZ = { sm:{padding:"5px 12px",fontSize:12,gap:4}, md:{padding:"8px 16px",fontSize:13,gap:5}, lg:{padding:"10px 22px",fontSize:14,gap:6} };
 const VARS = {
-  primary:  {background:"#C9A84C",color:"#1A1A1A",  border:"none",            borderRadius:"100px"},
+  primary:  {background:"#ABABAB",color:"#1A1A1A",  border:"none",            borderRadius:"100px"},
   secondary:{background:DS.s2,    color:DS.t1,      border:`1px solid ${DS.bd2}`, borderRadius:"100px"},
   danger:   {background:DS.cBg,   color:DS.critical,border:`1px solid ${DS.cBd}`},
   ghost:    {background:"transparent",color:DS.t3,  border:"none"},

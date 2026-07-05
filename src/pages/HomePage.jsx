@@ -6,7 +6,7 @@ const T = {
   primary:   "#1A1A1A",
   primaryDk: "#0D0D0D",
   hero:      "linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 60%, #1F1F1F 100%)",
-  accent:    "#C9A84C",
+  accent:    "#ABABAB",
   accentLt:  "#E0BC6A",
   surface:   "#F9F7F4",
   white:     "#FFFFFF",
@@ -14,7 +14,7 @@ const T = {
   border:    "#E8E4DC",
   valueBg:   "#1A1A1A",
   visionBg:  "#0D0D0D",
-  ctaBg:     "#C9A84C",
+  ctaBg:     "#ABABAB",
   ctaText:   "#1A1A1A",
   footerBg:  "#111111",
 };
@@ -39,8 +39,8 @@ function BtnPrimary({ children, onClick }) {
       background: h ? T.accentLt : T.accent,
       color: T.ctaText, fontSize: 14, fontWeight: 700, letterSpacing: 0.3,
       boxShadow: h
-        ? `0 0 0 4px rgba(201,168,76,0.25), 0 4px 16px rgba(201,168,76,0.4)`
-        : `0 2px 8px rgba(201,168,76,0.35)`,
+        ? `0 0 0 4px rgba(171,171,171,0.25), 0 4px 16px rgba(171,171,171,0.4)`
+        : `0 2px 8px rgba(171,171,171,0.35)`,
       transform: h ? "scale(1.03)" : "scale(1)",
       transition: "all 0.2s ease",
     }}>{children}</button>
@@ -103,8 +103,8 @@ function Nav({ onEnterApp }) {
             }}
               onMouseEnter={e => {
                 e.currentTarget.style.color = T.accent;
-                e.currentTarget.style.background = "rgba(201,168,76,0.10)";
-                e.currentTarget.style.borderColor = "rgba(201,168,76,0.30)";
+                e.currentTarget.style.background = "rgba(171,171,171,0.10)";
+                e.currentTarget.style.borderColor = "rgba(171,171,171,0.30)";
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.color = "rgba(255,255,255,0.7)";
@@ -130,17 +130,17 @@ function HeroGraphic() {
       {[0,1,2,3,4,5].map(i => <line key={`v${i}`} x1={40+i*80} y1="40" x2={40+i*80} y2="360" stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>)}
       {[[240,180,22],[120,100,14],[360,120,16],[160,280,12],[340,270,18],[440,200,10],[80,220,10],[290,90,10]].map(([cx,cy,r],i) => (
         <g key={i}>
-          <circle cx={cx} cy={cy} r={r+7} fill="rgba(201,168,76,0.07)"/>
-          <circle cx={cx} cy={cy} r={r} fill={i===0 ? T.accent : `rgba(201,168,76,${0.2+i*0.07})`}/>
+          <circle cx={cx} cy={cy} r={r+7} fill="rgba(171,171,171,0.07)"/>
+          <circle cx={cx} cy={cy} r={r} fill={i===0 ? T.accent : `rgba(171,171,171,${0.2+i*0.07})`}/>
         </g>
       ))}
       {[[240,180,120,100],[240,180,360,120],[240,180,160,280],[240,180,340,270],[120,100,80,220],[360,120,440,200],[360,120,290,90],[340,270,440,200]].map(([x1,y1,x2,y2],i) => (
-        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(201,168,76,0.2)" strokeWidth="1.5"/>
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(171,171,171,0.2)" strokeWidth="1.5"/>
       ))}
-      <circle cx="240" cy="180" r="38" stroke="rgba(201,168,76,0.22)" strokeWidth="1.5" strokeDasharray="6 4"/>
-      <circle cx="240" cy="180" r="56" stroke="rgba(201,168,76,0.09)" strokeWidth="1" strokeDasharray="4 6"/>
+      <circle cx="240" cy="180" r="38" stroke="rgba(171,171,171,0.22)" strokeWidth="1.5" strokeDasharray="6 4"/>
+      <circle cx="240" cy="180" r="56" stroke="rgba(171,171,171,0.09)" strokeWidth="1" strokeDasharray="4 6"/>
       {[0.4,0.65,0.85,0.55,0.9].map((h,i) => (
-        <rect key={i} x={310+i*22} y={320-h*60} width={14} height={h*60} rx="3" fill={`rgba(201,168,76,${0.25+i*0.14})`}/>
+        <rect key={i} x={310+i*22} y={320-h*60} width={14} height={h*60} rx="3" fill={`rgba(171,171,171,${0.25+i*0.14})`}/>
       ))}
       <text x="310" y="335" fill="rgba(255,255,255,0.2)" fontSize="9" fontFamily="monospace">RISK SCORE</text>
       <text x="100" y="94"  fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="monospace">GOV</text>
@@ -216,8 +216,8 @@ function About() {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <svg viewBox="0 0 320 320" width="300" height="300" fill="none">
             <rect x="40" y="40" width="100" height="100" rx="12" fill="rgba(26,26,26,0.05)" stroke={T.primary} strokeWidth="1.5"/>
-            <rect x="180" y="40" width="100" height="100" rx="12" fill="rgba(201,168,76,0.1)" stroke={T.accent} strokeWidth="1.5"/>
-            <rect x="40" y="180" width="100" height="100" rx="12" fill="rgba(201,168,76,0.1)" stroke={T.accent} strokeWidth="1.5"/>
+            <rect x="180" y="40" width="100" height="100" rx="12" fill="rgba(171,171,171,0.1)" stroke={T.accent} strokeWidth="1.5"/>
+            <rect x="40" y="180" width="100" height="100" rx="12" fill="rgba(171,171,171,0.1)" stroke={T.accent} strokeWidth="1.5"/>
             <rect x="180" y="180" width="100" height="100" rx="12" fill="rgba(26,26,26,0.05)" stroke={T.primary} strokeWidth="1.5"/>
             <text x="90" y="97" textAnchor="middle" fontSize="11" fill={T.primary} fontWeight="600">GOVERN</text>
             <text x="230" y="97" textAnchor="middle" fontSize="11" fill={T.accent} fontWeight="600">RISK</text>
@@ -323,11 +323,11 @@ function PlatformCard({ p, onEnterFraudGuard }) {
   return (
     <div {...hProps} onClick={handleClick} style={{
       background: h ? "#242424" : "#1C1C1C",
-      border: `1px solid ${h ? "rgba(201,168,76,0.20)" : "rgba(255,255,255,0.06)"}`,
+      border: `1px solid ${h ? "rgba(171,171,171,0.20)" : "rgba(255,255,255,0.06)"}`,
       borderRadius: 14, padding: "26px 24px",
       display: "flex", flexDirection: "column", gap: 14,
       cursor: "pointer",
-      boxShadow: h ? "0 0 0 1px rgba(201,168,76,0.13), 0 20px 48px rgba(0,0,0,0.6)" : "none",
+      boxShadow: h ? "0 0 0 1px rgba(171,171,171,0.13), 0 20px 48px rgba(0,0,0,0.6)" : "none",
       transform: h ? "translateY(-4px)" : "translateY(0)",
       transition: "all 0.25s",
     }}>
@@ -335,8 +335,8 @@ function PlatformCard({ p, onEnterFraudGuard }) {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{
             width: 44, height: 44, borderRadius: 10, flexShrink: 0,
-            background: h ? "rgba(201,168,76,0.18)" : "rgba(201,168,76,0.10)",
-            border: `1px solid ${h ? "rgba(201,168,76,0.45)" : "rgba(201,168,76,0.22)"}`,
+            background: h ? "rgba(171,171,171,0.18)" : "rgba(171,171,171,0.10)",
+            border: `1px solid ${h ? "rgba(171,171,171,0.45)" : "rgba(171,171,171,0.22)"}`,
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: p.mono.length > 2 ? 10 : 12, fontWeight: 800,
             color: T.accent, transition: "all 0.2s",

@@ -1,4 +1,4 @@
-const GOLD = "#C9A84C";
+const GOLD = "#ABABAB";
 const DARK = "#1A1A1A";
 const HOME_URL = "https://quantioglobal.net";
 const NAV_LINKS = ["About", "Services", "Platforms", "Vision", "Contact"];
@@ -16,8 +16,8 @@ function NavLink({ label }) {
       }}
       onMouseEnter={e => {
         e.currentTarget.style.color = GOLD;
-        e.currentTarget.style.background = "rgba(201,168,76,0.10)";
-        e.currentTarget.style.borderColor = "rgba(201,168,76,0.30)";
+        e.currentTarget.style.background = "rgba(171,171,171,0.10)";
+        e.currentTarget.style.borderColor = "rgba(171,171,171,0.30)";
       }}
       onMouseLeave={e => {
         e.currentTarget.style.color = "rgba(255,255,255,0.7)";
