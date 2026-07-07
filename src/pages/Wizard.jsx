@@ -69,15 +69,15 @@ export default function Wizard() {
         </div>
       <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",padding:48}}>
         <div style={{maxWidth:500,width:"100%"}}>
-          <div style={{fontSize:10,fontWeight:700,color:"#5B7FA6",letterSpacing:1,marginBottom:8,textTransform:"uppercase"}}>Step {step+1} of 3</div>
+          <div style={{fontSize:10,fontWeight:700,color:"#6495ED",letterSpacing:1,marginBottom:8,textTransform:"uppercase"}}>Step {step+1} of 3</div>
 
           {step===0 && <>
             <h2 style={{margin:"0 0 6px",fontSize:24,fontWeight:800,color:DS.t1}}>What type of organization are you?</h2>
             <p style={{margin:"0 0 24px",color:DS.t3,fontSize:13}}>We will pre-configure detection rules and OMB templates for your grant type.</p>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
               {ORGS.map(o=>(
-                <button key={o} onClick={()=>setOrg(o)} style={{padding:"14px",borderRadius:DS.r2,border:`2px solid ${org===o?"#5B7FA6":DS.bd}`,background:org===o?"rgba(91,127,166,0.10)":DS.surface,cursor:"pointer",textAlign:"left",fontFamily:"inherit"}}>
-                  <div style={{fontSize:12,fontWeight:700,color:org===o?"#5B7FA6":DS.t1}}>{o}</div>
+                <button key={o} onClick={()=>setOrg(o)} style={{padding:"14px",borderRadius:DS.r2,border:`2px solid ${org===o?"#6495ED":DS.bd}`,background:org===o?"rgba(100,149,237,0.10)":DS.surface,cursor:"pointer",textAlign:"left",fontFamily:"inherit"}}>
+                  <div style={{fontSize:12,fontWeight:700,color:org===o?"#6495ED":DS.t1}}>{o}</div>
                 </button>
               ))}
             </div>
@@ -89,13 +89,13 @@ export default function Wizard() {
             <p style={{margin:"0 0 22px",color:DS.t3,fontSize:13}}>The demo dataset contains 150 transactions across 6 fraud scenarios (DS1-DS6).</p>
             <div style={{display:"flex",flexDirection:"column",gap:9}}>
               {SRCS.map(sr=>(
-                <button key={sr.l} onClick={()=>setSrc(sr.l)} style={{padding:"13px 16px",borderRadius:DS.r2,border:`2px solid ${src===sr.l?"#5B7FA6":DS.bd}`,background:src===sr.l?"rgba(91,127,166,0.10)":DS.surface,cursor:"pointer",display:"flex",alignItems:"center",gap:12,fontFamily:"inherit"}}>
+                <button key={sr.l} onClick={()=>setSrc(sr.l)} style={{padding:"13px 16px",borderRadius:DS.r2,border:`2px solid ${src===sr.l?"#6495ED":DS.bd}`,background:src===sr.l?"rgba(100,149,237,0.10)":DS.surface,cursor:"pointer",display:"flex",alignItems:"center",gap:12,fontFamily:"inherit"}}>
                   <span style={{fontSize:20,flexShrink:0}}>{sr.e}</span>
                   <div style={{textAlign:"left",flex:1}}>
-                    <div style={{fontSize:13,fontWeight:700,color:src===sr.l?"#5B7FA6":DS.t1}}>{sr.l}</div>
+                    <div style={{fontSize:13,fontWeight:700,color:src===sr.l?"#6495ED":DS.t1}}>{sr.l}</div>
                     <div style={{fontSize:10,color:DS.t3}}>{sr.d}</div>
                   </div>
-                  {src===sr.l&&<span style={{color:"#5B7FA6",fontWeight:800,marginLeft:"auto"}}>✓</span>}
+                  {src===sr.l&&<span style={{color:"#6495ED",fontWeight:800,marginLeft:"auto"}}>✓</span>}
                 </button>
               ))}
             </div>
@@ -108,8 +108,8 @@ export default function Wizard() {
           {step===2 && <>
             <h2 style={{margin:"0 0 6px",fontSize:24,fontWeight:800,color:DS.t1}}>Ready to scan for fraud</h2>
             <p style={{margin:"0 0 20px",color:DS.t3,fontSize:13}}><strong>{org}</strong> · <strong>{src}</strong></p>
-            <Card sx={{background:"rgba(91,127,166,0.06)",border:"1px solid rgba(91,127,166,0.20)",marginBottom:18}}>
-              <div style={{fontSize:13,fontWeight:700,color:"#5B7FA6",marginBottom:8}}>📋 Pre-configured for your organization</div>
+            <Card sx={{background:"rgba(100,149,237,0.06)",border:"1px solid rgba(100,149,237,0.20)",marginBottom:18}}>
+              <div style={{fontSize:13,fontWeight:700,color:"#6495ED",marginBottom:8}}>📋 Pre-configured for your organization</div>
               {["OMB 2 CFR 200 Uniform Guidance rules active (R001-R010)","SAM.gov debarment & COI screening enabled","Statistical anomaly detection (Z-score) ready","Graph entity relationship analysis enabled","150 real transactions across DS1-DS6 loaded"].map(txt=>(
                 <div key={txt} style={{fontSize:12,color:DS.t2,marginBottom:3}}>✓ {txt}</div>
               ))}

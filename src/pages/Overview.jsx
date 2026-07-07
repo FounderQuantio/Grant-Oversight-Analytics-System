@@ -37,11 +37,11 @@ function LineChart({ totalData, flaggedData, labels }) {
         <line key={i} x1={pad.l} y1={gy} x2={W - pad.r} y2={gy}
           style={{ stroke: "var(--qg-border)" }} strokeWidth={1} />
       ))}
-      <path d={areaPath} fill="rgba(91,127,166,0.10)" />
-      <polyline points={totalPts} fill="none" stroke="#5B7FA6" strokeWidth={2} strokeLinejoin="round" />
+      <path d={areaPath} fill="rgba(100,149,237,0.10)" />
+      <polyline points={totalPts} fill="none" stroke="#6495ED" strokeWidth={2} strokeLinejoin="round" />
       {totalData.map((v, i) => (
         <circle key={i} cx={xp(i)} cy={yp(v)} r={3}
-          style={{ fill: "var(--qg-surface)" }} stroke="#5B7FA6" strokeWidth={1.5} />
+          style={{ fill: "var(--qg-surface)" }} stroke="#6495ED" strokeWidth={1.5} />
       ))}
       <polyline points={flagPts} fill="none" stroke="#EF4444" strokeWidth={1.5}
         strokeDasharray="4,3" strokeLinejoin="round" />
@@ -157,7 +157,7 @@ export default function Overview() {
             {["30d", "90d", "YTD"].map(r => (
               <button key={r} onClick={() => setTimeRange(r)} style={{
                 padding: "6px 12px", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600,
-                background: timeRange === r ? "#5B7FA6" : "transparent",
+                background: timeRange === r ? "#6495ED" : "transparent",
                 color: timeRange === r ? "#fff" : T.t3,
               }}>{r}</button>
             ))}
@@ -173,8 +173,8 @@ export default function Overview() {
             const isActive = activeDS === f.id;
             return (
               <button key={String(f.id)} onClick={() => setActiveDS(f.id)} style={{
-                padding: "5px 14px", borderRadius: 20, border: `1px solid ${isActive ? "#5B7FA6" : T.border}`,
-                background: isActive ? "#5B7FA6" : T.pillBg,
+                padding: "5px 14px", borderRadius: 20, border: `1px solid ${isActive ? "#6495ED" : T.border}`,
+                background: isActive ? "#6495ED" : T.pillBg,
                 color: isActive ? "#fff" : T.t2,
                 fontSize: 12, fontWeight: isActive ? 700 : 400, cursor: "pointer",
                 transition: "all 0.15s",
@@ -203,7 +203,7 @@ export default function Overview() {
             <div style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Disbursement flow · 12 weeks</div>
             <div style={{ display: "flex", gap: 16, fontSize: 11, color: T.t3 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                <svg width="20" height="2" style={{ display: "inline-block" }}><line x1="0" y1="1" x2="20" y2="1" stroke="#5B7FA6" strokeWidth="2"/></svg>
+                <svg width="20" height="2" style={{ display: "inline-block" }}><line x1="0" y1="1" x2="20" y2="1" stroke="#6495ED" strokeWidth="2"/></svg>
                 Total
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
@@ -248,7 +248,7 @@ export default function Overview() {
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <span style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Top risk vendors</span>
-            <span style={{ fontSize: 12, color: "#5B7FA6", cursor: "pointer", fontWeight: 600 }}>View all →</span>
+            <span style={{ fontSize: 12, color: "#6495ED", cursor: "pointer", fontWeight: 600 }}>View all →</span>
           </div>
           {topVendors.length === 0 && (
             <div style={{ color: T.t4, fontSize: 12, textAlign: "center", padding: "20px 0" }}>✅ No flagged vendors</div>
@@ -280,7 +280,7 @@ export default function Overview() {
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <span style={{ fontSize: 14, fontWeight: 700, color: T.t1 }}>Recent critical alerts</span>
-            <span style={{ fontSize: 12, color: "#5B7FA6", cursor: "pointer", fontWeight: 600 }}>View all →</span>
+            <span style={{ fontSize: 12, color: "#6495ED", cursor: "pointer", fontWeight: 600 }}>View all →</span>
           </div>
           {critAlerts.length === 0 && (
             <div style={{ color: T.t4, fontSize: 12, textAlign: "center", padding: "20px 0" }}>✅ No critical alerts</div>

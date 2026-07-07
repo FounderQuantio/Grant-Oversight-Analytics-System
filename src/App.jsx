@@ -112,7 +112,7 @@ export default function App() {
         @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes barFill { from { width: 0; } to { width: 100%; } }
         button:not([disabled]):hover { filter: brightness(0.96); }
-        tr:hover td { background: rgba(15,23,42,0.04) !important; }
+        tr:hover td { background: rgba(33,36,39,0.04) !important; }
       `}</style>
     </>
   );

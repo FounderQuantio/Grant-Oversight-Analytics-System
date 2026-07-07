@@ -13,32 +13,32 @@
 
 export const COLORS = {
   // Brand gold
-  gold:           "#5B7FA6",
-  goldLight:      "#7295B8",
-  goldDim:        "rgba(91,127,166,0.55)",
-  goldTint1:      "rgba(91,127,166,0.18)",
-  goldTint2:      "rgba(91,127,166,0.12)",
-  goldTint3:      "rgba(91,127,166,0.08)",
-  goldBorder:     "rgba(91,127,166,0.25)",
-  goldBorderH:    "rgba(91,127,166,0.45)",
+  gold:           "#6495ED",
+  goldLight:      "#7FA6F0",
+  goldDim:        "rgba(100,149,237,0.55)",
+  goldTint1:      "rgba(100,149,237,0.18)",
+  goldTint2:      "rgba(100,149,237,0.12)",
+  goldTint3:      "rgba(100,149,237,0.08)",
+  goldBorder:     "rgba(100,149,237,0.25)",
+  goldBorderH:    "rgba(100,149,237,0.45)",
 
   // Backgrounds
-  bg:             "#F4F7FC",
+  bg:             "#F1EEEA",
   sidebar:        "#FFFFFF",
   surface:        "#FFFFFF",
-  surface2:       "#EEF2FA",
-  overlay:        "rgba(15,23,42,0.45)",
+  surface2:       "#E8E2D8",
+  overlay:        "rgba(33,36,39,0.45)",
 
   // Borders
-  border:         "rgba(15,23,42,0.08)",
-  border2:        "rgba(15,23,42,0.13)",
-  borderStrong:   "rgba(15,23,42,0.22)",
+  border:         "rgba(33,36,39,0.08)",
+  border2:        "rgba(33,36,39,0.13)",
+  borderStrong:   "rgba(33,36,39,0.22)",
 
   // Text
-  text1:          "#0F172A",
-  text2:          "rgba(15,23,42,0.78)",
-  text3:          "rgba(15,23,42,0.50)",
-  text4:          "rgba(15,23,42,0.32)",
+  text1:          "#212427",
+  text2:          "rgba(33,36,39,0.78)",
+  text3:          "rgba(33,36,39,0.50)",
+  text4:          "rgba(33,36,39,0.32)",
 
   // Semantic
   red:            "#EF4444", redBg:    "rgba(239,68,68,0.09)",  redBd:    "rgba(239,68,68,0.25)",
@@ -110,10 +110,10 @@ export const RADIUS = {
 // ─── 5. SHADOW TOKENS ────────────────────────────────────────────────────────
 
 export const SHADOW = {
-  sm:   "0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.05)",
-  md:   "0 4px 12px rgba(15,23,42,0.10), 0 2px 4px rgba(15,23,42,0.05)",
-  lg:   "0 20px 48px rgba(15,23,42,0.14), 0 8px 16px rgba(15,23,42,0.07)",
-  gold: "0 0 0 1px rgba(91,127,166,0.20), 0 8px 24px rgba(15,23,42,0.10)",
+  sm:   "0 1px 3px rgba(33,36,39,0.08), 0 1px 2px rgba(33,36,39,0.05)",
+  md:   "0 4px 12px rgba(33,36,39,0.10), 0 2px 4px rgba(33,36,39,0.05)",
+  lg:   "0 20px 48px rgba(33,36,39,0.14), 0 8px 16px rgba(33,36,39,0.07)",
+  gold: "0 0 0 1px rgba(100,149,237,0.20), 0 8px 24px rgba(33,36,39,0.10)",
 };
 
 // ─── 6. MAIN TOKEN EXPORT (shorthand QT) ─────────────────────────────────────
@@ -147,7 +147,7 @@ export const QS = {
   // ── Nav ──────────────────────────────────────────────────────────────────
   nav: {
     height: 60,
-    background: "rgba(15,23,42,0.96)",
+    background: "rgba(33,36,39,0.96)",
     borderBottom: `1px solid ${COLORS.border}`,
     display: "flex",
     alignItems: "center",
@@ -161,14 +161,14 @@ export const QS = {
   },
 
   navLinkInactive: {
-    color: "rgba(15,23,42,0.70)",
+    color: "rgba(33,36,39,0.70)",
     fontSize: 13,
     fontWeight: TYPE.medium,
     textDecoration: "none",
     padding: "7px 16px",
     borderRadius: RADIUS.pill,
-    background: "rgba(15,23,42,0.04)",
-    border: "1px solid rgba(15,23,42,0.07)",
+    background: "rgba(33,36,39,0.04)",
+    border: "1px solid rgba(33,36,39,0.07)",
     transition: "all 0.18s",
     cursor: "pointer",
   },
@@ -207,7 +207,7 @@ export const QS = {
     borderRadius: RADIUS.md,
     cursor: "pointer",
     background: "transparent",
-    color: "rgba(15,23,42,0.50)",
+    color: "rgba(33,36,39,0.50)",
     fontSize: 12,
     fontWeight: TYPE.normal,
     textAlign: "left",
@@ -231,7 +231,7 @@ export const QS = {
 
   cardHover: {
     background: COLORS.surface2,
-    borderColor: "rgba(91,127,166,0.20)",
+    borderColor: "rgba(100,149,237,0.20)",
     boxShadow: SHADOW.gold,
     transform: "translateY(-4px)",
   },
@@ -241,7 +241,7 @@ export const QS = {
     height: 44,
     borderRadius: RADIUS.lg,
     background: COLORS.goldTint2,
-    border: `1px solid rgba(91,127,166,0.22)`,
+    border: `1px solid rgba(100,149,237,0.22)`,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -261,12 +261,12 @@ export const QS = {
     width: 34,
     height: 34,
     borderRadius: RADIUS.circle,
-    background: "rgba(15,23,42,0.05)",
+    background: "rgba(33,36,39,0.05)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: 15,
-    color: "rgba(15,23,42,0.22)",
+    color: "rgba(33,36,39,0.22)",
     flexShrink: 0,
     transition: "all 0.22s",
   },
@@ -300,7 +300,7 @@ export const QS = {
   },
 
   btnSecondary: {
-    background: "rgba(15,23,42,0.06)",
+    background: "rgba(33,36,39,0.06)",
     color: COLORS.text2,
     border: `1px solid ${COLORS.border2}`,
   },
@@ -338,8 +338,8 @@ export const QS = {
     padding: "3px 10px",
     borderRadius: RADIUS.pill,
     border: `1px solid ${COLORS.border2}`,
-    background: "rgba(15,23,42,0.06)",
-    color: "rgba(15,23,42,0.65)",
+    background: "rgba(33,36,39,0.06)",
+    color: "rgba(33,36,39,0.65)",
     fontSize: 9,
     fontWeight: TYPE.bold,
     cursor: "pointer",
@@ -412,7 +412,7 @@ export const QS = {
   badgeMedium:   { background: COLORS.yellowBg,  color: COLORS.yellow, border: `1px solid ${COLORS.yellowBd}` },
   badgeLow:      { background: COLORS.greenBg,   color: COLORS.green,  border: `1px solid ${COLORS.greenBd}` },
   badgeGold:     { background: COLORS.goldTint2, color: COLORS.gold,   border: `1px solid ${COLORS.goldBorder}` },
-  badgeMuted:    { background: "rgba(15,23,42,0.06)", color: COLORS.text3, border: `1px solid ${COLORS.border}` },
+  badgeMuted:    { background: "rgba(33,36,39,0.06)", color: COLORS.text3, border: `1px solid ${COLORS.border}` },
 };
 
 

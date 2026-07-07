@@ -11,37 +11,37 @@
   color-scheme: light;
 
   /* Brand gold */
-  --qg-gold:            #5B7FA6;
-  --qg-gold-light:      #7295B8;
-  --qg-gold-dim:        rgba(91, 127, 166, 0.55);
-  --qg-gold-tint-1:     rgba(91, 127, 166, 0.12);
-  --qg-gold-tint-2:     rgba(91, 127, 166, 0.08);
-  --qg-gold-tint-3:     rgba(91, 127, 166, 0.05);
-  --qg-gold-border:     rgba(91, 127, 166, 0.28);
-  --qg-gold-border-h:   rgba(91, 127, 166, 0.45);
+  --qg-gold:            #6495ED;
+  --qg-gold-light:      #7FA6F0;
+  --qg-gold-dim:        rgba(100, 149, 237, 0.55);
+  --qg-gold-tint-1:     rgba(100, 149, 237, 0.12);
+  --qg-gold-tint-2:     rgba(100, 149, 237, 0.08);
+  --qg-gold-tint-3:     rgba(100, 149, 237, 0.05);
+  --qg-gold-border:     rgba(100, 149, 237, 0.28);
+  --qg-gold-border-h:   rgba(100, 149, 237, 0.45);
 
   /* Backgrounds */
-  --qg-bg:              #F4F7FC;   /* page background */
+  --qg-bg:              #F1EEEA;   /* page background */
   --qg-sidebar:         #FFFFFF;   /* sidebar / nav panel */
   --qg-surface:         #FFFFFF;   /* card surface */
-  --qg-surface-2:       #EEF2FA;   /* elevated card / hover state */
-  --qg-overlay:         rgba(15, 23, 42, 0.45);
+  --qg-surface-2:       #E8E2D8;   /* elevated card / hover state */
+  --qg-overlay:         rgba(33, 36, 39, 0.45);
 
   /* Borders */
-  --qg-border:          rgba(15, 23, 42, 0.08);
-  --qg-border-2:        rgba(15, 23, 42, 0.13);
-  --qg-border-strong:   rgba(15, 23, 42, 0.22);
+  --qg-border:          rgba(33, 36, 39, 0.08);
+  --qg-border-2:        rgba(33, 36, 39, 0.13);
+  --qg-border-strong:   rgba(33, 36, 39, 0.22);
 
   /* Text */
-  --qg-text-1:          #0F172A;
-  --qg-text-2:          rgba(15, 23, 42, 0.78);
-  --qg-text-3:          rgba(15, 23, 42, 0.50);
-  --qg-text-4:          rgba(15, 23, 42, 0.32);
+  --qg-text-1:          #212427;
+  --qg-text-2:          rgba(33, 36, 39, 0.78);
+  --qg-text-3:          rgba(33, 36, 39, 0.50);
+  --qg-text-4:          rgba(33, 36, 39, 0.32);
 
   /* Informational (muted, theme-responsive) */
-  --qg-info:            rgba(15,23,42,0.45);
-  --qg-info-bg:         rgba(15,23,42,0.05);
-  --qg-info-border:     rgba(15,23,42,0.10);
+  --qg-info:            rgba(33,36,39,0.45);
+  --qg-info-bg:         rgba(33,36,39,0.05);
+  --qg-info-border:     rgba(33,36,39,0.10);
 
   /* Semantic colours (keep recognisable — only backgrounds go dark) */
   --qg-red:             #EF4444;
@@ -72,6 +72,7 @@
      2. TYPOGRAPHY TOKENS
      -------------------------------------------------------------------------- */
   --qg-font:            "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --qg-font-display:    "Playfair Display", Georgia, "Times New Roman", serif;
   --qg-font-mono:       "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
 
   --qg-text-xs:         9px;
@@ -123,10 +124,10 @@
   /* --------------------------------------------------------------------------
      5. SHADOW TOKENS
      -------------------------------------------------------------------------- */
-  --qg-shadow-sm:  0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.05);
-  --qg-shadow-md:  0 4px 12px rgba(15,23,42,0.10), 0 2px 4px rgba(15,23,42,0.05);
-  --qg-shadow-lg:  0 20px 48px rgba(15,23,42,0.14), 0 8px 16px rgba(15,23,42,0.07);
-  --qg-shadow-gold: 0 0 0 1px rgba(91,127,166,0.20), 0 8px 24px rgba(15,23,42,0.10);
+  --qg-shadow-sm:  0 1px 3px rgba(33,36,39,0.08), 0 1px 2px rgba(33,36,39,0.05);
+  --qg-shadow-md:  0 4px 12px rgba(33,36,39,0.10), 0 2px 4px rgba(33,36,39,0.05);
+  --qg-shadow-lg:  0 20px 48px rgba(33,36,39,0.14), 0 8px 16px rgba(33,36,39,0.07);
+  --qg-shadow-gold: 0 0 0 1px rgba(100,149,237,0.20), 0 8px 24px rgba(33,36,39,0.10);
 
   /* --------------------------------------------------------------------------
      6. TRANSITION
@@ -177,6 +178,7 @@ input, textarea, select, button {
 }
 
 .qg-title {
+  font-family: var(--qg-font-display);
   font-size: var(--qg-text-2xl);
   font-weight: var(--qg-weight-extra);
   color: var(--qg-text-1);
@@ -293,14 +295,14 @@ input, textarea, select, button {
 }
 
 .qg-nav-link {
-  color: rgba(15,23,42,0.70);
+  color: rgba(33,36,39,0.70);
   font-size: var(--qg-text-base);
   font-weight: var(--qg-weight-medium);
   text-decoration: none;
   padding: 7px 16px;
   border-radius: var(--qg-radius-pill);
-  background: rgba(15,23,42,0.04);
-  border: 1px solid rgba(15,23,42,0.07);
+  background: rgba(33,36,39,0.04);
+  border: 1px solid rgba(33,36,39,0.07);
   transition: var(--qg-ease);
 }
 
@@ -341,7 +343,7 @@ input, textarea, select, button {
 .qg-sidebar-group-label {
   font-size: var(--qg-text-xs);
   font-weight: var(--qg-weight-bold);
-  color: rgba(15,23,42,0.20);
+  color: rgba(33,36,39,0.20);
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 5px 10px 3px;
@@ -360,15 +362,15 @@ input, textarea, select, button {
   cursor: pointer;
   font-size: 12px;
   font-weight: var(--qg-weight-normal);
-  color: rgba(15,23,42,0.50);
+  color: rgba(33,36,39,0.50);
   background: transparent;
   text-align: left;
   transition: var(--qg-ease);
 }
 
 .qg-sidebar-item:hover {
-  background: rgba(15,23,42,0.05);
-  color: rgba(15,23,42,0.80);
+  background: rgba(33,36,39,0.05);
+  color: rgba(33,36,39,0.80);
 }
 
 .qg-sidebar-item.active {
@@ -390,7 +392,7 @@ input, textarea, select, button {
 
 .qg-card:hover {
   background: var(--qg-surface-2);
-  border-color: rgba(91,127,166,0.20);
+  border-color: rgba(100,149,237,0.20);
   box-shadow: var(--qg-shadow-gold);
   transform: translateY(-4px);
 }
@@ -404,7 +406,7 @@ input, textarea, select, button {
   height: 44px;
   border-radius: var(--qg-radius-lg);
   background: var(--qg-gold-tint-2);
-  border: 1px solid rgba(91,127,166,0.22);
+  border: 1px solid rgba(100,149,237,0.22);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -417,19 +419,19 @@ input, textarea, select, button {
 
 .qg-card:hover .qg-card-icon {
   background: var(--qg-gold-tint-1);
-  border-color: rgba(91,127,166,0.45);
+  border-color: rgba(100,149,237,0.45);
 }
 
 .qg-card-arrow {
   width: 34px;
   height: 34px;
   border-radius: var(--qg-radius-circle);
-  background: rgba(15,23,42,0.05);
+  background: rgba(33,36,39,0.05);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  color: rgba(15,23,42,0.22);
+  color: rgba(33,36,39,0.22);
   flex-shrink: 0;
   transition: var(--qg-ease);
 }
@@ -449,7 +451,7 @@ input, textarea, select, button {
 
 .qg-card-desc {
   font-size: 12.5px;
-  color: rgba(15,23,42,0.45);
+  color: rgba(33,36,39,0.45);
   line-height: var(--qg-leading-loose);
 }
 
@@ -496,18 +498,18 @@ input, textarea, select, button {
 
 .qg-btn-primary:hover {
   background: var(--qg-gold-light);
-  box-shadow: 0 4px 20px rgba(91,127,166,0.35);
+  box-shadow: 0 4px 20px rgba(100,149,237,0.35);
   transform: translateY(-1px);
 }
 
 .qg-btn-secondary {
-  background: rgba(15,23,42,0.06);
+  background: rgba(33,36,39,0.06);
   color: var(--qg-text-2);
   border: 1px solid var(--qg-border-2);
 }
 
 .qg-btn-secondary:hover {
-  background: rgba(15,23,42,0.10);
+  background: rgba(33,36,39,0.10);
   border-color: var(--qg-border-strong);
 }
 
@@ -577,8 +579,8 @@ input, textarea, select, button {
   padding: 4px 12px;
   border-radius: var(--qg-radius-pill);
   border: 1px solid var(--qg-border-2);
-  background: rgba(15,23,42,0.06);
-  color: rgba(15,23,42,0.65);
+  background: rgba(33,36,39,0.06);
+  color: rgba(33,36,39,0.65);
   font-size: var(--qg-text-xs);
   font-weight: var(--qg-weight-bold);
   cursor: pointer;
@@ -587,7 +589,7 @@ input, textarea, select, button {
 }
 
 .qg-pill:hover {
-  background: rgba(15,23,42,0.10);
+  background: rgba(33,36,39,0.10);
   color: var(--qg-text-1);
 }
 
@@ -663,11 +665,11 @@ input, textarea, select, button {
 }
 
 .qg-table tbody tr:nth-child(even) td {
-  background: rgba(15,23,42,0.018);
+  background: rgba(33,36,39,0.018);
 }
 
 .qg-table tbody tr:hover td {
-  background: rgba(15,23,42,0.04);
+  background: rgba(33,36,39,0.04);
 }
 
 /* --------------------------------------------------------------------------
@@ -689,7 +691,7 @@ input, textarea, select, button {
 .qg-badge-medium   { background: var(--qg-yellow-bg); color: var(--qg-yellow); border: 1px solid var(--qg-yellow-border); }
 .qg-badge-low      { background: var(--qg-green-bg);  color: var(--qg-green);  border: 1px solid var(--qg-green-border); }
 .qg-badge-gold     { background: var(--qg-gold-tint-2); color: var(--qg-gold); border: 1px solid var(--qg-gold-border); }
-.qg-badge-muted    { background: rgba(15,23,42,0.06); color: var(--qg-text-3); border: 1px solid var(--qg-border); }
+.qg-badge-muted    { background: rgba(33,36,39,0.06); color: var(--qg-text-3); border: 1px solid var(--qg-border); }
 
 /* --------------------------------------------------------------------------
    18. SECTION HEADERS (page-level)
@@ -732,8 +734,8 @@ input, textarea, select, button {
    -------------------------------------------------------------------------- */
 ::-webkit-scrollbar          { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track    { background: transparent; }
-::-webkit-scrollbar-thumb    { background: rgba(15,23,42,0.12); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(91,127,166,0.40); }
+::-webkit-scrollbar-thumb    { background: rgba(33,36,39,0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(100,149,237,0.40); }
 
 /* --------------------------------------------------------------------------
    21. FOCUS RING (accessibility)
@@ -761,8 +763,8 @@ input, textarea, select, button {
 }
 
 @keyframes qg-pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0   rgba(91,127,166,0.40); }
-  50%       { box-shadow: 0 0 0 8px rgba(91,127,166,0.00); }
+  0%, 100% { box-shadow: 0 0 0 0   rgba(100,149,237,0.40); }
+  50%       { box-shadow: 0 0 0 8px rgba(100,149,237,0.00); }
 }
 
 .qg-animate-in   { animation: qg-fade-in   0.22s ease both; }

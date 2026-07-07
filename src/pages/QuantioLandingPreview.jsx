@@ -1,8 +1,8 @@
 import { useState } from "react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
-const GOLD  = "#5B7FA6";
-const GOLD3 = "rgba(91,127,166,0.18)";
+const GOLD  = "#6495ED";
+const GOLD3 = "rgba(100,149,237,0.18)";
 
 function useHover() {
   const [h, setH] = useState(false);
@@ -38,8 +38,8 @@ function NavA() {
               color: h ? GOLD : "var(--qg-text-2)",
               fontSize:13, fontWeight:500, textDecoration:"none",
               padding:"7px 16px", borderRadius:100,
-              background: h ? "rgba(91,127,166,0.10)" : "var(--qg-border)",
-              border:`1px solid ${h ? "rgba(91,127,166,0.30)" : "var(--qg-border-2)"}`,
+              background: h ? "rgba(100,149,237,0.10)" : "var(--qg-border)",
+              border:`1px solid ${h ? "rgba(100,149,237,0.30)" : "var(--qg-border-2)"}`,
               transition:"all 0.18s",
             }}>{l}</a>
           );
@@ -60,7 +60,7 @@ function CardZ({ p }) {
     <div {...hp} style={{
       background: h ? "var(--qg-surface-2)" : "var(--qg-surface)",
       borderRadius:14, padding:"26px 24px",
-      border:`1px solid ${h ? "rgba(91,127,166,0.25)" : "var(--qg-border)"}`,
+      border:`1px solid ${h ? "rgba(100,149,237,0.25)" : "var(--qg-border)"}`,
       display:"flex", flexDirection:"column", gap:14, cursor:"pointer",
       transform:h?"translateY(-4px)":"translateY(0)",
       transition:"all 0.25s",
@@ -70,8 +70,8 @@ function CardZ({ p }) {
         <div style={{ display:"flex", alignItems:"center", gap:12 }}>
           <div style={{
             width:44, height:44, borderRadius:10, flexShrink:0,
-            background: h ? "rgba(91,127,166,0.18)" : "rgba(91,127,166,0.10)",
-            border:`1px solid ${h?"rgba(91,127,166,0.45)":"rgba(91,127,166,0.22)"}`,
+            background: h ? "rgba(100,149,237,0.18)" : "rgba(100,149,237,0.10)",
+            border:`1px solid ${h?"rgba(100,149,237,0.45)":"rgba(100,149,237,0.22)"}`,
             display:"flex", alignItems:"center", justifyContent:"center",
             fontSize:p.mono.length>2?10:12, fontWeight:800, color:GOLD,
             transition:"all 0.2s",
@@ -112,8 +112,8 @@ function PlatformRow({ p, i }) {
       <div style={{ fontSize:12, fontWeight:700, color:"var(--qg-text-4)", width:20, flexShrink:0, textAlign:"right" }}>0{i+1}</div>
       <div style={{
         width:40, height:40, borderRadius:9, flexShrink:0,
-        background: h ? GOLD3 : "rgba(91,127,166,0.08)",
-        border:`1px solid ${h ? "rgba(91,127,166,0.40)" : "rgba(91,127,166,0.18)"}`,
+        background: h ? GOLD3 : "rgba(100,149,237,0.08)",
+        border:`1px solid ${h ? "rgba(100,149,237,0.40)" : "rgba(100,149,237,0.18)"}`,
         display:"flex", alignItems:"center", justifyContent:"center",
         fontSize:p.mono.length>2?9:11, fontWeight:800, color:GOLD,
         transition:"all 0.2s",
@@ -126,7 +126,7 @@ function PlatformRow({ p, i }) {
       <p style={{ fontSize:12.5, color:"var(--qg-text-3)", lineHeight:1.7, margin:0, flex:1 }}>{p.desc}</p>
       <div style={{
         flexShrink:0, padding:"9px 20px", borderRadius:8,
-        border:`1px solid ${h ? GOLD : "rgba(91,127,166,0.25)"}`,
+        border:`1px solid ${h ? GOLD : "rgba(100,149,237,0.25)"}`,
         background: h ? GOLD3 : "transparent",
         color:GOLD, fontSize:12, fontWeight:700, letterSpacing:0.5,
         whiteSpace:"nowrap", transition:"all 0.2s",
@@ -183,7 +183,7 @@ export default function QuantioLandingPreview() {
           </div>
         </div>
 
-        <div style={{ background:"rgba(91,127,166,0.08)", border:"1px solid rgba(91,127,166,0.22)", borderRadius:8, padding:"16px 24px" }}>
+        <div style={{ background:"rgba(100,149,237,0.08)", border:"1px solid rgba(100,149,237,0.22)", borderRadius:8, padding:"16px 24px" }}>
           <div style={{ color:GOLD, fontSize:13, fontWeight:700, marginBottom:6 }}>Which layout do you prefer?</div>
           <div style={{ color:"var(--qg-text-3)", fontSize:12, lineHeight:1.8 }}>
             <strong style={{ color:"var(--qg-text-2)" }}>Grid (Option 1)</strong> — visual, card-based, each tool gets breathing room.<br/>
