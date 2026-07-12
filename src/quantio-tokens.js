@@ -13,20 +13,20 @@
 
 export const COLORS = {
   // Brand gold
-  gold:           "#6495ED",
-  goldLight:      "#7FA6F0",
-  goldDim:        "rgba(100,149,237,0.55)",
-  goldTint1:      "rgba(100,149,237,0.18)",
-  goldTint2:      "rgba(100,149,237,0.12)",
-  goldTint3:      "rgba(100,149,237,0.08)",
-  goldBorder:     "rgba(100,149,237,0.25)",
-  goldBorderH:    "rgba(100,149,237,0.45)",
+  gold:           "#3D5A99",
+  goldLight:      "#8194BD",
+  goldDim:        "rgba(61,90,153,0.55)",
+  goldTint1:      "rgba(61,90,153,0.18)",
+  goldTint2:      "rgba(61,90,153,0.12)",
+  goldTint3:      "rgba(61,90,153,0.08)",
+  goldBorder:     "rgba(61,90,153,0.25)",
+  goldBorderH:    "rgba(61,90,153,0.45)",
 
   // Backgrounds
-  bg:             "#F1EEEA",
+  bg:             "#F4F5F7",
   sidebar:        "#FFFFFF",
   surface:        "#FFFFFF",
-  surface2:       "#E8E2D8",
+  surface2:       "#EEF1F4",
   overlay:        "rgba(33,36,39,0.45)",
 
   // Borders
@@ -113,7 +113,7 @@ export const SHADOW = {
   sm:   "0 1px 3px rgba(33,36,39,0.08), 0 1px 2px rgba(33,36,39,0.05)",
   md:   "0 4px 12px rgba(33,36,39,0.10), 0 2px 4px rgba(33,36,39,0.05)",
   lg:   "0 20px 48px rgba(33,36,39,0.14), 0 8px 16px rgba(33,36,39,0.07)",
-  gold: "0 0 0 1px rgba(100,149,237,0.20), 0 8px 24px rgba(33,36,39,0.10)",
+  gold: "0 0 0 1px rgba(61,90,153,0.20), 0 8px 24px rgba(33,36,39,0.10)",
 };
 
 // ─── 6. MAIN TOKEN EXPORT (shorthand QT) ─────────────────────────────────────
@@ -231,7 +231,7 @@ export const QS = {
 
   cardHover: {
     background: COLORS.surface2,
-    borderColor: "rgba(100,149,237,0.20)",
+    borderColor: "rgba(61,90,153,0.20)",
     boxShadow: SHADOW.gold,
     transform: "translateY(-4px)",
   },
@@ -241,7 +241,7 @@ export const QS = {
     height: 44,
     borderRadius: RADIUS.lg,
     background: COLORS.goldTint2,
-    border: `1px solid rgba(100,149,237,0.22)`,
+    border: `1px solid rgba(61,90,153,0.22)`,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

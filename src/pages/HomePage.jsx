@@ -5,18 +5,20 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 const T = {
   primary:   "#212427",
   primaryDk: "#212427",
-  hero:      "linear-gradient(135deg, #F1EEEA 0%, #E8E2D8 60%, #F1EEEA 100%)",
-  accent:    "#6495ED",
-  accentLt:  "#7FA6F0",
-  surface:   "#F9F7F4",
+  hero:      "linear-gradient(135deg, #F4F5F7 0%, #EEF1F4 60%, #F4F5F7 100%)",
+  accent:    "#3D5A99",
+  accentLt:  "#2F4677",
+  secondary:   "#0D9488",
+  secondaryDk: "#0F766E",
+  surface:   "#F4F5F7",
   white:     "#FFFFFF",
   muted:     "#6B6B6B",
-  border:    "#E8E4DC",
-  valueBg:   "#E8E2D8",
-  visionBg:  "#F1EEEA",
-  ctaBg:     "#6495ED",
+  border:    "#E4E7EB",
+  valueBg:   "#EEF1F4",
+  visionBg:  "#F4F5F7",
+  ctaBg:     "#3D5A99",
   ctaText:   "#FFFFFF",
-  footerBg:  "#F1EEEA",
+  footerBg:  "#F4F5F7",
 };
 
 const wrap = { maxWidth: 1200, margin: "0 auto", padding: "0 40px" };
@@ -39,8 +41,8 @@ function BtnPrimary({ children, onClick }) {
       background: h ? T.accentLt : T.accent,
       color: T.ctaText, fontSize: 14, fontWeight: 700, letterSpacing: 0.3,
       boxShadow: h
-        ? `0 0 0 4px rgba(100,149,237,0.25), 0 4px 16px rgba(100,149,237,0.4)`
-        : `0 2px 8px rgba(100,149,237,0.35)`,
+        ? `0 0 0 4px rgba(61,90,153,0.25), 0 4px 16px rgba(61,90,153,0.4)`
+        : `0 2px 8px rgba(61,90,153,0.35)`,
       transform: h ? "scale(1.03)" : "scale(1)",
       transition: "all 0.2s ease",
     }}>{children}</button>
@@ -51,12 +53,10 @@ function BtnOutline({ children }) {
   const [h, hProps] = useHover();
   return (
     <button {...hProps} style={{
-      padding: "14px 32px", borderRadius: 8, cursor: "pointer",
-      background: "transparent",
-      border: `2px solid ${T.primary}`,
-      color: T.primary,
+      padding: "14px 32px", borderRadius: 8, border: "none", cursor: "pointer",
+      background: h ? T.secondaryDk : T.secondary,
+      color: "#FFFFFF",
       fontSize: 14, fontWeight: 600, letterSpacing: 0.3,
-      opacity: h ? 0.75 : 1,
       transform: h ? "scale(1.03)" : "scale(1)",
       transition: "all 0.2s ease",
     }}>{children}</button>
@@ -79,37 +79,36 @@ function Nav({ onEnterApp }) {
   return (
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 999,
-      background: scrolled ? "rgba(255,255,255,0.96)" : "transparent",
-      backdropFilter: scrolled ? "blur(14px)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(33,36,39,0.07)" : "none",
+      background: "#1F3A5F",
+      borderBottom: "1px solid rgba(255,255,255,0.10)",
       transition: "all 0.3s ease", padding: "18px 0",
     }}>
       <div style={{ ...wrap, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <img src="/qg-logo-gold.png" alt="Quantio Global" style={{ width: 46, height: "auto" }} />
           <div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: "#212427", letterSpacing: 2.5, textTransform: "uppercase", lineHeight: 1 }}>Quantio</div>
-            <div style={{ fontSize: 9, fontWeight: 400, color: "rgba(33,36,39,0.45)", letterSpacing: 3.5, textTransform: "uppercase", marginTop: 2 }}>Global</div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#FFFFFF", letterSpacing: 2.5, textTransform: "uppercase", lineHeight: 1 }}>Quantio</div>
+            <div style={{ fontSize: 9, fontWeight: 400, color: "rgba(255,255,255,0.55)", letterSpacing: 3.5, textTransform: "uppercase", marginTop: 2 }}>Global</div>
           </div>
         </div>
         <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
           {["About", "Services", "Platforms", "Vision", "Contact"].map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} style={{
-              color: "rgba(33,36,39,0.7)", fontSize: 13, fontWeight: 500,
+              color: "rgba(255,255,255,0.75)", fontSize: 13, fontWeight: 500,
               textDecoration: "none", padding: "7px 16px", borderRadius: 100,
-              background: "rgba(33,36,39,0.04)",
-              border: "1px solid rgba(33,36,39,0.07)",
+              background: "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.14)",
               transition: "all 0.18s",
             }}
               onMouseEnter={e => {
-                e.currentTarget.style.color = T.accent;
-                e.currentTarget.style.background = "rgba(100,149,237,0.10)";
-                e.currentTarget.style.borderColor = "rgba(100,149,237,0.30)";
+                e.currentTarget.style.color = "#FFFFFF";
+                e.currentTarget.style.background = "rgba(61,90,153,0.35)";
+                e.currentTarget.style.borderColor = "rgba(61,90,153,0.55)";
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.color = "rgba(33,36,39,0.7)";
-                e.currentTarget.style.background = "rgba(33,36,39,0.04)";
-                e.currentTarget.style.borderColor = "rgba(33,36,39,0.07)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.75)";
+                e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
               }}
             >{l}</a>
           ))}
@@ -130,17 +129,17 @@ function HeroGraphic() {
       {[0,1,2,3,4,5].map(i => <line key={`v${i}`} x1={40+i*80} y1="40" x2={40+i*80} y2="360" stroke="rgba(33,36,39,0.04)" strokeWidth="1"/>)}
       {[[240,180,22],[120,100,14],[360,120,16],[160,280,12],[340,270,18],[440,200,10],[80,220,10],[290,90,10]].map(([cx,cy,r],i) => (
         <g key={i}>
-          <circle cx={cx} cy={cy} r={r+7} fill="rgba(100,149,237,0.07)"/>
-          <circle cx={cx} cy={cy} r={r} fill={i===0 ? T.accent : `rgba(100,149,237,${0.2+i*0.07})`}/>
+          <circle cx={cx} cy={cy} r={r+7} fill="rgba(61,90,153,0.07)"/>
+          <circle cx={cx} cy={cy} r={r} fill={i===0 ? T.accent : `rgba(61,90,153,${0.2+i*0.07})`}/>
         </g>
       ))}
       {[[240,180,120,100],[240,180,360,120],[240,180,160,280],[240,180,340,270],[120,100,80,220],[360,120,440,200],[360,120,290,90],[340,270,440,200]].map(([x1,y1,x2,y2],i) => (
-        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(100,149,237,0.2)" strokeWidth="1.5"/>
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(61,90,153,0.2)" strokeWidth="1.5"/>
       ))}
-      <circle cx="240" cy="180" r="38" stroke="rgba(100,149,237,0.22)" strokeWidth="1.5" strokeDasharray="6 4"/>
-      <circle cx="240" cy="180" r="56" stroke="rgba(100,149,237,0.09)" strokeWidth="1" strokeDasharray="4 6"/>
+      <circle cx="240" cy="180" r="38" stroke="rgba(61,90,153,0.22)" strokeWidth="1.5" strokeDasharray="6 4"/>
+      <circle cx="240" cy="180" r="56" stroke="rgba(61,90,153,0.09)" strokeWidth="1" strokeDasharray="4 6"/>
       {[0.4,0.65,0.85,0.55,0.9].map((h,i) => (
-        <rect key={i} x={310+i*22} y={320-h*60} width={14} height={h*60} rx="3" fill={`rgba(100,149,237,${0.25+i*0.14})`}/>
+        <rect key={i} x={310+i*22} y={320-h*60} width={14} height={h*60} rx="3" fill={`rgba(61,90,153,${0.25+i*0.14})`}/>
       ))}
       <text x="310" y="335" fill="rgba(33,36,39,0.2)" fontSize="9" fontFamily="monospace">RISK SCORE</text>
       <text x="100" y="94"  fill="rgba(33,36,39,0.35)" fontSize="9" fontFamily="monospace">GOV</text>
@@ -191,6 +190,151 @@ function Hero({ onEnterApp }) {
   );
 }
 
+/* ── Quick Reference ("Framework at a Glance") ────────────────────────── */
+const QUICK_REF = [
+  {
+    id: "what", label: "What is it?", icon: "📋",
+    short: "An AI-enabled fraud detection dashboard that screens every federal grant transaction in real time — built to OMB 2 CFR Part 200, the GAO Green Book, and the COSO Framework.",
+    detail: "FraudGuard is a production-ready grant intelligence platform that gives financial governance officers, compliance teams, and external auditors a live view of fraud risk across federally funded grant programs — before a transaction becomes an audit finding.\n\nUnlike a static compliance checklist, FraudGuard runs continuously: every transaction is scored the moment it's recorded, combining rule-based detection, machine-learning anomaly scoring, and relationship-graph analysis that surfaces patterns a human reviewer would miss.\n\nThe platform ships with six real fraud scenario datasets pre-loaded — 150 transactions across duplicate invoices, vendor collusion networks, procurement violations, transaction structuring, and ML-flagged anomalies — so your team can see exactly how detection works before connecting live data.",
+    bullets: [
+      { label: "10 OMB-aligned detection rules (R001–R010):", text: "A configurable rule engine covering duplicate payments, split purchases, structuring thresholds, and sole-source procurement red flags." },
+      { label: "ML + Graph Engine:", text: "Z-score anomaly detection per grant/category baseline, plus shared-address, bank-routing, and procurement-concentration graph analysis." },
+      { label: "Full case lifecycle:", text: "OPEN → ESCALATED → CLOSED workflow with notes, evidence bundling, and one-click OIG-style HTML audit export." },
+      { label: "Compliance Matrix:", text: "CC-001–CC-010 internal controls mapped directly to COSO and GAO Green Book references." },
+    ],
+    callout: "FraudGuard answers the question every grantor agency and recipient organization eventually asks: \"How do we catch fraud before the audit — not after?\" Six embedded real-world fraud datasets let you see the answer in minutes, not months.",
+  },
+  {
+    id: "who", label: "Who uses it?", icon: "👥",
+    short: "Financial governance officers, compliance teams, investigators, and external auditors at agencies and organizations that disburse or receive federal grant funding.",
+    detail: "FraudGuard is built around role-based access control, so every user sees exactly the workspace their job requires — nothing more, nothing less. Four roles ship out of the box, each scoped to a different slice of the platform:",
+    bullets: [
+      { label: "System Admin:", text: "Full visibility across every module, plus the ability to toggle detection rules live and manage the audit log." },
+      { label: "Compliance Officer:", text: "Overview, alerts, transactions, cases, and the compliance matrix — can close cases but not edit detection rules." },
+      { label: "Investigator:", text: "Overview, alerts, transactions, and cases — focused on working the queue, no rule configuration or case closure." },
+      { label: "External Auditor:", text: "Read-only access to the overview dashboard and compliance matrix — everything needed for an audit walkthrough." },
+    ],
+    callout: "Same data, four different lenses — a compliance officer triaging today's alert queue and an external auditor reviewing last quarter's controls never have to fight over what they're allowed to see.",
+  },
+  {
+    id: "why", label: "Who benefits?", icon: "🏛️",
+    short: "Grantor agencies, program recipients, and taxpayers — fewer improper payments caught earlier, before funds leave the door instead of after the audit finding.",
+    detail: "Every dollar FraudGuard flags before disbursement is a dollar that never has to be clawed back, disputed, or written off as an improper payment. That benefit compounds across three groups:",
+    bullets: [
+      { label: "Grantor agencies:", text: "Real-time visibility into fraud risk across the entire portfolio, instead of relying on annual single-audit sampling to catch problems months later." },
+      { label: "Recipient organizations:", text: "An early-warning system that protects their own compliance standing — a pattern caught internally never becomes a finding in someone else's audit report." },
+      { label: "Taxpayers:", text: "Fewer federal dollars lost to fraud, waste, and improper payment before they reach the communities the grant was meant to serve." },
+    ],
+    callout: "The ROI Calculator built into FraudGuard lets any of these stakeholders run the numbers themselves — audit cost saved, staff hours saved, and net return, using their own grant portfolio size.",
+  },
+  {
+    id: "cost", label: "Cost", icon: "💰",
+    short: "A subscription-based platform — the built-in ROI calculator shows your audit-cost and staff-hour savings against FraudGuard's annual cost, so the return is transparent before you commit.",
+    detail: "FraudGuard is licensed as an annual subscription, scaled to the size of the grant portfolio being monitored. Rather than publish a flat rate, the platform includes an interactive ROI Calculator on the Overview dashboard so every prospective customer can model their own numbers:",
+    bullets: [
+      { label: "Annual grant portfolio:", text: "$100K – $50M — the total federal award volume being monitored." },
+      { label: "Average audit finding cost:", text: "$5,000 – $200,000 — what a single improper-payment finding typically costs to resolve." },
+      { label: "Compliance staff rate:", text: "$30 – $200/hr — loaded cost of the staff hours FraudGuard's automation replaces." },
+      { label: "FraudGuard annual cost:", text: "$0 – $100,000 — the platform's own subscription cost, weighed directly against the savings above." },
+    ],
+    callout: "Move any slider and the calculator recomputes audit cost saved, staff hours saved, and net ROI percentage in real time — the same tool your CFO will use to justify the line item.",
+  },
+  {
+    id: "access", label: "How to access", icon: "🔓",
+    short: "A 3-step onboarding wizard — tell us your organization type, connect your data source, and launch your first scan in minutes.",
+    detail: "There's no lengthy implementation project standing between signup and your first fraud scan. The Setup Guide walks every new organization through exactly three steps:",
+    bullets: [
+      { label: "1 · Organization:", text: "Select your organization type — municipality, state agency, nonprofit, tribal government, housing authority, or federal contractor — so FraudGuard pre-configures the right detection rules and OMB templates." },
+      { label: "2 · Data Source:", text: "Choose how you'll provide transaction data — direct upload, ERP integration, or one of the six embedded demo datasets to explore the platform risk-free first." },
+      { label: "3 · Launch Scan:", text: "Run your first detection pass and watch the alert queue, risk distribution, and compliance matrix populate live." },
+    ],
+    callout: "Most organizations complete setup and see their first flagged transaction in under ten minutes.",
+  },
+  {
+    id: "result", label: "Key result", icon: "📊",
+    short: "10 OMB detection rules · ML + graph anomaly engine · 6 real fraud datasets (150 transactions) · one-click OIG-style case export · full COSO / GAO Green Book alignment.",
+    detail: null,
+    bullets: [],
+    callout: null,
+  },
+];
+
+function QuickRefItem({ item, isOpen, onToggle }) {
+  return (
+    <div style={{
+      border: `1px solid ${isOpen ? "rgba(15,76,76,0.28)" : T.border}`,
+      borderRadius: 8,
+      background: T.white,
+      overflow: "hidden",
+      boxShadow: isOpen ? "0 0 0 1px rgba(15,76,76,0.13), 0 12px 32px rgba(33,36,39,0.08)" : "none",
+      transition: "all 0.2s ease",
+    }}>
+      <button
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        style={{
+          width: "100%", background: isOpen ? "rgba(15,76,76,0.06)" : "transparent",
+          border: "none", cursor: "pointer",
+          display: "grid", gridTemplateColumns: "52px 1fr 36px", alignItems: "center",
+          textAlign: "left", padding: 0, fontFamily: "inherit", transition: "background 0.15s",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 52, height: 58, fontSize: 20, flexShrink: 0 }}>{item.icon}</div>
+        <div style={{ padding: "12px 16px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: 0.4, textTransform: "uppercase", color: isOpen ? T.accent : T.primary, display: "block" }}>{item.label}</span>
+          <span style={{ fontSize: 12.5, color: T.muted, marginTop: 2, lineHeight: 1.4, display: "block" }}>{item.short}</span>
+        </div>
+        <div style={{ width: 36, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, color: T.muted, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.25s" }}>⌄</div>
+      </button>
+      {isOpen && item.detail && (
+        <div style={{ padding: "0 28px 26px 52px", borderTop: `1px solid ${T.border}` }}>
+          {item.detail.split("\n\n").map((p, i) => (
+            <p key={i} style={{ fontSize: 14, color: T.muted, lineHeight: 1.8, margin: "18px 0 0" }}>{p}</p>
+          ))}
+          {item.bullets.length > 0 && (
+            <ul style={{ listStyle: "none", padding: 0, margin: "16px 0 0", display: "flex", flexDirection: "column", gap: 8 }}>
+              {item.bullets.map((b, i) => (
+                <li key={i} style={{ fontSize: 13.5, color: T.muted, lineHeight: 1.7 }}>
+                  <span style={{ color: T.primary, fontWeight: 700 }}>{b.label}</span> {b.text}
+                </li>
+              ))}
+            </ul>
+          )}
+          {item.callout && (
+            <div style={{ background: "rgba(15,76,76,0.06)", borderLeft: `3px solid ${T.accent}`, borderRadius: "0 8px 8px 0", padding: "12px 16px", marginTop: 18, fontSize: 13.5, fontStyle: "italic", color: T.muted, lineHeight: 1.7 }}>
+              {item.callout}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function QuickRef() {
+  const [open, setOpen] = useState("what");
+  return (
+    <section style={{ background: T.surface, padding: "100px 0" }}>
+      <div style={{ ...wrap, maxWidth: 860 }}>
+        <p style={sectionLabel}>QUICK REFERENCE</p>
+        <h2 style={{ fontFamily: "var(--qg-font-display)", fontSize: 32, fontWeight: 700, color: T.primary, margin: "0 0 32px", lineHeight: 1.2, letterSpacing: -0.5 }}>
+          FraudGuard at a Glance
+        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {QUICK_REF.map(item => (
+            <QuickRefItem
+              key={item.id}
+              item={item}
+              isOpen={open === item.id}
+              onToggle={() => setOpen(open === item.id ? null : item.id)}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── About ─────────────────────────────────────────────────────────── */
 function About() {
   return (
@@ -216,8 +360,8 @@ function About() {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <svg viewBox="0 0 320 320" width="300" height="300" fill="none">
             <rect x="40" y="40" width="100" height="100" rx="12" fill="rgba(26,26,26,0.05)" stroke={T.primary} strokeWidth="1.5"/>
-            <rect x="180" y="40" width="100" height="100" rx="12" fill="rgba(100,149,237,0.1)" stroke={T.accent} strokeWidth="1.5"/>
-            <rect x="40" y="180" width="100" height="100" rx="12" fill="rgba(100,149,237,0.1)" stroke={T.accent} strokeWidth="1.5"/>
+            <rect x="180" y="40" width="100" height="100" rx="12" fill="rgba(61,90,153,0.1)" stroke={T.accent} strokeWidth="1.5"/>
+            <rect x="40" y="180" width="100" height="100" rx="12" fill="rgba(61,90,153,0.1)" stroke={T.accent} strokeWidth="1.5"/>
             <rect x="180" y="180" width="100" height="100" rx="12" fill="rgba(26,26,26,0.05)" stroke={T.primary} strokeWidth="1.5"/>
             <text x="90" y="97" textAnchor="middle" fontSize="11" fill={T.primary} fontWeight="600">GOVERN</text>
             <text x="230" y="97" textAnchor="middle" fontSize="11" fill={T.accent} fontWeight="600">RISK</text>
@@ -322,12 +466,12 @@ function PlatformCard({ p, onEnterFraudGuard }) {
   };
   return (
     <div {...hProps} onClick={handleClick} style={{
-      background: h ? "#E8E2D8" : "#FFFFFF",
-      border: `1px solid ${h ? "rgba(100,149,237,0.20)" : "rgba(33,36,39,0.06)"}`,
+      background: h ? "rgba(61,90,153,0.05)" : "#FFFFFF",
+      border: `1px solid ${h ? "rgba(61,90,153,0.20)" : "rgba(33,36,39,0.06)"}`,
       borderRadius: 14, padding: "26px 24px",
       display: "flex", flexDirection: "column", gap: 14,
       cursor: "pointer",
-      boxShadow: h ? "0 0 0 1px rgba(100,149,237,0.13), 0 12px 32px rgba(33,36,39,0.12)" : "none",
+      boxShadow: h ? "0 0 0 1px rgba(61,90,153,0.13), 0 12px 32px rgba(33,36,39,0.12)" : "none",
       transform: h ? "translateY(-4px)" : "translateY(0)",
       transition: "all 0.25s",
     }}>
@@ -335,8 +479,8 @@ function PlatformCard({ p, onEnterFraudGuard }) {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{
             width: 44, height: 44, borderRadius: 10, flexShrink: 0,
-            background: h ? "rgba(100,149,237,0.18)" : "rgba(100,149,237,0.10)",
-            border: `1px solid ${h ? "rgba(100,149,237,0.45)" : "rgba(100,149,237,0.22)"}`,
+            background: h ? "rgba(61,90,153,0.18)" : "rgba(61,90,153,0.10)",
+            border: `1px solid ${h ? "rgba(61,90,153,0.45)" : "rgba(61,90,153,0.22)"}`,
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: p.mono.length > 2 ? 10 : 12, fontWeight: 800,
             color: T.accent, transition: "all 0.2s",
@@ -366,7 +510,7 @@ function PlatformCard({ p, onEnterFraudGuard }) {
 
 function Platforms({ onEnterFraudGuard }) {
   return (
-    <section id="platforms" style={{ background: "#F9F7F4", padding: "100px 0" }}>
+    <section id="platforms" style={{ background: "#F4F5F7", padding: "100px 0" }}>
       <div style={wrap}>
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <p style={{ ...sectionLabel, textAlign: "center" }}>OUR PLATFORMS</p>
@@ -530,6 +674,7 @@ export default function HomePage({ onEnterFraudGuard }) {
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
       <Nav onEnterApp={onEnterFraudGuard}/>
       <Hero onEnterApp={onEnterFraudGuard}/>
+      <QuickRef/>
       <About/>
       <Services/>
       <Platforms onEnterFraudGuard={onEnterFraudGuard}/>
