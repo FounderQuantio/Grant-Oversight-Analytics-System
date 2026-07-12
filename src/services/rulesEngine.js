@@ -1,5 +1,6 @@
 // Rules Engine — OMB 2 CFR 200 violation detection
 // R001-R010: all 10 detection rules
+import { SEV_P } from '../utils/tokens';
 
 export const INIT_RULES = [
   {id:"R001",name:"Duplicate Invoice",           on:true,sev:"HIGH",     omb:"2 CFR 200.305(b)", thr:null,   cat:"Financial"},
@@ -49,9 +50,10 @@ export function mkAlert(ruleId, txn, ven, meta, sev, rules) {
   const rule = (rules||INIT_RULES).find(r=>r.id===ruleId)||{sev:"MEDIUM",omb:"2 CFR 200"};
   const cm   = CTRL_INLINE[ruleId]||{ctrl:"CC-GEN",coso:"General",gao:"N/A",fix:"Review and remediate."};
   const label = humanLabel(ruleId, meta||{}, txn, ven);
+  const severity = sev||rule.sev||"MEDIUM";
   return {
     id:`ALT-${ruleId}-${txn.id}`,
-    ruleId, severity: sev||rule.sev||"MEDIUM",
+    ruleId, severity, pts:SEV_P[severity]||0,
     txnId:txn.id, vendorId:txn.vendorId, grantId:txn.grantId,
     amount:txn.amount, omb:rule.omb||"2 CFR 200",
     label, desc:label, fix:cm.fix,
