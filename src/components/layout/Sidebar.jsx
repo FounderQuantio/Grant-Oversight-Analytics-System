@@ -7,6 +7,7 @@ const NAV = [
   {id:"transactions",l:"Transactions",i:"≡", g:"main"},
   {id:"cases",       l:"Cases",       i:"📁",g:"main", badge:"cases"},
   {id:"compliance",  l:"Compliance",  i:"✓", g:"main"},
+  {id:"glance",      l:"At a Glance", i:"📋",g:"sys"},
   {id:"settings",    l:"Settings",    i:"⚙", g:"sys"},
 ];
 
@@ -32,7 +33,7 @@ export default function Sidebar({ active, setActive }) {
         {["main","sys"].map(grp=>(
           <div key={grp} style={{marginBottom:6}}>
             <div style={{fontSize:9,fontWeight:700,color:DS.t4,letterSpacing:1,padding:"5px 10px 3px",textTransform:"uppercase"}}>{grp==="main"?"Workspace":"System"}</div>
-            {NAV.filter(n=>n.g===grp).filter(n=>role.views.includes(n.id)||n.id==="settings").map(item=>{
+            {NAV.filter(n=>n.g===grp).filter(n=>role.views.includes(n.id)||n.id==="settings"||n.id==="glance").map(item=>{
               const isA=active===item.id;
               const count=item.badge?bc[item.badge]:0;
               return (

@@ -12,6 +12,7 @@ import Alerts from "@/pages/Alerts";
 import Cases from "@/pages/Cases";
 import Compliance from "@/pages/Compliance";
 import Settings from "@/pages/Settings";
+import AtAGlance from "@/pages/AtAGlance";
 
 const VIEW_META = {
   "/fraud-guard":              { title:"Overview",           sub:"Portfolio risk · ROI calculator · DS1–DS6 real-time monitoring" },
@@ -19,6 +20,7 @@ const VIEW_META = {
   "/fraud-guard/transactions": { title:"Transactions",       sub:"150 real transactions (DS1–DS6) · ML risk scoring · Batch payment holds" },
   "/fraud-guard/cases":        { title:"Case Management",    sub:"Investigation workflow · Evidence packages · OIG report export" },
   "/fraud-guard/compliance":   { title:"Compliance Reports", sub:"OMB control matrix (CC-001–CC-010) · GAO Green Book · Audit readiness" },
+  "/fraud-guard/glance":       { title:"At a Glance",        sub:"What FraudGuard is, who uses it, who benefits, cost, access, and key results" },
   "/fraud-guard/settings":     { title:"Settings",           sub:"Detection rules (R001–R010) · Graph analytics · Role-based access control" },
 };
 
@@ -45,6 +47,7 @@ function Shell() {
     "/fraud-guard/transactions": "transactions",
     "/fraud-guard/cases":        "cases",
     "/fraud-guard/compliance":   "compliance",
+    "/fraud-guard/glance":       "glance",
     "/fraud-guard/settings":     "settings",
   };
   const active    = pathToId[location.pathname] || "overview";
@@ -55,6 +58,7 @@ function Shell() {
       transactions: "/fraud-guard/transactions",
       cases:        "/fraud-guard/cases",
       compliance:   "/fraud-guard/compliance",
+      glance:       "/fraud-guard/glance",
       settings:     "/fraud-guard/settings",
     };
     navigate(idToPath[id] || "/fraud-guard");
@@ -76,6 +80,7 @@ function Shell() {
               <Route path="/transactions" element={<Transactions/>}/>
               <Route path="/cases"        element={<Cases/>}/>
               <Route path="/compliance"   element={<Compliance/>}/>
+              <Route path="/glance"       element={<AtAGlance/>}/>
               <Route path="/settings"     element={role.views.includes("settings") ? <Settings/> : <Navigate to="/fraud-guard" replace/>}/>
               <Route path="*"             element={<Navigate to="/fraud-guard" replace/>}/>
             </Routes>
