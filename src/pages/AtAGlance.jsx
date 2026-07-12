@@ -118,7 +118,7 @@ function QuickRefItem({ item, isOpen, onToggle }) {
 export default function AtAGlance() {
   const [open, setOpen] = useState("what");
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 760 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 760, margin: "0 auto" }}>
       {QUICK_REF.map(item => (
         <QuickRefItem
           key={item.id}

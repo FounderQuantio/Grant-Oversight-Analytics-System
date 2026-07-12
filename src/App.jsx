@@ -20,7 +20,7 @@ const VIEW_META = {
   "/fraud-guard/transactions": { title:"Transactions",       sub:"150 real transactions (DS1–DS6) · ML risk scoring · Batch payment holds" },
   "/fraud-guard/cases":        { title:"Case Management",    sub:"Investigation workflow · Evidence packages · OIG report export" },
   "/fraud-guard/compliance":   { title:"Compliance Reports", sub:"OMB control matrix (CC-001–CC-010) · GAO Green Book · Audit readiness" },
-  "/fraud-guard/glance":       { title:"At a Glance",        sub:"What FraudGuard is, who uses it, who benefits, cost, access, and key results" },
+  "/fraud-guard/glance":       { title:"Framework at a Glance", sub:"What FraudGuard is, who uses it, who benefits, cost, access, and key results" },
   "/fraud-guard/settings":     { title:"Settings",           sub:"Detection rules (R001–R010) · Graph analytics · Role-based access control" },
 };
 

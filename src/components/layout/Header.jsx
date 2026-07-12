@@ -1,25 +1,14 @@
 import { DS, ROLES } from "@/utils/tokens";
 import { Tip, Pick, ThemeToggle } from "@/components/ui";
 import { useAppState } from "@/context/AppContext";
-import { useNavigate } from "react-router-dom";
 import GSearch from "@/components/layout/GSearch";
 
 export default function Header({ title, sub }) {
   const { s, d } = useAppState();
-  const navigate  = useNavigate();
   const crit = s.alerts.filter(a=>a.severity==="CRITICAL"&&a.status==="OPEN").length;
   const role = ROLES[s.role] || ROLES.compliance;
   return (
     <div style={{height:55,background:"var(--qg-header-bg)",borderBottom:"1px solid rgba(255,255,255,0.10)",display:"flex",alignItems:"center",padding:"0 22px",gap:16,flexShrink:0,zIndex:100}}>
-      <button
-        onClick={() => navigate("/")}
-        title="Back to Home"
-        style={{background:"rgba(255,255,255,0.10)",border:"1px solid rgba(255,255,255,0.22)",borderRadius:DS.r2,padding:"5px 12px",cursor:"pointer",color:"var(--qg-header-text)",fontSize:12,fontWeight:700,display:"flex",alignItems:"center",gap:5,flexShrink:0,transition:"all 0.15s"}}
-        onMouseEnter={e=>{e.currentTarget.style.background="rgba(255,255,255,0.18)";e.currentTarget.style.borderColor="rgba(255,255,255,0.35)";}}
-        onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.10)";e.currentTarget.style.borderColor="rgba(255,255,255,0.22)";}}
-      >
-        ← Home
-      </button>
       <div style={{flex:"0 0 auto"}}>
         <h1 style={{margin:0,fontSize:15,fontWeight:800,color:"var(--qg-header-text)",letterSpacing:-.3}}>{title}</h1>
         {sub&&<p style={{margin:0,fontSize:10,color:"rgba(255,255,255,0.60)"}}>{sub}</p>}
