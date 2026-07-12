@@ -96,7 +96,7 @@ function QuickRefItem({ item, isOpen, onToggle }) {
             <p key={i} style={{ fontSize: 12.5, color: DS.t3, lineHeight: 1.75, margin: "14px 0 0" }}>{p}</p>
           ))}
           {item.bullets.length > 0 && (
-            <ul style={{ listStyle: "none", padding: 0, margin: "12px 0 0", display: "flex", flexDirection: "column", gap: 7 }}>
+            <ul style={{ listStyle: "none", padding: 0, margin: "14px 0 0", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px 24px" }}>
               {item.bullets.map((b, i) => (
                 <li key={i} style={{ fontSize: 12, color: DS.t3, lineHeight: 1.65 }}>
                   <span style={{ color: DS.t1, fontWeight: 700 }}>{b.label}</span> {b.text}
@@ -118,7 +118,7 @@ function QuickRefItem({ item, isOpen, onToggle }) {
 export default function AtAGlance() {
   const [open, setOpen] = useState("what");
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 760, margin: "0 auto" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 1040, margin: "0 auto" }}>
       {QUICK_REF.map(item => (
         <QuickRefItem
           key={item.id}
