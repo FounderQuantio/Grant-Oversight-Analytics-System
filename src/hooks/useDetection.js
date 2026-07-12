@@ -5,7 +5,7 @@
 import { useState } from "react";
 import { runRules } from "@/services/rulesEngine";
 import { runML, velAnomalies, scoreAll } from "@/services/mlEngine";
-import { runGraph } from "@/services/graphEngine";
+import { runGraph, graphScoresByVendor } from "@/services/graphEngine";
 import { useAppState } from "@/context/AppContext";
 
 export function useDetection() {
@@ -18,8 +18,8 @@ export function useDetection() {
     setTimeout(() => {
       const { mlAlerts, B } = runML(s.txns);
       const alerts  = runRules(s.txns, s.vens, s.rules);
-      const scored  = scoreAll(s.txns, alerts);
-      const gAlerts = runGraph(scored, s.vens);
+      const gAlerts = runGraph(s.txns, s.vens);
+      const scored  = scoreAll(s.txns, alerts, graphScoresByVendor(gAlerts, s.vens));
       d({ type: "SET_ALERTS", v: alerts });
       d({ type: "SET_TXNS",   v: scored });
       d({ type: "SET_GRAPH",  v: gAlerts });

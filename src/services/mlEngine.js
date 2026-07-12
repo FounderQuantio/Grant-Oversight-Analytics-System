@@ -77,16 +77,18 @@ export function cgrs(rPts, mlZ, gScore = 0) {
 }
 
 /** Apply composite scores to all transactions (mutates in place) */
-export function scoreAll(txns, alerts) {
+export function scoreAll(txns, alerts, graphScoreByVendor = {}) {
   const out = [...txns];
   for (const t of out) {
     const ta   = alerts.filter(a => a.txnId === t.id);
     const rPts = Math.min(100, ta.reduce((s, a) => s + (a.pts || 0), 0));
-    const { s, tier, color } = cgrs(rPts, t.mlZ, 0);
+    const gScore = graphScoreByVendor[t.vendorId] || 0;
+    const { s, tier, color } = cgrs(rPts, t.mlZ, gScore);
     t.riskScore = s;
     t.riskTier  = tier;
     t.riskColor = color;
     t.ruleScore = rPts;
+    t.graphScore = gScore;
     t.mlScore   = Math.min(100, Math.round(Math.abs(t.mlZ || 0) * 12));
     t.alertIds  = ta.map(a => a.id);
   }

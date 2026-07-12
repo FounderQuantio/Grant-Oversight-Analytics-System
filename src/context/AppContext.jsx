@@ -3,7 +3,7 @@ import { buildRealTxns } from "@/data/transactions";
 import { VEND_DB } from "@/data/referenceData";
 import { INIT_RULES, runRules } from "@/services/rulesEngine";
 import { runML, velAnomalies, scoreAll } from "@/services/mlEngine";
-import { runGraph } from "@/services/graphEngine";
+import { runGraph, graphScoresByVendor } from "@/services/graphEngine";
 
 function reducer(s, a) {
   switch (a.type) {
@@ -49,9 +49,9 @@ export function AppProvider({ children }) {
     const vens = VEND_DB.map(v=>({...v}));
     const {mlAlerts,B} = runML(txns);
     const alerts = runRules(txns,vens,INIT_RULES);
-    const scored = scoreAll(txns,alerts);
+    const gAlerts = runGraph(txns,vens);
+    const scored = scoreAll(txns,alerts,graphScoresByVendor(gAlerts,vens));
     for(const v of vens) v.spend = scored.filter(t=>t.vendorId===v.id).reduce((acc,t)=>acc+(t.amount||0),0);
-    const gAlerts = runGraph(scored,vens);
     d({type:"INIT",p:{txns:scored,vens,alerts,graphAlerts:gAlerts,mlStats:{cnt:mlAlerts.length,bases:Object.keys(B).length,vel:velAnomalies(scored)}}});
   },[]);
   return <Ctx.Provider value={{s,d}}>{children}</Ctx.Provider>;

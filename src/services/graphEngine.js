@@ -67,3 +67,17 @@ export function runGraph(txns, vens) {
   }
   return out;
 }
+
+/** Reduce graph alerts (entities/path/vendor shapes) to a per-vendorId max graph score. */
+export function graphScoresByVendor(graphAlerts, vens) {
+  const nameToId = {};
+  for (const v of vens) nameToId[v.name] = v.id;
+  const scores = {};
+  const bump = (vid, gs) => { if (!vid) return; scores[vid] = Math.max(scores[vid] || 0, gs || 0); };
+  for (const g of graphAlerts) {
+    if (g.entities) { for (const n of g.entities) bump(nameToId[n], g.gs); }
+    else if (g.path) { for (const n of g.path) { if (n !== '↔') bump(nameToId[n], g.gs); } }
+    else if (g.vendor) { bump(nameToId[g.vendor], g.gs); }
+  }
+  return scores;
+}
