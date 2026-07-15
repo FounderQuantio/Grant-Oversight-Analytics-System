@@ -55,5 +55,5 @@ export const NAV = [
   { id:"transactions", l:"Transactions", i:"≡", g:"main" },
   { id:"cases",        l:"Cases",        i:"📁", g:"main", badge:"cases"  },
   { id:"compliance",   l:"Compliance",   i:"✓", g:"main" },
-  { id:"glance",       l:"At a Glance",  i:"📋", g:"sys"  },
+  { id:"glance",       l:"Framework at a Glance",  i:"📋", g:"sys"  },
 ];

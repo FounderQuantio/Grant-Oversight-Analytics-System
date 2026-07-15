@@ -16,7 +16,7 @@ const T = {
   border:    "#E4E7EB",
   valueBg:   "#EEF1F4",
   visionBg:  "#F4F5F7",
-  ctaBg:     "#3D5A99",
+  ctaBg:     "#1F3A5F",
   ctaText:   "#FFFFFF",
   footerBg:  "#F4F5F7",
 };
