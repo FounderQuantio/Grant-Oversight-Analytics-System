@@ -1,12 +1,24 @@
+import { useState } from "react";
 import { DS, ROLES } from "@/utils/tokens";
 import { Tip, Pick, ThemeToggle } from "@/components/ui";
 import { useAppState } from "@/context/AppContext";
 import GSearch from "@/components/layout/GSearch";
+import { exportSystemReport } from "@/services/systemReport";
 
 export default function Header({ title, sub }) {
   const { s, d } = useAppState();
   const crit = s.alerts.filter(a=>a.severity==="CRITICAL"&&a.status==="OPEN").length;
   const role = ROLES[s.role] || ROLES.compliance;
+  const [genBusy, setGenBusy] = useState(false);
+
+  const handleGenerateReport = () => {
+    setGenBusy(true);
+    setTimeout(() => {
+      exportSystemReport(s);
+      setGenBusy(false);
+    }, 300);
+  };
+
   return (
     <div style={{height:55,background:"var(--qg-header-bg)",borderBottom:"1px solid rgba(255,255,255,0.10)",display:"flex",alignItems:"center",padding:"0 22px",gap:16,flexShrink:0,zIndex:100}}>
       <div style={{flex:"0 0 auto"}}>
@@ -15,6 +27,17 @@ export default function Header({ title, sub }) {
       </div>
       <div style={{flex:1,display:"flex",justifyContent:"center"}}><GSearch/></div>
       <div style={{display:"flex",alignItems:"center",gap:10}}>
+        <Tip txt="Download a full findings report (alerts, risk vendors, cases, audit readiness)">
+          <button
+            onClick={handleGenerateReport}
+            disabled={genBusy}
+            style={{display:"flex",alignItems:"center",gap:6,background:"rgba(255,255,255,0.10)",border:"1px solid rgba(255,255,255,0.22)",borderRadius:DS.r2,padding:"6px 13px",cursor:genBusy?"not-allowed":"pointer",color:"var(--qg-header-text)",fontSize:11,fontWeight:700,opacity:genBusy?.6:1,transition:"all 0.15s"}}
+            onMouseEnter={e=>{if(!genBusy){e.currentTarget.style.background="rgba(255,255,255,0.18)";}}}
+            onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.10)";}}
+          >
+            📄 {genBusy ? "Generating…" : "Download Report"}
+          </button>
+        </Tip>
         <ThemeToggle/>
         <Tip txt={`${crit} critical alert${crit!==1?"s":""} need action`}>
           <button style={{position:"relative",background:"none",border:"none",cursor:"pointer",padding:4,color:"var(--qg-header-text)",fontSize:18}}>

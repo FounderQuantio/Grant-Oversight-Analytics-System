@@ -48,7 +48,6 @@ export default function Compliance() {
             <div><strong style={{color:DS.t1}}>{s.alerts.length}</strong><span style={{color:DS.t3}}> Total Alerts</span></div>
           </div>
         </div>
-        <Btn onClick={expLog} v="secondary" sz="sm">↓ Export Audit Log</Btn>
       </Card>
 
       {/* Control matrix */}
