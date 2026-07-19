@@ -6,7 +6,7 @@ import { GRANT_DB } from "@/data/referenceData";
 import TxnPanel from "@/components/TxnPanel";
 
 const DS_PREFIXES = ["ALL","TXN-1","TXN-2","TXN-3","TXN-4","TXN-5","TXN-6"];
-const DS_LABELS   = {"ALL":"All Datasets","TXN-1":"DS1 Clean (TX)","TXN-2":"DS2 Duplicates (TN)","TXN-3":"DS3 Fraud Network (AZ)","TXN-4":"DS4 Procurement (Midwest)","TXN-5":"DS5 Structuring (FL)","TXN-6":"DS6 ML Anomalies (NW)"};
+const DS_LABELS   = {"ALL":"All Datasets","TXN-1":"DS1 Clean (TX)","TXN-2":"DS2 Duplicates (TN)","TXN-3":"DS3 Fraud Network (AZ)","TXN-4":"DS4 Procurement (Midwest)","TXN-5":"DS5 Structuring (FL)","TXN-6":"DS6 Statistical Anomalies (NW)"};
 
 function createCase(al, d) {
   const nc = {id:`CASE-${Date.now()}`,alertId:al.id,ruleId:al.ruleId,label:al.label,txnId:al.txnId,grantId:al.grantId,vendorId:al.vendorId,severity:al.severity,omb:al.omb,desc:al.desc,fix:al.fix,ctrl:al.ctrl,status:"OPEN",created:new Date().toISOString(),updated:new Date().toISOString(),notes:[],evidence:[{type:"ALERT",ref:al.id,ts:new Date().toISOString()}]};
@@ -65,7 +65,7 @@ export default function Transactions() {
         <Pick val={dsF} set={v=>{setDsF(v);setPage(0);}} opts={DS_PREFIXES.map(v=>({v,l:DS_LABELS[v]||v}))}/>
         <Pick val={gF}  set={v=>{setGF(v);setPage(0);}} opts={[{v:"ALL",l:"All Grants"},...GRANT_DB.map(g=>({v:g.id,l:`${g.id} — ${g.name.slice(0,26)}`}))]}/>
         <label style={{display:"flex",alignItems:"center",gap:4,fontSize:11,color:DS.t2,cursor:"pointer"}}><input type="checkbox" checked={holdOnly} onChange={e=>setHoldOnly(e.target.checked)}/> Holds Only</label>
-        <label style={{display:"flex",alignItems:"center",gap:4,fontSize:11,color:DS.t2,cursor:"pointer"}}><input type="checkbox" checked={mlOnly}   onChange={e=>setMlOnly(e.target.checked)}/> ML Anomalies</label>
+        <label style={{display:"flex",alignItems:"center",gap:4,fontSize:11,color:DS.t2,cursor:"pointer"}}><input type="checkbox" checked={mlOnly}   onChange={e=>setMlOnly(e.target.checked)}/> Statistical Anomalies</label>
         {selected.size>0&&<Btn onClick={batchHold} v="danger" sz="sm">⛔ Hold ({selected.size})</Btn>}
         <div style={{fontSize:11,color:DS.t3,marginLeft:"auto"}}>{filtered.length} results</div>
       </div>

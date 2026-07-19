@@ -18,11 +18,11 @@ export default function Explain({ alert, txn, ven }) {
   const cfs = [];
   if(alert.ruleId==="R002") cfs.push("If vendor age >90 days → score drops by 25pts");
   if(alert.ruleId==="R009") cfs.push("If payments above $50K threshold → structuring flag cleared");
-  if(txn&&txn.mlFlag)        cfs.push("If amount within 2σ of baseline → ML contributes 0pts");
+  if(txn&&txn.mlFlag)        cfs.push("If amount within 2σ of baseline → statistical anomaly signal contributes 0pts");
 
   return (
     <div style={{marginTop:16,borderTop:`1px solid ${DS.bd}`,paddingTop:14}}>
-      <div style={{fontSize:10,fontWeight:700,color:DS.t4,letterSpacing:.5,textTransform:"uppercase",marginBottom:10}}>🧠 AI Risk Explanation</div>
+      <div style={{fontSize:10,fontWeight:700,color:DS.t4,letterSpacing:.5,textTransform:"uppercase",marginBottom:10}}>🔍 Risk Score Explanation</div>
       {drvs.map((dr,i)=>(
         <div key={i} style={{marginBottom:10}}>
           <div style={{display:"flex",justifyContent:"space-between",fontSize:11,marginBottom:3}}>

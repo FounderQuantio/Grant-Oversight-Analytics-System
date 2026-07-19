@@ -10,7 +10,7 @@ const DS_FILTERS = [
   { id: "3",   label: "DS3 · Vendor Fraud Network" },
   { id: "4",   label: "DS4 · Procurement Violations" },
   { id: "5",   label: "DS5 · Transaction Structuring" },
-  { id: "6",   label: "DS6 · ML Anomalies" },
+  { id: "6",   label: "DS6 · Statistical Anomalies" },
 ];
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May"];
@@ -189,7 +189,7 @@ export default function Overview() {
         <StatCard T={T} label="Transactions"   value={filteredTxns.length} sub1={`${fmt(totalAmount)} total`} dot1={DS.p2} />
         <StatCard T={T} label="Open Alerts"    value={openAlerts} sub1={`${critHigh} critical / high`} dot1="#F97316" />
         <StatCard T={T} label="Risk Exposure"  value={fmt(riskExposure)} sub1="Critical + High txns" dot1="#EF4444" />
-        <StatCard T={T} label="ML Anomalies"   value={s.mlStats?.cnt ?? 0} sub1={`${s.mlStats?.bases ?? 0} baselines`} dot1="#EAB308" />
+        <StatCard T={T} label="Statistical Anomalies" value={s.mlStats?.cnt ?? 0} sub1={`${s.mlStats?.bases ?? 0} baselines`} dot1="#EAB308" />
         <StatCard T={T} label="Network Alerts" value={s.graphAlerts?.length ?? 0} sub1="Graph patterns" dot1="#EF4444" />
         <StatCard T={T} label="Open Cases"     value={openCases} sub1={`${s.cases.length} total`} dot1={DS.p2} />
       </div>

@@ -1,6 +1,6 @@
 # FraudGuard — Grant Intelligence Platform v4.1 Enterprise
 
-> **AI-enabled grant fraud detection dashboard aligned with OMB 2 CFR Part 200, GAO Green Book, and the COSO Framework.**
+> **Rules- and statistics-based grant fraud detection dashboard aligned with OMB 2 CFR Part 200, GAO Green Book, and the COSO Framework.**
 > *Muhammad Bilal FCA · FCCA · CFA — MIT License*
 
 ---
@@ -18,7 +18,7 @@ FraudGuard GFDS v4 is a production-ready React application that provides financi
 | DS3 | Vendor Fraud Network | Arizona/SW | 25 |
 | DS4 | Procurement Violations (Sole-Source) | Midwest | 25 |
 | DS5 | Transaction Structuring (31 U.S.C. 5324) | Florida | 25 |
-| DS6 | ML Anomalies / Missing Docs | Pacific NW | 25 |
+| DS6 | Statistical Anomalies / Missing Docs | Pacific NW | 25 |
 
 ---
 
@@ -28,14 +28,14 @@ FraudGuard GFDS v4 is a production-ready React application that provides financi
 |--------|-----------|
 | **Overview Dashboard** | KPI strip, risk distribution donut, 8-week spend sparklines, top risk vendors |
 | **Alert Queue** | 10 OMB detection rules (R001–R010), severity filter, corrective actions, one-click case creation |
-| **Transaction Monitor** | 150 real transactions, ML Z-score scoring, CGRS composite risk, batch payment hold |
+| **Transaction Monitor** | 150 real transactions, statistical Z-score scoring, CGRS composite risk, batch payment hold |
 | **Case Management** | Full workflow (OPEN → ESCALATED → CLOSED), notes, evidence bundle, OIG HTML export |
 | **Compliance Matrix** | CC-001–CC-010 controls mapped to COSO / GAO Green Book / OMB references |
 | **Settings** | Toggle R001–R010 detection rules live, audit log |
 | **Onboarding Wizard** | 3-step org setup, data source selection, animated scan launch |
 | **RBAC** | 4 roles: System Admin, Compliance Officer, Investigator, External Auditor |
 | **Global Search** | Live search across transactions, vendors, alerts |
-| **ML Engine** | Z-score anomaly detection per grant/category baseline |
+| **Statistical Engine** | Z-score anomaly detection per grant/category baseline |
 | **Graph Engine** | Shared address, bank routing, procurement concentration detection |
 | **ROI Calculator** | Fraud savings vs. implementation cost with interactive sliders |
 | **Report Export** | OIG-style HTML audit package per case |
@@ -134,7 +134,7 @@ netlify deploy --build --prod
 | §2 RBAC | `src/utils/tokens.js` → ROLES, NAV |
 | §3 Vendor/Grant Reference Data | `src/data/referenceData.js` |
 | §4 DS1–DS6 Transaction Data | `src/data/transactions.js` |
-| §5–6 Rules + ML Engines | `src/services/rulesEngine.js`, `mlEngine.js` |
+| §5–6 Rules + Statistical Engines | `src/services/rulesEngine.js`, `mlEngine.js` |
 | §7 Graph Engine | `src/services/graphEngine.js` |
 | §8 Report Export | `src/services/reportExport.js` |
 | §9 Global State | `src/context/AppContext.jsx` |

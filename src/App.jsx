@@ -17,7 +17,7 @@ import AtAGlance from "@/pages/AtAGlance";
 const VIEW_META = {
   "/fraud-guard":              { title:"Overview",           sub:"Portfolio risk · ROI calculator · DS1–DS6 real-time monitoring" },
   "/fraud-guard/alerts":       { title:"Alert Queue",        sub:"OMB 2 CFR 200 violations · Corrective actions · Case creation" },
-  "/fraud-guard/transactions": { title:"Transactions",       sub:"150 real transactions (DS1–DS6) · ML risk scoring · Batch payment holds" },
+  "/fraud-guard/transactions": { title:"Transactions",       sub:"150 real transactions (DS1–DS6) · Statistical risk scoring · Batch payment holds" },
   "/fraud-guard/cases":        { title:"Case Management",    sub:"Investigation workflow · Evidence packages · OIG report export" },
   "/fraud-guard/compliance":   { title:"Compliance Reports", sub:"OMB control matrix (CC-001–CC-010) · GAO Green Book · Audit readiness" },
   "/fraud-guard/glance":       { title:"Framework at a Glance", sub:"What FraudGuard is, who uses it, who benefits, cost, access, and key results" },

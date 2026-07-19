@@ -284,7 +284,7 @@ const PLATFORMS = [
   {
     mono: "FG", name: "FraudGuard™ v4.1",
     tag:  "Transaction Intelligence",
-    desc: "ML-powered fraud detection — duplicate invoices, vendor collusion, shell entities, and 47 GAO-aligned rules. Stop fraud before funds leave the door.",
+    desc: "Rules- and statistics-driven fraud detection — duplicate invoices, vendor collusion, shell entities, and OMB-aligned rules. Stop fraud before funds leave the door.",
     internal: true,
   },
   {

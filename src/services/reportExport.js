@@ -59,7 +59,7 @@ ${t ? `<table><tr><th>Field</th><th>Value</th></tr>
   <tr><td>Invoice Ref</td><td>${t.invoiceRef||'N/A'}</td></tr>
   <tr><td>Procurement Type</td><td>${t.procType||'N/A'}</td></tr>
   <tr><td>Risk Score (CGRS)</td><td>${t.riskScore}/100 — ${t.riskTier}</td></tr>
-  <tr><td>ML Anomaly</td><td>${t.mlFlag?'Yes – Z-Score: '+t.mlZ:'No'}</td></tr>
+  <tr><td>Statistical Anomaly</td><td>${t.mlFlag?'Yes – Z-Score: '+t.mlZ:'No'}</td></tr>
 </table>` : '<p>Transaction details unavailable.</p>'}
 <h2>3. Vendor Profile</h2>
 ${v ? `<table><tr><th>Field</th><th>Value</th></tr>

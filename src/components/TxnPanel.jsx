@@ -40,7 +40,7 @@ export default function TxnPanel({ txn, alerts, vens, onClose, onCase }) {
               </div>
               <div style={{display:"flex",gap:14,fontSize:11}}>
                 <div><span style={{color:DS.t4}}>Rules: </span><strong style={{color:DS.t1}}>{txn.ruleScore||0}</strong></div>
-                <div><span style={{color:DS.t4}}>ML: </span><strong style={{color:DS.t1}}>{txn.mlScore||0}</strong></div>
+                <div><span style={{color:DS.t4}}>Anomaly: </span><strong style={{color:DS.t1}}>{txn.mlScore||0}</strong></div>
                 {txn.mlFlag&&<Chip c={DS.purple} bg="#F5F3FF" bd="#DDD6FE" sm>σ={txn.mlZ}</Chip>}
               </div>
             </div>

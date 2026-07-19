@@ -103,7 +103,7 @@ export function exportSystemReport(s) {
 </div>
 
 <div class="box"><b>Executive Summary</b><br>
-Across ${d.totalTxns} transactions (${fmt(d.totalAmount)} total disbursed), FraudGuard's three-engine hybrid detection (rules + ML + graph analytics) identified ${d.totalAlerts} alerts, of which ${d.critHigh} remain open at CRITICAL/HIGH severity, representing ${fmt(d.riskExposure)} in flagged risk exposure. ${d.totalCases} case(s) have been opened for investigation. Current OMB 2 CFR 200 audit readiness stands at ${d.readiness}%.
+Across ${d.totalTxns} transactions (${fmt(d.totalAmount)} total disbursed), FraudGuard's three-engine hybrid detection (rules + statistical anomaly scoring + graph analytics) identified ${d.totalAlerts} alerts, of which ${d.critHigh} remain open at CRITICAL/HIGH severity, representing ${fmt(d.riskExposure)} in flagged risk exposure. ${d.totalCases} case(s) have been opened for investigation. Current OMB 2 CFR 200 audit readiness stands at ${d.readiness}%.
 </div>
 
 <div class="stat-grid">
@@ -117,7 +117,7 @@ Across ${d.totalTxns} transactions (${fmt(d.totalAmount)} total disbursed), Frau
 <h2>1. Detection Engine Overview</h2>
 <table><tr><th>Engine</th><th>Coverage</th><th>Output</th></tr>
   <tr><td>Rules Engine</td><td>${d.engines.rulesActive} / ${d.engines.rulesTotal} rules active</td><td>${d.sevCounts.CRITICAL + d.sevCounts.HIGH + d.sevCounts.MEDIUM + d.sevCounts.LOW} rule-based alerts</td></tr>
-  <tr><td>ML Z-Score Engine</td><td>${d.engines.mlBaselines} vendor/category baselines</td><td>${d.engines.mlAnomalies} statistical anomalies flagged</td></tr>
+  <tr><td>Z-Score Statistical Engine</td><td>${d.engines.mlBaselines} vendor/category baselines</td><td>${d.engines.mlAnomalies} statistical anomalies flagged</td></tr>
   <tr><td>Graph Analytics Engine</td><td>Vendor relationship network</td><td>${d.engines.graphAlerts} network-pattern alerts</td></tr>
 </table>
 

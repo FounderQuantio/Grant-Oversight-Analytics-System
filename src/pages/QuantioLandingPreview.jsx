@@ -12,7 +12,7 @@ function useHover() {
 const NAV_LINKS = ["About","Services","Platforms","Vision","Contact"];
 
 const PLATFORMS = [
-  { mono:"FG",  name:"FraudGuard™ v4.1", tag:"Transaction Intelligence",      desc:"ML-powered fraud detection — 47 GAO-aligned rules, duplicate invoices, vendor collusion, shell entities." },
+  { mono:"FG",  name:"FraudGuard™ v4.1", tag:"Transaction Intelligence",      desc:"Rules- and statistics-driven fraud detection — 10 OMB-aligned rules, duplicate invoices, vendor collusion, shell entities." },
   { mono:"GG",  name:"GovGuard™",         tag:"Grant Lifecycle Management",    desc:"2 CFR 200 compliance automated from pre-award to closeout. Live risk scoring and audit packages." },
   { mono:"ERP", name:"ERP Platform",      tag:"Enterprise Resource Planning",  desc:"Unified financial and operational data across your agency. Streamline procurement and budget execution." },
   { mono:"CD",  name:"Control Dashboard", tag:"Operational Controls Overview", desc:"Single pane of glass across all active controls, exceptions, and remediation workflows." },

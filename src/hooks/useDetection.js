@@ -1,5 +1,5 @@
 /**
- * useDetection — re-runs all engines (rules, ML, graph) on demand.
+ * useDetection — re-runs all engines (rules, statistical, graph) on demand.
  * Used by the Settings page "Re-run Full Detection" button.
  */
 import { useState } from "react";
@@ -24,7 +24,7 @@ export function useDetection() {
       d({ type: "SET_TXNS",   v: scored });
       d({ type: "SET_GRAPH",  v: gAlerts });
       d({ type: "SET_ML",     v: { cnt: mlAlerts.length, bases: Object.keys(B).length, vel: velAnomalies(scored) } });
-      d({ type: "LOG", act: "FULL_RESCAN", detail: `${alerts.length} alerts · ${mlAlerts.length} ML · ${gAlerts.length} graph` });
+      d({ type: "LOG", act: "FULL_RESCAN", detail: `${alerts.length} alerts · ${mlAlerts.length} statistical · ${gAlerts.length} graph` });
       setRunning(false);
     }, 500);
   };

@@ -5,11 +5,11 @@ import { Card } from "@/components/ui";
 const QUICK_REF = [
   {
     id: "what", label: "What is it?", icon: "📋",
-    short: "An AI-enabled fraud detection dashboard that screens every federal grant transaction in real time — built to OMB 2 CFR Part 200, the GAO Green Book, and the COSO Framework.",
-    detail: "FraudGuard is a production-ready grant intelligence platform that gives financial governance officers, compliance teams, and external auditors a live view of fraud risk across federally funded grant programs — before a transaction becomes an audit finding.\n\nUnlike a static compliance checklist, FraudGuard runs continuously: every transaction is scored the moment it's recorded, combining rule-based detection, machine-learning anomaly scoring, and relationship-graph analysis that surfaces patterns a human reviewer would miss.\n\nThe platform ships with six real fraud scenario datasets pre-loaded — 150 transactions across duplicate invoices, vendor collusion networks, procurement violations, transaction structuring, and ML-flagged anomalies — so your team can see exactly how detection works before connecting live data.",
+    short: "A fraud detection dashboard that screens every federal grant transaction in real time — built to OMB 2 CFR Part 200, the GAO Green Book, and the COSO Framework.",
+    detail: "FraudGuard is a production-ready grant intelligence platform that gives financial governance officers, compliance teams, and external auditors a live view of fraud risk across federally funded grant programs — before a transaction becomes an audit finding.\n\nUnlike a static compliance checklist, FraudGuard runs continuously: every transaction is scored the moment it's recorded, combining rule-based detection, statistical (z-score) anomaly scoring, and relationship-graph analysis that surfaces patterns a human reviewer would miss.\n\nThe platform ships with six real fraud scenario datasets pre-loaded — 150 transactions across duplicate invoices, vendor collusion networks, procurement violations, transaction structuring, and statistically-flagged anomalies — so your team can see exactly how detection works before connecting live data.",
     bullets: [
       { label: "10 OMB-aligned detection rules (R001–R010):", text: "A configurable rule engine covering duplicate payments, split purchases, structuring thresholds, and sole-source procurement red flags." },
-      { label: "ML + Graph Engine:", text: "Z-score anomaly detection per grant/category baseline, plus shared-address, bank-routing, and procurement-concentration graph analysis." },
+      { label: "Statistical + Graph Engine:", text: "Z-score anomaly detection per grant/category baseline, plus shared-address, bank-routing, and procurement-concentration graph analysis." },
       { label: "Full case lifecycle:", text: "OPEN → ESCALATED → CLOSED workflow with notes, evidence bundling, and one-click OIG-style HTML audit export." },
       { label: "Compliance Matrix:", text: "CC-001–CC-010 internal controls mapped directly to COSO and GAO Green Book references." },
     ],
@@ -63,7 +63,7 @@ const QUICK_REF = [
   },
   {
     id: "result", label: "Key result", icon: "📊",
-    short: "10 OMB detection rules · ML + graph anomaly engine · 6 real fraud datasets (150 transactions) · one-click OIG-style case export · full COSO / GAO Green Book alignment.",
+    short: "10 OMB detection rules · statistical + graph anomaly engine · 6 real fraud datasets (150 transactions) · one-click OIG-style case export · full COSO / GAO Green Book alignment.",
     detail: null,
     bullets: [],
     callout: null,

@@ -22,7 +22,7 @@ export function computeBaselines(txns) {
   return B;
 }
 
-/** Run Z-score ML anomaly detection (mutates txns.mlZ / mlFlag) */
+/** Run Z-score statistical anomaly detection (mutates txns.mlZ / mlFlag) */
 export function runML(txns) {
   const B = computeBaselines(txns);
   const mlAlerts = [];

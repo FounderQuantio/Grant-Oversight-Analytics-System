@@ -58,7 +58,7 @@ export default function Wizard() {
         ))}
         <div style={{marginTop:"auto",fontSize:11,color:DS.t3,lineHeight:1.6}}>
           <div style={{fontWeight:700,marginBottom:4,color:DS.t2}}>📊 Dataset Coverage</div>
-          DS1 Clean · DS2 Duplicates · DS3 Fraud Network · DS4 Procurement · DS5 Structuring · DS6 ML Anomalies
+          DS1 Clean · DS2 Duplicates · DS3 Fraud Network · DS4 Procurement · DS5 Structuring · DS6 Statistical Anomalies
         </div>
       </div>
 

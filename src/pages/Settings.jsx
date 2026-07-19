@@ -29,7 +29,7 @@ export default function Settings() {
         <div>
           <div style={{display:"flex",gap:10,marginBottom:16,alignItems:"center"}}>
             <Btn onClick={rerun} dis={running}>{running?<><Spin/> Running...</>:"▶ Re-run Full Detection"}</Btn>
-            {s.mlStats&&<span style={{fontSize:12,color:DS.t3}}>Last scan: {s.mlStats.cnt} ML anomalies · {s.alerts.length} rule alerts · {(s.graphAlerts||[]).length} graph alerts</span>}
+            {s.mlStats&&<span style={{fontSize:12,color:DS.t3}}>Last scan: {s.mlStats.cnt} statistical anomalies · {s.alerts.length} rule alerts · {(s.graphAlerts||[]).length} graph alerts</span>}
           </div>
           {Object.entries(byC).map(([cat,rules])=>(
             <div key={cat} style={{marginBottom:16}}>
